@@ -17,7 +17,7 @@ struct PiggySavingApp: App {
                 if (configStore.isInitialized == false) {
                     ChooseSourceView(isInitialized: $configStore.isInitialized, usingExternalURL: $configStore.usingExternalURL, externalURL: $configStore.externalURL)
                 } else {
-                    MainSavingView(configs: configStore)
+                    MainView(configs: configStore)
                 }
             }
         }

@@ -8,7 +8,7 @@
 import Foundation
 
 class ConfigStore: ObservableObject {
-    @Published var isInitialized = false
-    @Published var usingExternalURL = false
+    @Published var isInitialized = true
+    @Published var usingExternalURL = true
     @Published var externalURL: String = ""
 }
