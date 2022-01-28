@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct MainSavingView: View {
     @ObservedObject var configs: ConfigStore = ConfigStore()
+    var lastData = LastAmount()
     
     var body: some View {
         VStack {
@@ -19,13 +20,18 @@ struct MainView: View {
             }
         }
         .onAppear {
-            
+            ServerApi().getLast(externalURL: configs.externalURL) { lastData in
+//                self.lastData = lastData
+            }
+            ServerApi().getSum(externalURL: configs.externalURL) { lastData in
+//                self.lastData = lastData
+            }
         }
     }
 }
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainSavingView()
     }
 }

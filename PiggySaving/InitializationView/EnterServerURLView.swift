@@ -24,12 +24,14 @@ struct EnterServerURLView: View {
             TextField("https://", text: $externalURL)
                 .frame(width: UIScreen.screenWidth * 0.8)
                 .disableAutocorrection(true)
+                .keyboardType(.URL)
         }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Save") {
                     self.isInitialized = true
                     self.usingExternalURL = true
+                    self.externalURL = self.externalURL.lowercased()
                 }
             }
         }

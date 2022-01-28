@@ -10,13 +10,14 @@ import SwiftUI
 @main
 struct PiggySavingApp: App {
     @StateObject private var configStore = ConfigStore()
+    
     var body: some Scene {
         WindowGroup {
             NavigationView {
                 if (configStore.isInitialized == false) {
                     ChooseSourceView(isInitialized: $configStore.isInitialized, usingExternalURL: $configStore.usingExternalURL, externalURL: $configStore.externalURL)
                 } else {
-                    MainView(configs: configStore)
+                    MainSavingView(configs: configStore)
                 }
             }
         }

@@ -10,7 +10,9 @@
 		AB1530DD27A33149006FD2FF /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530DC27A33149006FD2FF /* CardView.swift */; };
 		AB1530DF27A33425006FD2FF /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530DE27A33425006FD2FF /* ErrorWrapper.swift */; };
 		AB1530E127A334DB006FD2FF /* LocalUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530E027A334DB006FD2FF /* LocalUsageView.swift */; };
-		AB1530E427A33A54006FD2FF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530E327A33A54006FD2FF /* MainView.swift */; };
+		AB1530E427A33A54006FD2FF /* MainSavingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530E327A33A54006FD2FF /* MainSavingView.swift */; };
+		AB1530E627A3DE42006FD2FF /* ServerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530E527A3DE42006FD2FF /* ServerApi.swift */; };
+		AB1530E827A3E5F1006FD2FF /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530E727A3E5F1006FD2FF /* Data.swift */; };
 		AB43A30A27A1E4BF0046740D /* ChooseSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43A30927A1E4BF0046740D /* ChooseSourceView.swift */; };
 		AB43A30C27A1EC220046740D /* EnterServerURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43A30B27A1EC220046740D /* EnterServerURLView.swift */; };
 		ABA6D2B427A1A62000F62E42 /* PiggySavingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA6D2B327A1A62000F62E42 /* PiggySavingApp.swift */; };
@@ -23,7 +25,9 @@
 		AB1530DC27A33149006FD2FF /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		AB1530DE27A33425006FD2FF /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
 		AB1530E027A334DB006FD2FF /* LocalUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUsageView.swift; sourceTree = "<group>"; };
-		AB1530E327A33A54006FD2FF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		AB1530E327A33A54006FD2FF /* MainSavingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSavingView.swift; sourceTree = "<group>"; };
+		AB1530E527A3DE42006FD2FF /* ServerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerApi.swift; sourceTree = "<group>"; };
+		AB1530E727A3E5F1006FD2FF /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		AB43A30927A1E4BF0046740D /* ChooseSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSourceView.swift; sourceTree = "<group>"; };
 		AB43A30B27A1EC220046740D /* EnterServerURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterServerURLView.swift; sourceTree = "<group>"; };
 		ABA6D2B027A1A62000F62E42 /* Piggy Saving.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Piggy Saving.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,7 +51,7 @@
 		AB1530E227A33A33006FD2FF /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				AB1530E327A33A54006FD2FF /* MainView.swift */,
+				AB1530E327A33A54006FD2FF /* MainSavingView.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -102,6 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				ABA6D2D227A1BC8700F62E42 /* ConfigStore.swift */,
+				AB1530E727A3E5F1006FD2FF /* Data.swift */,
+				AB1530E527A3DE42006FD2FF /* ServerApi.swift */,
 				AB1530DE27A33425006FD2FF /* ErrorWrapper.swift */,
 			);
 			path = Model;
@@ -189,12 +195,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB1530DF27A33425006FD2FF /* ErrorWrapper.swift in Sources */,
-				AB1530E427A33A54006FD2FF /* MainView.swift in Sources */,
+				AB1530E827A3E5F1006FD2FF /* Data.swift in Sources */,
+				AB1530E427A33A54006FD2FF /* MainSavingView.swift in Sources */,
 				AB1530E127A334DB006FD2FF /* LocalUsageView.swift in Sources */,
 				ABA6D2D327A1BC8700F62E42 /* ConfigStore.swift in Sources */,
 				ABA6D2B427A1A62000F62E42 /* PiggySavingApp.swift in Sources */,
 				AB43A30C27A1EC220046740D /* EnterServerURLView.swift in Sources */,
 				AB43A30A27A1E4BF0046740D /* ChooseSourceView.swift in Sources */,
+				AB1530E627A3DE42006FD2FF /* ServerApi.swift in Sources */,
 				AB1530DD27A33149006FD2FF /* CardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
