@@ -19,6 +19,7 @@
 		AB1530E827A3E5F1006FD2FF /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530E727A3E5F1006FD2FF /* Data.swift */; };
 		AB43A30A27A1E4BF0046740D /* ChooseSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43A30927A1E4BF0046740D /* ChooseSourceView.swift */; };
 		AB43A30C27A1EC220046740D /* EnterServerURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43A30B27A1EC220046740D /* EnterServerURLView.swift */; };
+		AB8AC01727A6FAB200EDFD62 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8AC01627A6FAB200EDFD62 /* ErrorView.swift */; };
 		ABA6D2B427A1A62000F62E42 /* PiggySavingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA6D2B327A1A62000F62E42 /* PiggySavingApp.swift */; };
 		ABA6D2B827A1A62100F62E42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABA6D2B727A1A62100F62E42 /* Assets.xcassets */; };
 		ABA6D2BB27A1A62100F62E42 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABA6D2BA27A1A62100F62E42 /* Preview Assets.xcassets */; };
@@ -38,6 +39,7 @@
 		AB1530E727A3E5F1006FD2FF /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		AB43A30927A1E4BF0046740D /* ChooseSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSourceView.swift; sourceTree = "<group>"; };
 		AB43A30B27A1EC220046740D /* EnterServerURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterServerURLView.swift; sourceTree = "<group>"; };
+		AB8AC01627A6FAB200EDFD62 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		ABA6D2B027A1A62000F62E42 /* Piggy Saving.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Piggy Saving.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA6D2B327A1A62000F62E42 /* PiggySavingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiggySavingApp.swift; sourceTree = "<group>"; };
 		ABA6D2B727A1A62100F62E42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				AB1530DC27A33149006FD2FF /* CardView.swift */,
+				AB8AC01627A6FAB200EDFD62 /* ErrorView.swift */,
 			);
 			path = UtilityView;
 			sourceTree = "<group>";
@@ -95,8 +98,8 @@
 		ABA6D2B227A1A62000F62E42 /* PiggySaving */ = {
 			isa = PBXGroup;
 			children = (
-				ABA6D2D127A1BC7900F62E42 /* Model */,
 				ABA6D2B327A1A62000F62E42 /* PiggySavingApp.swift */,
+				ABA6D2D127A1BC7900F62E42 /* Model */,
 				ABA6D2D427A1D7B900F62E42 /* InitializationView */,
 				AB1530E227A33A33006FD2FF /* MainView */,
 				AB43A30D27A1F1680046740D /* UtilityView */,
@@ -216,6 +219,7 @@
 				AB01CC2427A3FA9200C4E448 /* OverviewView.swift in Sources */,
 				AB01CC2827A3FB0D00C4E448 /* SavingsView.swift in Sources */,
 				AB43A30A27A1E4BF0046740D /* ChooseSourceView.swift in Sources */,
+				AB8AC01727A6FAB200EDFD62 /* ErrorView.swift in Sources */,
 				AB1530E627A3DE42006FD2FF /* ServerApi.swift in Sources */,
 				AB01CC2627A3FAC300C4E448 /* SavingsListView.swift in Sources */,
 				AB1530DD27A33149006FD2FF /* CardView.swift in Sources */,
@@ -365,7 +369,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tianyu.PiggySaving;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tianyu.piggysaving;
 				PRODUCT_NAME = "Piggy Saving";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -394,7 +398,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tianyu.PiggySaving;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tianyu.piggysaving;
 				PRODUCT_NAME = "Piggy Saving";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

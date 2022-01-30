@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct ChooseSourceView: View {
-    @Binding var isInitialized: Bool
-    @Binding var usingExternalURL: Bool
-    @Binding var externalURL: String
+    @Binding var configs: Configs
+    let saveAction: () -> Void
     
     var body: some View {
         VStack {
             Text("Select Source")
             Button(action: {}) {
-                NavigationLink(destination: EnterServerURLView(isInitialized: $isInitialized, usingExternalURL: $usingExternalURL, externalURL: $externalURL)) {
+                NavigationLink(destination: EnterServerURLView(configs: $configs, saveAction: saveAction)) {
                     Text("Select")
                 }
             }
@@ -43,6 +42,7 @@ struct ChooseSourceView: View {
 
 struct ChooseSourceView_Previews: PreviewProvider {
     static var previews: some View {
-        ChooseSourceView(isInitialized: .constant(false), usingExternalURL: .constant(false), externalURL: .constant(""))
+        let configConst = Configs()
+        ChooseSourceView(configs: .constant(configConst), saveAction: {})
     }
 }

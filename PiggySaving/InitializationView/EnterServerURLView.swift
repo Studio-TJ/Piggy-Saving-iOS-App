@@ -14,14 +14,13 @@ extension UIScreen{
 }
 
 struct EnterServerURLView: View {
-    @Binding var isInitialized: Bool
-    @Binding var usingExternalURL: Bool
-    @Binding var externalURL: String
+    @Binding var configs: Configs
+    let saveAction: () -> Void
     
     var body: some View {
         VStack {
             Text("Enter server URL:")
-            TextField("https://", text: $externalURL)
+            TextField("https://", text: $configs.externalURL)
                 .frame(width: UIScreen.screenWidth * 0.8)
                 .disableAutocorrection(true)
                 .keyboardType(.URL)
@@ -29,9 +28,10 @@ struct EnterServerURLView: View {
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Save") {
-                    self.isInitialized = true
-                    self.usingExternalURL = true
-                    self.externalURL = self.externalURL.lowercased()
+                    self.configs.setIsInitialized(isInitialized: true)
+                    self.configs.setUsingExternalURL(usingExternalURL: true)
+                    self.configs.setExternalURL(externalURL:  self.configs.externalURL.lowercased())
+                    saveAction()
                 }
             }
         }
@@ -40,6 +40,7 @@ struct EnterServerURLView: View {
 
 struct EnterServerURLView_Previews: PreviewProvider {
     static var previews: some View {
-        EnterServerURLView(isInitialized: .constant(false), usingExternalURL: .constant(false), externalURL: .constant(""))
+        let configConst = Configs()
+        EnterServerURLView(configs: .constant(configConst), saveAction: {})
     }
 }
