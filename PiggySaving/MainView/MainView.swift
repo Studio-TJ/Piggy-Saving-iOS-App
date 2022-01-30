@@ -36,6 +36,12 @@ struct MainView: View {
                     Text("Settings")
                 }
         }
+        .onAppear {
+            print("Appear")
+            ServerApi.getAllSaving(externalURL: configs.configs.externalURL) { allSaving in
+                
+            }
+        }
     }
 }
 

@@ -13,8 +13,8 @@ struct LastAmountDetail: Codable {
     var saved: Int
     
     init() {
-        amount = 0
-        saved = 0
+        self.amount = 0
+        self.saved = 0
     }
 }
 
@@ -22,7 +22,7 @@ struct LastAmount: Codable {
     var last: LastAmountDetail
     
     init() {
-        last = LastAmountDetail()
+        self.last = LastAmountDetail()
     }
 }
 
@@ -30,6 +30,18 @@ struct Sum: Codable {
     var sum: Double
     
     init() {
-        sum = 0
+        self.sum = 0
+    }
+}
+
+struct AllSaving: Codable {
+    var date: String
+    var amount: Double
+    var saved: Int
+    
+    init() {
+        self.date = ""
+        self.amount = 0
+        self.saved = 0
     }
 }
