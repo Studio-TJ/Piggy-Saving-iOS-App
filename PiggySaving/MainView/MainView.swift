@@ -30,7 +30,7 @@ struct MainView: View {
                     Text("Overview")
                 }
             
-            SettingsView()
+            SettingsView(configs: configs)
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Settings")

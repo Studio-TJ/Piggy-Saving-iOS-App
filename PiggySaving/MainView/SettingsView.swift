@@ -8,8 +8,22 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @ObservedObject var configs: ConfigStore = ConfigStore()
+    
     var body: some View {
-        Text("Settings View")
+        List {
+            HStack {
+                Spacer()
+                Button(action: {
+                    configs.resetConfig()
+                },
+                       label: {
+                    Text("Reset App!")
+                        .foregroundColor(Color.red)
+                })
+                Spacer()
+            }
+        }
     }
 }
 
