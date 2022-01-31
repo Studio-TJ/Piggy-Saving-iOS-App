@@ -9,7 +9,7 @@ import Foundation
 
 class ServerApi {
     
-    static func getLast(externalURL: String) async throws -> LastAmount {
+    static func getLast(externalURL: String) async throws -> LastSavingAmount {
         try await withCheckedThrowingContinuation { continuation in
             getLast(externalURL: externalURL) { result in
                 switch result {
@@ -22,16 +22,16 @@ class ServerApi {
         }
     }
         
-    private static func getLast(externalURL: String, completion: @escaping (Result<LastAmount, Error>) -> Void) {
+    private static func getLast(externalURL: String, completion: @escaping (Result<LastSavingAmount, Error>) -> Void) {
         guard let url = URL(string: externalURL + "/last") else {
             print("Invalid url..")
             return
         }
         URLSession.shared.dataTask(with: url) { data, response, error in
             do {
-                let lastAmount = try JSONDecoder().decode(LastAmount.self, from: data!)
+                let lastAmount = try JSONDecoder().decode([String: LastSavingAmount].self, from: data!)
                 DispatchQueue.main.async {
-                    completion(.success(lastAmount))
+                    completion(.success(Array(lastAmount.values)[0]))
                 }
             } catch {
                 completion(.failure(error))
@@ -71,16 +71,24 @@ class ServerApi {
         .resume()
     }
     
-    static func getAllSaving(externalURL: String, completion: @escaping (Result<[AllSaving], Error>) -> Void) {
+    static func getAllSaving(externalURL: String) async throws -> [Saving] {
+        try await withCheckedThrowingContinuation { continuation in
+            getAllSaving(externalURL: externalURL) { result in
+                switch result {
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                case .success(let savings):
+                    continuation.resume(returning: savings)
+                }
+            }
+        }
+    }
+    
+    private static func getAllSaving(externalURL: String, completion: @escaping (Result<[Saving], Error>) -> Void) {
         let json: [String: Bool] = [
             "desc": true,
             "withdraw": false
         ]
-        
-        struct RequestData: Encodable {
-            let desc: Bool = true
-            let withdraw: Bool = false
-        }
 
         guard let url = URL(string: externalURL + "/all") else {
             print("Invalid url..")
@@ -89,22 +97,30 @@ class ServerApi {
         
         var request = URLRequest(url: url)
         do {
-//            request.httpBody = try JSONSerialization.data(withJSONObject: json)
-            request.httpBody = try JSONEncoder().encode(RequestData())
+            request.httpBody = try JSONSerialization.data(withJSONObject: json)
         } catch {
             print(error.localizedDescription)
         }
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-
+    
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
-                if let dataString = String(data: data, encoding: .utf8) {
-                    print(dataString)
+                do {
+                    var savings: [Saving] = []
+                    let allSavings = try JSONDecoder().decode([String: Saving].self, from: data)
+                    for allSaving in allSavings {
+                        savings.append(allSaving.value)
+                    }
+                    DispatchQueue.main.async {
+                        completion(.success(savings))
+                    }
+                } catch {
+                    completion(.failure(error))
                 }
+            } else {
+                completion(.success([]))
             }
-            
         }.resume()
     }
 }

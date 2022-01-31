@@ -18,7 +18,7 @@ struct MainView: View {
                     Text("Savings")
                 }
             
-            SavingsListView()
+            SavingsListView(configs: configs)
                 .tabItem {
                     Image(systemName: "list.dash")
                     Text("Savings List")
@@ -35,12 +35,6 @@ struct MainView: View {
                     Image(systemName: "gear")
                     Text("Settings")
                 }
-        }
-        .onAppear {
-            print("Appear")
-            ServerApi.getAllSaving(externalURL: configs.configs.externalURL) { allSaving in
-                
-            }
         }
     }
 }
