@@ -27,8 +27,8 @@ struct Sum: Codable {
     }
 }
 
-
-struct Saving: Codable, Identifiable {
+ 
+struct Saving: Codable, Identifiable, Equatable {
     let id = UUID().uuidString
     var date: String
     var amount: Double
@@ -58,8 +58,10 @@ struct Saving: Codable, Identifiable {
     
     init(savingData: SavingData) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-DD"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         self.date = dateFormatter.string(from: savingData.date!)
+        print(savingData.date!)
+        print(self.date)
         self.amount = savingData.amount
         self.saved = savingData.saved ? 1 : 0
     }
@@ -80,6 +82,15 @@ extension Saving {
     ]
 }
 
+extension SavingData {
+    convenience init(context: NSManagedObjectContext, saving: Saving) {
+        self.init(context: context)
+        self.date = saving.dateFormatted
+        self.amount = saving.amount
+        self.saved = saving.isSaved
+    }
+}
+
 class SavingDataStore: ObservableObject {
     @Published var savings: [Saving]
     let container = NSPersistentContainer(name: "PiggySavingData")
@@ -94,6 +105,8 @@ class SavingDataStore: ObservableObject {
         
         let context = self.container.viewContext
         let fetchRequest = SavingData.fetchRequest()
+        let dateSort = NSSortDescriptor(key: "date", ascending: false)
+        fetchRequest.sortDescriptors = [dateSort]
  
         // TODO: think about error handling later.
         let savings = try? context.fetch(fetchRequest)
@@ -111,6 +124,19 @@ class SavingDataStore: ObservableObject {
     }
     
     public func updateFromSelfSavingArray() -> Void {
+        let context = self.container.viewContext
+        let fetchRequest = SavingData.fetchRequest()
+        let savings = try? context.fetch(fetchRequest)
         
+        if let savings = savings {
+            savings.forEach { saving in
+                context.delete(saving)
+            }
+        }
+        
+        self.savings.forEach { saving in
+            _ = SavingData(context: context, saving: saving)
+        }
+        try? context.save()
     }
 }

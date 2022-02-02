@@ -93,6 +93,9 @@ struct SavingsListView: View {
                     self.listItemHasChange = false
                 }
             }
+            .onChange(of: self.allSaving.savings) { value in
+                self.allSaving.updateFromSelfSavingArray()
+            }
             .onAppear {
                 self.getAllSavingFromServer(sortDesc: true)
                 self.getSum()
