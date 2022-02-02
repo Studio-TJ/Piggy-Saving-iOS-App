@@ -13,6 +13,17 @@ struct SettingsView: View {
     var body: some View {
         List {
             HStack {
+                Toggle(isOn: $configs.configs.ableToWithdraw)
+                {
+                    Text("Withdraw")
+                }
+                .onChange(of: configs.configs.ableToWithdraw) { value in
+                    Task {
+                        try await ConfigStore.save(configs: configs.configs)
+                    }
+                }
+            }
+            HStack {
                 Spacer()
                 Button(action: {
                     configs.resetConfig()

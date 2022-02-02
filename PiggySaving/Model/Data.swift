@@ -52,6 +52,21 @@ struct Saving: Codable, Identifiable {
     init() {
         self.date = "2000-01-01"
         self.amount = 1
-        self.saved = 1
+        self.saved = 0
     }
+}
+
+extension Saving {
+    init(date: String, amount: Double, saved: Int) {
+        self.date = date
+        self.amount = amount
+        self.saved = saved
+    }
+    
+    static let sampleData: [Saving] =
+    [
+        Saving(date: "2000-01-01", amount: 10.0, saved: 1),
+        Saving(date: "2000-01-02", amount: 10.1, saved: 1),
+        Saving(date: "2000-01-03", amount: 10.2, saved: 0)
+    ]
 }

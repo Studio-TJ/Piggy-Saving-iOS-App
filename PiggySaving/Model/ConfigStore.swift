@@ -8,9 +8,25 @@
 import Foundation
 
 struct Configs: Codable {
-    var isInitialized = false
-    var usingExternalURL = false
-    var externalURL = ""
+    var isInitialized: Bool
+    var usingExternalURL: Bool
+    var externalURL: String
+    var ableToWithdraw: Bool
+    
+    init() {
+        self.isInitialized = false
+        self.usingExternalURL = false
+        self.externalURL = ""
+        self.ableToWithdraw = false
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.isInitialized = try values.decode(Bool.self, forKey: .isInitialized)
+        self.usingExternalURL = try values.decode(Bool.self, forKey: .usingExternalURL)
+        self.externalURL = try values.decode(String.self, forKey: .externalURL)
+        self.ableToWithdraw = try values.decodeIfPresent(Bool.self, forKey: .ableToWithdraw) ?? false
+    }
     
     mutating func setIsInitialized(isInitialized: Bool) {
         self.isInitialized = isInitialized
@@ -53,7 +69,7 @@ class ConfigStore: ObservableObject {
         }
     }
     
-    static func load(completion: @escaping (Result<Configs, Error>) -> Void) {
+    private static func load(completion: @escaping (Result<Configs, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
                 let fileURL = try fileURL()
@@ -63,7 +79,7 @@ class ConfigStore: ObservableObject {
                     }
                     return
                 }
-                let configs = try JSONDecoder().decode(Configs.self, from: file.availableData)
+                let configs = try JSONDecoder().decode(Configs.self, from: file.availableData) 
                 DispatchQueue.main.async {
                     completion(.success(configs))
                 }
@@ -89,7 +105,7 @@ class ConfigStore: ObservableObject {
         }
     }
     
-    static func save(configs: Configs, completion: @escaping (Result<Bool, Error>) -> Void) {
+    private static func save(configs: Configs, completion: @escaping (Result<Bool, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
                 let data = try JSONEncoder().encode(configs)

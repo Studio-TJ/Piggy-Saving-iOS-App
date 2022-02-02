@@ -24,7 +24,9 @@
 		ABA6D2B827A1A62100F62E42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABA6D2B727A1A62100F62E42 /* Assets.xcassets */; };
 		ABA6D2BB27A1A62100F62E42 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABA6D2BA27A1A62100F62E42 /* Preview Assets.xcassets */; };
 		ABA6D2D327A1BC8700F62E42 /* ConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA6D2D227A1BC8700F62E42 /* ConfigStore.swift */; };
-		ABCCCBFB27A8186D00ECAE6F /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCCCBFA27A8186D00ECAE6F /* ListItemView.swift */; };
+		ABC6EA0027A988B400E6D487 /* TrailingIconLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC6E9FF27A988B400E6D487 /* TrailingIconLabelStyle.swift */; };
+		ABC6EA0227A9BD4400E6D487 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC6EA0127A9BD4400E6D487 /* Helper.swift */; };
+		ABCCCBFB27A8186D00ECAE6F /* SavingListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +48,9 @@
 		ABA6D2B727A1A62100F62E42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ABA6D2BA27A1A62100F62E42 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ABA6D2D227A1BC8700F62E42 /* ConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigStore.swift; sourceTree = "<group>"; };
-		ABCCCBFA27A8186D00ECAE6F /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
+		ABC6E9FF27A988B400E6D487 /* TrailingIconLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingIconLabelStyle.swift; sourceTree = "<group>"; };
+		ABC6EA0127A9BD4400E6D487 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +81,7 @@
 			children = (
 				AB1530DC27A33149006FD2FF /* CardView.swift */,
 				AB8AC01627A6FAB200EDFD62 /* ErrorView.swift */,
-				ABCCCBFA27A8186D00ECAE6F /* ListItemView.swift */,
+				ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */,
 			);
 			path = UtilityView;
 			sourceTree = "<group>";
@@ -106,6 +110,7 @@
 				ABA6D2D427A1D7B900F62E42 /* InitializationView */,
 				AB1530E227A33A33006FD2FF /* MainView */,
 				AB43A30D27A1F1680046740D /* UtilityView */,
+				ABC6E9FE27A9591100E6D487 /* Shape */,
 				ABA6D2B727A1A62100F62E42 /* Assets.xcassets */,
 				ABA6D2B927A1A62100F62E42 /* Preview Content */,
 			);
@@ -127,6 +132,8 @@
 				AB1530E727A3E5F1006FD2FF /* Data.swift */,
 				AB1530E527A3DE42006FD2FF /* ServerApi.swift */,
 				AB1530DE27A33425006FD2FF /* ErrorWrapper.swift */,
+				ABC6E9FF27A988B400E6D487 /* TrailingIconLabelStyle.swift */,
+				ABC6EA0127A9BD4400E6D487 /* Helper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -139,6 +146,13 @@
 				AB1530E027A334DB006FD2FF /* LocalUsageView.swift */,
 			);
 			path = InitializationView;
+			sourceTree = "<group>";
+		};
+		ABC6E9FE27A9591100E6D487 /* Shape */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shape;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,11 +229,13 @@
 				AB1530DF27A33425006FD2FF /* ErrorWrapper.swift in Sources */,
 				AB1530E827A3E5F1006FD2FF /* Data.swift in Sources */,
 				AB1530E427A33A54006FD2FF /* MainView.swift in Sources */,
-				ABCCCBFB27A8186D00ECAE6F /* ListItemView.swift in Sources */,
+				ABCCCBFB27A8186D00ECAE6F /* SavingListItemView.swift in Sources */,
 				AB1530E127A334DB006FD2FF /* LocalUsageView.swift in Sources */,
+				ABC6EA0227A9BD4400E6D487 /* Helper.swift in Sources */,
 				ABA6D2D327A1BC8700F62E42 /* ConfigStore.swift in Sources */,
 				ABA6D2B427A1A62000F62E42 /* PiggySavingApp.swift in Sources */,
 				AB43A30C27A1EC220046740D /* EnterServerURLView.swift in Sources */,
+				ABC6EA0027A988B400E6D487 /* TrailingIconLabelStyle.swift in Sources */,
 				AB01CC2427A3FA9200C4E448 /* OverviewView.swift in Sources */,
 				AB01CC2827A3FB0D00C4E448 /* SavingsView.swift in Sources */,
 				AB43A30A27A1E4BF0046740D /* ChooseSourceView.swift in Sources */,

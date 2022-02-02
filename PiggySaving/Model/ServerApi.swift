@@ -60,6 +60,7 @@ class ServerApi {
         }
         URLSession.shared.dataTask(with: url) { data, response, error in
             do {
+                // TODO: for all REST result, check if data is available
                 let sum = try JSONDecoder().decode(Sum.self, from: data!)
                 DispatchQueue.main.async {
                     completion(.success(sum))
@@ -120,6 +121,50 @@ class ServerApi {
                 }
             } else {
                 completion(.success([]))
+            }
+        }.resume()
+    }
+    
+    @discardableResult
+    static func save(externalURL: String, date: String, isSaved: Bool) async throws -> Bool {
+        try await withCheckedThrowingContinuation { continuation in
+            save(externalURL: externalURL, date: date, isSaved: isSaved) { result in
+                switch result {
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                case .success(let retval):
+                    continuation.resume(returning: retval)
+                }
+            }
+        }
+    }
+    
+    private static func save(externalURL: String, date: String, isSaved: Bool, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let json: [String: Any] = [
+            "date": date,
+            "saved": isSaved
+        ]
+        
+        guard let url = URL(string: externalURL + "/save") else {
+            print("Invalid url..")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: json)
+        } catch {
+            print(error.localizedDescription)
+        }
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        // TODO: error handle with response and error
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
             }
         }.resume()
     }
