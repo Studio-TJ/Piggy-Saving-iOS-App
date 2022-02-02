@@ -28,6 +28,7 @@
 		ABC6EA0227A9BD4400E6D487 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC6EA0127A9BD4400E6D487 /* Helper.swift */; };
 		ABCCCBFB27A8186D00ECAE6F /* SavingListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */; };
 		ABD0DF1E27AA915700B9AAC9 /* PiggySavingConfig.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABD0DF1C27AA915700B9AAC9 /* PiggySavingConfig.xcdatamodeld */; };
+		ABD0DF2127AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABD0DF1F27AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		ABC6EA0127A9BD4400E6D487 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListItemView.swift; sourceTree = "<group>"; };
 		ABD0DF1D27AA915700B9AAC9 /* PiggySavingData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PiggySavingData.xcdatamodel; sourceTree = "<group>"; };
+		ABD0DF2027AAE7C000B9AAC9 /* PiggySavingData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PiggySavingData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				ABD0DF1C27AA915700B9AAC9 /* PiggySavingConfig.xcdatamodeld */,
+				ABD0DF1F27AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld */,
 				ABA6D2D227A1BC8700F62E42 /* ConfigStore.swift */,
 				AB1530E727A3E5F1006FD2FF /* Data.swift */,
 				AB1530E527A3DE42006FD2FF /* ServerApi.swift */,
@@ -235,6 +238,7 @@
 				ABCCCBFB27A8186D00ECAE6F /* SavingListItemView.swift in Sources */,
 				AB1530E127A334DB006FD2FF /* LocalUsageView.swift in Sources */,
 				ABC6EA0227A9BD4400E6D487 /* Helper.swift in Sources */,
+				ABD0DF2127AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld in Sources */,
 				ABA6D2D327A1BC8700F62E42 /* ConfigStore.swift in Sources */,
 				ABA6D2B427A1A62000F62E42 /* PiggySavingApp.swift in Sources */,
 				AB43A30C27A1EC220046740D /* EnterServerURLView.swift in Sources */,
@@ -461,6 +465,16 @@
 			);
 			currentVersion = ABD0DF1D27AA915700B9AAC9 /* PiggySavingData.xcdatamodel */;
 			path = PiggySavingConfig.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		ABD0DF1F27AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				ABD0DF2027AAE7C000B9AAC9 /* PiggySavingData.xcdatamodel */,
+			);
+			currentVersion = ABD0DF2027AAE7C000B9AAC9 /* PiggySavingData.xcdatamodel */;
+			path = PiggySavingData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

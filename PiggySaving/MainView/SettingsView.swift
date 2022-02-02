@@ -10,11 +10,26 @@ import CoreData
 
 struct SettingsView: View {
     @ObservedObject var configs: ConfigStore = ConfigStore()
-//    @FetchRequest(sortDescriptors: []) var configss: FetchedResults
-    @Environment(\.managedObjectContext) var dcContext
     
     var body: some View {
         List {
+            HStack {
+                Text("Running Mode")
+                Spacer()
+                let mode = configs.configs.usingExternalURL ? "Self-Hosted" : "Local"
+                Text(mode)
+            }
+            if configs.configs.usingExternalURL {
+                VStack(alignment: .leading) {
+                        Text("Server address:")
+                        Text(configs.configs.externalURL!)
+                }
+            }
+            Picker("Currency", selection: $configs.configs.currency) {
+                Text("Chinese Yuan").tag(Currency.chineseYuan.id)
+                Text("Euro").tag(Currency.euro.id)
+                Text("US Dollar").tag(Currency.usDollar.id)
+            }
             HStack {
                 Toggle(isOn: $configs.configs.ableToWithdraw)
                 {
@@ -26,6 +41,7 @@ struct SettingsView: View {
                 Spacer()
                 Button(action: {
                     configs.resetConfig()
+                    print(self.configs.configs.currency)
                 },
                        label: {
                     Text("Reset App!")

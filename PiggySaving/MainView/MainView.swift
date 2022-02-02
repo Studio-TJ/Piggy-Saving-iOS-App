@@ -24,18 +24,13 @@ struct MainView: View {
                     Text("Savings List")
                 }
             
-            OverviewView()
-                .tabItem {
-                    Image(systemName: "info.circle")
-                    Text("Overview")
-                }
-            
             SettingsView(configs: configs)
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Settings")
                 }
         }
+        
     }
 }
 

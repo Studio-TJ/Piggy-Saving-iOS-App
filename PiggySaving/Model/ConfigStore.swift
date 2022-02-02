@@ -8,6 +8,16 @@
 import Foundation
 import CoreData
 
+enum Currency: Int32, Identifiable {
+    case chineseYuan = 1
+    case euro = 2
+    case usDollar = 3
+    
+    case undefined = 0
+    
+    var id: Int32 { self.rawValue }
+}
+
 class ConfigStore: ObservableObject {
     @Published var configs: Configs
     let container = NSPersistentContainer(name: "PiggySavingConfig")
@@ -32,6 +42,9 @@ class ConfigStore: ObservableObject {
             self.configs.usingExternalURL = false
             self.configs.externalURL = ""
             self.configs.ableToWithdraw = false
+            self.configs.currency = Currency.undefined.rawValue
+            self.configs.amountRatio = 1
+            self.configs.totalDaysOfSaving = 0
             try? context.save()
         }
     }
@@ -43,6 +56,6 @@ class ConfigStore: ObservableObject {
     }
     
     public func resetConfig() {
-        self.configs = Configs()
+        self.configs = Configs(context: self.container.viewContext)
     }
 }

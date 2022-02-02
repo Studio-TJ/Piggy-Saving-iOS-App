@@ -27,15 +27,16 @@ func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
 
 struct SavingsListView: View {
     @ObservedObject var configs: ConfigStore
-    @State var allSaving: [Saving] = []
+    @StateObject var allSaving: SavingDataStore = SavingDataStore()
     @State var sumSaving: Double = 0.0
     @State var listItemHasChange: Bool = false
     
     private func getAllSavingFromServer(sortDesc: Bool) {
         Task {
             do {
-                self.allSaving = try await ServerApi.getAllSaving(externalURL: configs.configs.externalURL!)
-                self.allSaving = self.allSaving.sorted {
+                
+                self.allSaving.savings = try await ServerApi.getAllSaving(externalURL: configs.configs.externalURL!)
+                self.allSaving.savings = self.allSaving.savings.sorted {
                     if sortDesc {
                         return $0.dateFormatted > $1.dateFormatted
                     } else {
@@ -59,7 +60,7 @@ struct SavingsListView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack() {
             ZStack {
                 RoundedRectangle(cornerRadius: 21).stroke(Color.accentColor, lineWidth: 1)
                     .frame(width: screenSize.width * 0.92, height: screenSize.height * 0.26)
@@ -69,7 +70,7 @@ struct SavingsListView: View {
                         Spacer()
                     }
                     HStack {
-                        if let todaySaving = self.allSaving.first {
+                        if let todaySaving = self.allSaving.savings.first {
                             Text("Today to save: " + String(todaySaving.amount))
                             Spacer()
                         }
@@ -77,9 +78,8 @@ struct SavingsListView: View {
                 }
                 .frame(width: screenSize.width * 0.92 - 10, height: screenSize.height * 0.26, alignment: .leading)
             }
-            Spacer()
             List {
-                ForEach(allSaving) { saving in
+                ForEach(allSaving.savings) { saving in
                     SavingListItemView(externalURL: $configs.configs.externalURL ?? "", itemUpdated: $listItemHasChange, saving: saving)
                 }
                 .listRowBackground(Color.clear)
@@ -101,16 +101,17 @@ struct SavingsListView: View {
                 self.getAllSavingFromServer(sortDesc: true)
                 self.getSum()
             }
+            .mask(LinearGradient(gradient: Gradient(colors: [Color("FrontColor"), Color("FrontColor"), Color("FrontColor"), Color("FrontColor").opacity(0)]), startPoint: .top, endPoint:. bottom))
         }
         .onAppear {
             UIView.appearance().backgroundColor = .clear
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(true)
     }
 }
 
 struct SavingsListView_Previews: PreviewProvider {
     static var previews: some View {
-        SavingsListView(configs: ConfigStore(), allSaving: Saving.sampleData)
+        SavingsListView(configs: ConfigStore(), allSaving: SavingDataStore(saving: Saving.sampleData))
     }
 }

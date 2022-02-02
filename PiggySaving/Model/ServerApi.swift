@@ -61,9 +61,13 @@ class ServerApi {
         URLSession.shared.dataTask(with: url) { data, response, error in
             do {
                 // TODO: for all REST result, check if data is available
-                let sum = try JSONDecoder().decode(Sum.self, from: data!)
-                DispatchQueue.main.async {
-                    completion(.success(sum))
+                if let data = data {
+                    let sum = try JSONDecoder().decode(Sum.self, from: data)
+                    DispatchQueue.main.async {
+                        completion(.success(sum))
+                    }
+                } else {
+                    completion(.success(Sum()))
                 }
             } catch {
                 completion(.failure(error))

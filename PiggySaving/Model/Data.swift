@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 
 struct LastSavingAmount: Codable {
     var amount: Double
@@ -54,6 +55,14 @@ struct Saving: Codable, Identifiable {
         self.amount = 1
         self.saved = 0
     }
+    
+    init(savingData: SavingData) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-DD"
+        self.date = dateFormatter.string(from: savingData.date!)
+        self.amount = savingData.amount
+        self.saved = savingData.saved ? 1 : 0
+    }
 }
 
 extension Saving {
@@ -69,4 +78,39 @@ extension Saving {
         Saving(date: "2000-01-02", amount: 10.1, saved: 1),
         Saving(date: "2000-01-03", amount: 10.2, saved: 0)
     ]
+}
+
+class SavingDataStore: ObservableObject {
+    @Published var savings: [Saving]
+    let container = NSPersistentContainer(name: "PiggySavingData")
+    
+    init() {
+        self.savings = []
+        container.loadPersistentStores { description, error in
+            if let error = error {
+                print("Core data failed to load: \(error.localizedDescription)")
+            }
+        }
+        
+        let context = self.container.viewContext
+        let fetchRequest = SavingData.fetchRequest()
+ 
+        // TODO: think about error handling later.
+        let savings = try? context.fetch(fetchRequest)
+        
+        if let savings = savings {
+            savings.forEach { saving in
+                let newSaving = Saving(savingData: saving)
+                self.savings.append(newSaving)
+            }
+        }
+    }
+    
+    init(saving: [Saving]) {
+        self.savings = saving
+    }
+    
+    public func updateFromSelfSavingArray() -> Void {
+        
+    }
 }
