@@ -27,7 +27,7 @@
 		ABC6EA0027A988B400E6D487 /* TrailingIconLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC6E9FF27A988B400E6D487 /* TrailingIconLabelStyle.swift */; };
 		ABC6EA0227A9BD4400E6D487 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC6EA0127A9BD4400E6D487 /* Helper.swift */; };
 		ABCCCBFB27A8186D00ECAE6F /* SavingListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */; };
-		ABD0DF1E27AA915700B9AAC9 /* PiggySavingData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABD0DF1C27AA915700B9AAC9 /* PiggySavingData.xcdatamodeld */; };
+		ABD0DF1E27AA915700B9AAC9 /* PiggySavingConfig.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABD0DF1C27AA915700B9AAC9 /* PiggySavingConfig.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,7 +130,7 @@
 		ABA6D2D127A1BC7900F62E42 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ABD0DF1C27AA915700B9AAC9 /* PiggySavingData.xcdatamodeld */,
+				ABD0DF1C27AA915700B9AAC9 /* PiggySavingConfig.xcdatamodeld */,
 				ABA6D2D227A1BC8700F62E42 /* ConfigStore.swift */,
 				AB1530E727A3E5F1006FD2FF /* Data.swift */,
 				AB1530E527A3DE42006FD2FF /* ServerApi.swift */,
@@ -246,7 +246,7 @@
 				AB1530E627A3DE42006FD2FF /* ServerApi.swift in Sources */,
 				AB01CC2627A3FAC300C4E448 /* SavingsListView.swift in Sources */,
 				AB1530DD27A33149006FD2FF /* CardView.swift in Sources */,
-				ABD0DF1E27AA915700B9AAC9 /* PiggySavingData.xcdatamodeld in Sources */,
+				ABD0DF1E27AA915700B9AAC9 /* PiggySavingConfig.xcdatamodeld in Sources */,
 				AB01CC2227A3F89300C4E448 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,13 +454,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		ABD0DF1C27AA915700B9AAC9 /* PiggySavingData.xcdatamodeld */ = {
+		ABD0DF1C27AA915700B9AAC9 /* PiggySavingConfig.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				ABD0DF1D27AA915700B9AAC9 /* PiggySavingData.xcdatamodel */,
 			);
 			currentVersion = ABD0DF1D27AA915700B9AAC9 /* PiggySavingData.xcdatamodel */;
-			path = PiggySavingData.xcdatamodeld;
+			path = PiggySavingConfig.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

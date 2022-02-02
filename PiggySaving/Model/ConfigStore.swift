@@ -10,7 +10,7 @@ import CoreData
 
 class ConfigStore: ObservableObject {
     @Published var configs: Configs
-    let container = NSPersistentContainer(name: "PiggySavingData")
+    let container = NSPersistentContainer(name: "PiggySavingConfig")
     
     init() {
         container.loadPersistentStores { description, error in
