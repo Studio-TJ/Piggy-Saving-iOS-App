@@ -16,29 +16,14 @@ struct PiggySavingApp: App {
         WindowGroup {
             NavigationView {
                 if (configStore.configs.isInitialized == false) {
-                    ChooseSourceView(configs: $configStore.configs) {
-                        Task {
-                            do {
-                                try await ConfigStore.save(configs: configStore.configs)
-                            } catch {
-                                errorWrapper = ErrorWrapper(error: error,
-                                                            customErrorType: CustomErrorType.configSavingFailed,
-                                                            guidance: "Saving configuration failed. The Initialization did not completed successuflly. Please start over.")
-                            }
-                        }
-                    }
+                    ChooseSourceView(configs: configStore)
                 } else {
                     MainView(configs: configStore)
                 }
             }
-            .task {
-                do {
-                    configStore.configs = try await ConfigStore.load()
-                } catch  {
-                    errorWrapper = ErrorWrapper(error: error,
-                                                customErrorType: CustomErrorType.configLoadingFailed,
-                                                guidance: "Config loading failed.")
-                }
+            .environment(\.managedObjectContext, configStore.container.viewContext)
+            .onChange(of: configStore.configs.hasChanges) { configs in
+                configStore.updateConfig()
             }
             .sheet(item: $errorWrapper, onDismiss: {
                 switch errorWrapper?.customErrorType {

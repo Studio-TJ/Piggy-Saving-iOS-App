@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SettingsView: View {
     @ObservedObject var configs: ConfigStore = ConfigStore()
+//    @FetchRequest(sortDescriptors: []) var configss: FetchedResults
+    @Environment(\.managedObjectContext) var dcContext
     
     var body: some View {
         List {
@@ -16,11 +19,7 @@ struct SettingsView: View {
                 Toggle(isOn: $configs.configs.ableToWithdraw)
                 {
                     Text("Withdraw")
-                }
-                .onChange(of: configs.configs.ableToWithdraw) { value in
-                    Task {
-                        try await ConfigStore.save(configs: configs.configs)
-                    }
+
                 }
             }
             HStack {

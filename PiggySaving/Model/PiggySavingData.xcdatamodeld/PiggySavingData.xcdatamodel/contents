@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Configs" representedClassName="Configs" syncable="YES" codeGenerationType="class">
+        <attribute name="ableToWithdraw" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="externalURL" optional="YES" attributeType="String"/>
+        <attribute name="isInitialized" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="usingExternalURL" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
+    <elements>
+        <element name="Configs" positionX="-54" positionY="-36" width="128" height="89"/>
+    </elements>
+</model>

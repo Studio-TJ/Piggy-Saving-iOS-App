@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct ChooseSourceView: View {
-    @Binding var configs: Configs
-    let saveAction: () -> Void
+    @ObservedObject var configs: ConfigStore
     
     var body: some View {
         VStack {
             Text("Select Source")
             Button(action: {}) {
-                NavigationLink(destination: EnterServerURLView(configs: $configs, saveAction: saveAction)) {
-                    Text("Select")
+                NavigationLink(destination: EnterServerURLView(configs: configs)) {
+                    Text("Use with self-hosted server")
                 }
             }
             .font(.headline)
@@ -42,7 +41,7 @@ struct ChooseSourceView: View {
 
 struct ChooseSourceView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = Configs()
-        ChooseSourceView(configs: .constant(configConst), saveAction: {})
+        let configConst = ConfigStore()
+        ChooseSourceView(configs: configConst)
     }
 }

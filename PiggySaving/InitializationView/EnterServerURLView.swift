@@ -7,31 +7,28 @@
 
 import SwiftUI
 
-extension UIScreen{
-   static let screenWidth = UIScreen.main.bounds.size.width
-   static let screenHeight = UIScreen.main.bounds.size.height
-   static let screenSize = UIScreen.main.bounds.size
-}
-
 struct EnterServerURLView: View {
-    @Binding var configs: Configs
-    let saveAction: () -> Void
+    @ObservedObject var configs: ConfigStore
+    @State var externalURL: String = ""
+    @Environment(\.managedObjectContext) var context
     
     var body: some View {
         VStack {
             Text("Enter server URL:")
-            TextField("https://", text: $configs.externalURL)
-                .frame(width: UIScreen.screenWidth * 0.8)
+            TextField("https://", text: $externalURL)
+                .frame(width: screenSize.width * 0.8)
                 .disableAutocorrection(true)
                 .keyboardType(.URL)
         }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Save") {
-                    self.configs.setIsInitialized(isInitialized: true)
-                    self.configs.setUsingExternalURL(usingExternalURL: true)
-                    self.configs.setExternalURL(externalURL:  self.configs.externalURL.lowercased())
-                    saveAction()
+                    let newConfigs = self.configs.configs
+                    newConfigs.isInitialized = true
+                    newConfigs.usingExternalURL = true
+                    newConfigs.externalURL = self.externalURL.lowercased()
+                    newConfigs.ableToWithdraw = self.configs.configs.ableToWithdraw
+                    self.configs.configs = newConfigs
                 }
             }
         }
@@ -40,7 +37,7 @@ struct EnterServerURLView: View {
 
 struct EnterServerURLView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = Configs()
-        EnterServerURLView(configs: .constant(configConst), saveAction: {})
+        let configConst = ConfigStore()
+        EnterServerURLView(configs: configConst)
     }
 }

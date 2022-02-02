@@ -18,8 +18,15 @@ struct Window: Shape {
     }
 }
 
+func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
+    Binding(
+        get: { lhs.wrappedValue ?? rhs },
+        set: { lhs.wrappedValue = $0 }
+    )
+}
+
 struct SavingsListView: View {
-    @ObservedObject var configs: ConfigStore = ConfigStore()
+    @ObservedObject var configs: ConfigStore
     @State var allSaving: [Saving] = []
     @State var sumSaving: Double = 0.0
     @State var listItemHasChange: Bool = false
@@ -27,7 +34,7 @@ struct SavingsListView: View {
     private func getAllSavingFromServer(sortDesc: Bool) {
         Task {
             do {
-                self.allSaving = try await ServerApi.getAllSaving(externalURL: configs.configs.externalURL)
+                self.allSaving = try await ServerApi.getAllSaving(externalURL: configs.configs.externalURL!)
                 self.allSaving = self.allSaving.sorted {
                     if sortDesc {
                         return $0.dateFormatted > $1.dateFormatted
@@ -44,7 +51,7 @@ struct SavingsListView: View {
     private func getSum() {
         Task {
             do {
-                self.sumSaving = try await ServerApi.getSum(externalURL: self.configs.configs.externalURL).sum
+                self.sumSaving = try await ServerApi.getSum(externalURL: self.configs.configs.externalURL!).sum
             } catch {
                 print(error.localizedDescription)
             }
@@ -73,7 +80,7 @@ struct SavingsListView: View {
             Spacer()
             List {
                 ForEach(allSaving) { saving in
-                    SavingListItemView(externalURL: $configs.configs.externalURL, itemUpdated: $listItemHasChange, saving: saving)
+                    SavingListItemView(externalURL: $configs.configs.externalURL ?? "", itemUpdated: $listItemHasChange, saving: saving)
                 }
                 .listRowBackground(Color.clear)
             }
@@ -97,7 +104,6 @@ struct SavingsListView: View {
         }
         .onAppear {
             UIView.appearance().backgroundColor = .clear
-            print(screenSize.width)
         }
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -105,6 +111,6 @@ struct SavingsListView: View {
 
 struct SavingsListView_Previews: PreviewProvider {
     static var previews: some View {
-        SavingsListView(allSaving: Saving.sampleData)
+        SavingsListView(configs: ConfigStore(), allSaving: Saving.sampleData)
     }
 }
