@@ -18,9 +18,9 @@ struct ErrorView: View {
                     .font(.title)
                     .padding(.bottom)
                 Text(errorWrapper.error.localizedDescription)
-                    .font(.headline)
+                    .font(.body)
                 Text(errorWrapper.guidance)
-                    .font(.caption)
+                    .font(.headline)
                     .padding(.top)
                 Spacer()
             }
@@ -46,7 +46,6 @@ struct ErrorView_Previews: PreviewProvider {
     
     static var wrapper: ErrorWrapper {
         ErrorWrapper(error: SampleError.errorRequired,
-                     customErrorType: CustomErrorType.configSavingFailed,
                      guidance: "You can safely ignore this error.")
     }
     

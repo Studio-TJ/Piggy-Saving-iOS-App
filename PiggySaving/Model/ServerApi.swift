@@ -9,6 +9,28 @@ import Foundation
 
 class ServerApi {
     
+    struct ServerApiError: Error, LocalizedError {
+        
+        enum ErrorType {
+            case serverDataNotRetrieved
+        }
+        
+        let errorType: ErrorType
+        let errorURL: String?
+        
+        init(errorType: ErrorType, errorURL: String) {
+            self.errorType = errorType
+            self.errorURL = errorURL
+        }
+        
+        var errorDescription: String? {
+            switch self.errorType {
+            case .serverDataNotRetrieved:
+                return NSLocalizedString("Server data from URL: " + (self.errorURL ?? "") + " cannot be retrived.", comment: "Server data not retrived.")
+            }
+        }
+    }
+    
     static func getLast(externalURL: String) async throws -> LastSavingAmount {
         try await withCheckedThrowingContinuation { continuation in
             getLast(externalURL: externalURL) { result in
@@ -28,10 +50,18 @@ class ServerApi {
             return
         }
         URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
             do {
-                let lastAmount = try JSONDecoder().decode([String: LastSavingAmount].self, from: data!)
-                DispatchQueue.main.async {
-                    completion(.success(Array(lastAmount.values)[0]))
+                if let data = data {
+                    let lastAmount = try JSONDecoder().decode([String: LastSavingAmount].self, from: data)
+                    DispatchQueue.main.async {
+                        completion(.success(Array(lastAmount.values)[0]))
+                    }
+                } else {
+                    completion(.failure(ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL)))
                 }
             } catch {
                 completion(.failure(error))
@@ -59,6 +89,10 @@ class ServerApi {
             return
         }
         URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
             do {
                 // TODO: for all REST result, check if data is available
                 if let data = data {
@@ -67,7 +101,7 @@ class ServerApi {
                         completion(.success(sum))
                     }
                 } else {
-                    completion(.success(Sum()))
+                    completion(.failure(ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL)))
                 }
             } catch {
                 completion(.failure(error))
@@ -94,7 +128,7 @@ class ServerApi {
             "desc": true,
             "withdraw": false
         ]
-
+        
         guard let url = URL(string: externalURL + "/all") else {
             print("Invalid url..")
             return
@@ -108,11 +142,15 @@ class ServerApi {
         }
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    
+        
         URLSession.shared.dataTask(with: request) { data, response, error in
-            if let data = data {
-                do {
-                    var savings: [Saving] = []
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            do {
+                var savings: [Saving] = []
+                if let data = data {
                     let allSavings = try JSONDecoder().decode([String: Saving].self, from: data)
                     for allSaving in allSavings {
                         savings.append(allSaving.value)
@@ -120,11 +158,11 @@ class ServerApi {
                     DispatchQueue.main.async {
                         completion(.success(savings))
                     }
-                } catch {
-                    completion(.failure(error))
+                } else {
+                    completion(.failure(ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL)))
                 }
-            } else {
-                completion(.success([]))
+            } catch {
+                completion(.failure(error))
             }
         }.resume()
     }

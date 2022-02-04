@@ -56,6 +56,15 @@ class ConfigStore: ObservableObject {
     }
     
     public func resetConfig() {
-        self.configs = Configs(context: self.container.viewContext)
+        let context = self.container.viewContext
+        let fetchRequest = Configs.fetchRequest()
+        let configs = try? context.fetch(fetchRequest)
+        if let configs = configs {
+            configs.forEach { config in
+                context.delete(config)
+            }
+        }
+        self.configs = Configs(context: context)
+        try? context.save()
     }
 }

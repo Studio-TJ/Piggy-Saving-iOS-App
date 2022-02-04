@@ -10,6 +10,7 @@ import CoreData
 
 struct SettingsView: View {
     @ObservedObject var configs: ConfigStore = ConfigStore()
+    @State private var resetAppConfirmation: Bool = false
     
     var body: some View {
         List {
@@ -40,8 +41,7 @@ struct SettingsView: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    configs.resetConfig()
-                    print(self.configs.configs.currency)
+                    resetAppConfirmation = true
                 },
                        label: {
                     Text("Reset App!")
@@ -50,6 +50,17 @@ struct SettingsView: View {
                 Spacer()
             }
         }
+        .sheet(isPresented: $resetAppConfirmation) {
+        } content: {
+            WarningConfirmationView(description: "You are about to reset the App. This action will erase all data stored on this devices and it is not undoable.") {
+                self.resetAppConfirmation = false
+            } confirmAction: {
+                self.resetAppConfirmation = false
+                configs.resetConfig()
+            }
+
+        }
+
     }
 }
 

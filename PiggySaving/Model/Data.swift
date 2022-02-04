@@ -60,8 +60,6 @@ struct Saving: Codable, Identifiable, Equatable {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         self.date = dateFormatter.string(from: savingData.date!)
-        print(savingData.date!)
-        print(self.date)
         self.amount = savingData.amount
         self.saved = savingData.saved ? 1 : 0
     }
@@ -88,6 +86,7 @@ extension SavingData {
         self.date = saving.dateFormatted
         self.amount = saving.amount
         self.saved = saving.isSaved
+        self.type = "saving"
     }
 }
 
@@ -119,8 +118,9 @@ class SavingDataStore: ObservableObject {
         }
     }
     
-    init(saving: [Saving]) {
-        self.savings = saving
+    convenience init(savings: [Saving]) {
+        self.init()
+        self.savings = savings
     }
     
     public func updateFromSelfSavingArray() -> Void {
@@ -138,5 +138,17 @@ class SavingDataStore: ObservableObject {
             _ = SavingData(context: context, saving: saving)
         }
         try? context.save()
+    }
+    
+    public func resetData() {
+        let context = self.container.viewContext
+        let fetchRequest = SavingData.fetchRequest()
+        let savings = try? context.fetch(fetchRequest)
+        
+        if let savings = savings {
+            savings.forEach { saving in
+                context.delete(saving)
+            }
+        }
     }
 }

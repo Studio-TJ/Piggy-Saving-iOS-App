@@ -10,6 +10,7 @@ import SwiftUI
 struct SavingListItemView: View {
     @Binding var externalURL: String
     @Binding var itemUpdated: Bool
+    @State private var errorWrapper: ErrorWrapper?
     let saving: Saving
     
     var body: some View {
@@ -21,14 +22,23 @@ struct SavingListItemView: View {
                     Spacer()
                     Button(action: {
                         Task {
-                            try await ServerApi.save(externalURL: self.externalURL, date: self.saving.date, isSaved: true)
+                            do {
+                                try await ServerApi.save(externalURL: self.externalURL, date: self.saving.date, isSaved: true)
+                                itemUpdated = true
+                            } catch {
+                                self.errorWrapper = ErrorWrapper(error: error, guidance: "Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.")
+                            }
                         }
-                        itemUpdated = true
                     },
                            label: {
                         Text("Save Now!")
                     })
                 }
+            }
+            .sheet(item: $errorWrapper, onDismiss: {
+                self.errorWrapper = nil
+            }) { wrapper in
+                ErrorView(errorWrapper: wrapper)
             }
             HStack {
                 Label(String(format: "%.2f", saving.amount), systemImage: "eurosign.circle")

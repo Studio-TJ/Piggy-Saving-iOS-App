@@ -25,19 +25,6 @@ struct PiggySavingApp: App {
             .onChange(of: configStore.configs.hasChanges) { configs in
                 configStore.updateConfig()
             }
-            .sheet(item: $errorWrapper, onDismiss: {
-                switch errorWrapper?.customErrorType {
-                case .configSavingFailed:
-                    configStore.resetConfig()
-                    break
-                case .configLoadingFailed:
-                    break
-                case .none:
-                    break
-                }
-            }) { wrapper in
-                ErrorView(errorWrapper: wrapper)
-            }
         }
     }
 }
