@@ -30,6 +30,7 @@
 		ABCCCBFB27A8186D00ECAE6F /* SavingListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */; };
 		ABD0DF1E27AA915700B9AAC9 /* PiggySavingConfig.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABD0DF1C27AA915700B9AAC9 /* PiggySavingConfig.xcdatamodeld */; };
 		ABD0DF2127AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABD0DF1F27AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld */; };
+		ABD3336827AD8BA700A72D23 /* CostListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3336727AD8BA700A72D23 /* CostListItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListItemView.swift; sourceTree = "<group>"; };
 		ABD0DF1D27AA915700B9AAC9 /* PiggySavingData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PiggySavingData.xcdatamodel; sourceTree = "<group>"; };
 		ABD0DF2027AAE7C000B9AAC9 /* PiggySavingData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PiggySavingData.xcdatamodel; sourceTree = "<group>"; };
+		ABD3336727AD8BA700A72D23 /* CostListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostListItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				AB1530DC27A33149006FD2FF /* CardView.swift */,
+				ABD3336727AD8BA700A72D23 /* CostListItemView.swift */,
 				AB8AC01627A6FAB200EDFD62 /* ErrorView.swift */,
 				ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */,
 				AB1F410A27AD47970059D50F /* WarningConfirmationView.swift */,
@@ -249,6 +252,7 @@
 				AB01CC2427A3FA9200C4E448 /* OverviewView.swift in Sources */,
 				AB1F410B27AD47970059D50F /* WarningConfirmationView.swift in Sources */,
 				AB01CC2827A3FB0D00C4E448 /* SavingsView.swift in Sources */,
+				ABD3336827AD8BA700A72D23 /* CostListItemView.swift in Sources */,
 				AB43A30A27A1E4BF0046740D /* ChooseSourceView.swift in Sources */,
 				AB8AC01727A6FAB200EDFD62 /* ErrorView.swift in Sources */,
 				AB1530E627A3DE42006FD2FF /* ServerApi.swift in Sources */,

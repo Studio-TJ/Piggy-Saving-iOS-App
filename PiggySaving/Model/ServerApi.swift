@@ -12,6 +12,7 @@ class ServerApi {
     struct ServerApiError: Error, LocalizedError {
         
         enum ErrorType {
+            case invalidURL
             case serverDataNotRetrieved
         }
         
@@ -25,49 +26,12 @@ class ServerApi {
         
         var errorDescription: String? {
             switch self.errorType {
+            case.invalidURL:
+                return NSLocalizedString("Provided URL is invalid.", comment: "Invalid URL")
             case .serverDataNotRetrieved:
                 return NSLocalizedString("Server data from URL: " + (self.errorURL ?? "") + " cannot be retrived.", comment: "Server data not retrived.")
             }
         }
-    }
-    
-    static func getLast(externalURL: String) async throws -> LastSavingAmount {
-        try await withCheckedThrowingContinuation { continuation in
-            getLast(externalURL: externalURL) { result in
-                switch result {
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                case .success(let last):
-                    continuation.resume(returning: last)
-                }
-            }
-        }
-    }
-        
-    private static func getLast(externalURL: String, completion: @escaping (Result<LastSavingAmount, Error>) -> Void) {
-        guard let url = URL(string: externalURL + "/last") else {
-            print("Invalid url..")
-            return
-        }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            do {
-                if let data = data {
-                    let lastAmount = try JSONDecoder().decode([String: LastSavingAmount].self, from: data)
-                    DispatchQueue.main.async {
-                        completion(.success(Array(lastAmount.values)[0]))
-                    }
-                } else {
-                    completion(.failure(ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL)))
-                }
-            } catch {
-                completion(.failure(error))
-            }
-        }
-        .resume()
     }
     
     static func getSum(externalURL: String) async throws -> Sum {
@@ -85,7 +49,7 @@ class ServerApi {
     
     private static func getSum(externalURL: String, completion: @escaping (Result<Sum, Error>) -> Void) {
         guard let url = URL(string: externalURL + "/sum") else {
-            print("Invalid url..")
+            completion(.failure(ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL)))
             return
         }
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -130,7 +94,7 @@ class ServerApi {
         ]
         
         guard let url = URL(string: externalURL + "/all") else {
-            print("Invalid url..")
+            completion(.failure(ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL)))
             return
         }
         
@@ -167,6 +131,64 @@ class ServerApi {
         }.resume()
     }
     
+    static func getAllCost(externalURL: String) async throws -> [Cost] {
+        try await withCheckedThrowingContinuation { continuation in
+            getAllCost(externalURL: externalURL) { result in
+                switch result {
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                case .success(let savings):
+                    continuation.resume(returning: savings)
+                }
+            }
+        }
+    }
+    
+    // TODO: modify backend with better handling, more universal
+    private static func getAllCost(externalURL: String, completion: @escaping (Result<[Cost], Error>) -> Void) {
+        let json: [String: Bool] = [
+            "desc": true,
+            "withdraw": true
+        ]
+        
+        guard let url = URL(string: externalURL + "/all") else {
+            completion(.failure(ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL)))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: json)
+        } catch {
+            print(error.localizedDescription)
+        }
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            do {
+                var costs: [Cost] = []
+                if let data = data {
+                    let allCosts = try JSONDecoder().decode([String: Cost].self, from: data)
+                    for allCost in allCosts {
+                        costs.append(allCost.value)
+                    }
+                    DispatchQueue.main.async {
+                        completion(.success(costs))
+                    }
+                } else {
+                    completion(.failure(ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL)))
+                }
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+    
     @discardableResult
     static func save(externalURL: String, date: String, isSaved: Bool) async throws -> Bool {
         try await withCheckedThrowingContinuation { continuation in
@@ -188,7 +210,7 @@ class ServerApi {
         ]
         
         guard let url = URL(string: externalURL + "/save") else {
-            print("Invalid url..")
+            completion(.failure(ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL)))
             return
         }
         

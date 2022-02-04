@@ -26,7 +26,7 @@ struct SavingListItemView: View {
                                 try await ServerApi.save(externalURL: self.externalURL, date: self.saving.date, isSaved: true)
                                 itemUpdated = true
                             } catch {
-                                self.errorWrapper = ErrorWrapper(error: error, guidance: "Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.")
+                                self.errorWrapper = ErrorWrapper(error: error, guidance: "Cannot send save request to server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.")
                             }
                         }
                     },
