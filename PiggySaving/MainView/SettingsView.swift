@@ -11,6 +11,7 @@ import CoreData
 struct SettingsView: View {
     @ObservedObject var configs: ConfigStore = ConfigStore()
     @State private var resetAppConfirmation: Bool = false
+    @State private var toReset: Bool = false
     
     var body: some View {
         List {
@@ -22,8 +23,8 @@ struct SettingsView: View {
             }
             if configs.configs.usingExternalURL {
                 VStack(alignment: .leading) {
-                        Text("Server address:")
-                        Text(configs.configs.externalURL!)
+                    Text("Server address:")
+                    Text(configs.configs.externalURL!)
                 }
             }
             Picker("Currency", selection: $configs.configs.currency) {
@@ -35,7 +36,7 @@ struct SettingsView: View {
                 Toggle(isOn: $configs.configs.ableToWithdraw)
                 {
                     Text("Withdraw")
-
+                    
                 }
             }
             HStack {
@@ -50,17 +51,22 @@ struct SettingsView: View {
                 Spacer()
             }
         }
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
         .sheet(isPresented: $resetAppConfirmation) {
         } content: {
             WarningConfirmationView(description: "You are about to reset the App. This action will erase all data stored on this devices and it is not undoable.") {
                 self.resetAppConfirmation = false
             } confirmAction: {
+                self.toReset = true
                 self.resetAppConfirmation = false
-                configs.resetConfig()
             }
-
+            .onDisappear {
+                if toReset {
+                    configs.resetConfig()
+                }
+            }
         }
-
     }
 }
 

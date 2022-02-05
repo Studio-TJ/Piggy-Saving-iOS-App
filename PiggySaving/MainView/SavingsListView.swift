@@ -30,10 +30,11 @@ struct SavingsListView: View {
     @StateObject var allSaving: SavingDataStore = SavingDataStore()
     @State var sumSaving: Double = 0.0
     @State var listItemHasChange: Bool = false
-    @State private var errorWrapper: ErrorWrapper?
+    @State private var errorWrapper: [ErrorWrapper] = []
     var fetchOnAppear = true
     let displayOptions = ["Saving", "Cost"]
     @State var displayOption = "Saving"
+    @State var hasError = false
     
     private func getAllSavingFromServer(sortDesc: Bool) {
         Task {
@@ -47,7 +48,7 @@ struct SavingsListView: View {
                     }
                 }
             } catch {
-                self.errorWrapper = ErrorWrapper(error: error, guidance: "Cannot retrieve all savings from server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.")
+                self.errorWrapper.append(ErrorWrapper(error: error, guidance: NSLocalizedString("Cannot retrieve all savings from server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.", comment: "Get all saving from server error guidance.")))
             }
         }
     }
@@ -64,7 +65,7 @@ struct SavingsListView: View {
                     }
                 }
             } catch {
-                self.errorWrapper = ErrorWrapper(error: error, guidance: "Cannot retrieve all costs from server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.")
+                self.errorWrapper.append(ErrorWrapper(error: error, guidance: "Cannot retrieve all costs from server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now."))
             }
         }
     }
@@ -74,13 +75,13 @@ struct SavingsListView: View {
             do {
                 self.sumSaving = try await ServerApi.getSum(externalURL: self.configs.configs.externalURL!).sum
             } catch {
-                self.errorWrapper = ErrorWrapper(error: error, guidance: "Cannot retrieve sum from server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.")
+                self.errorWrapper.append(ErrorWrapper(error: error, guidance: "Cannot retrieve sum from server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now."))
             }
         }
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             ZStack {
                 RoundedRectangle(cornerRadius: 21).stroke(Color.accentColor, lineWidth: 1)
                     .frame(width: screenSize.width * 0.92, height: screenSize.height * 0.26)
@@ -123,9 +124,9 @@ struct SavingsListView: View {
                     ForEach(allSaving.costs) { cost in
                         CostListItemView(cost: cost)
                     }
+                    .listRowBackground(Color.clear)
                 }
             }
-            .background(Color.clear)
             .zIndex(-1)
             .onChange(of: self.listItemHasChange) { value in
                 // TODO: In the future implement a better event
@@ -138,8 +139,13 @@ struct SavingsListView: View {
             .onChange(of: self.allSaving.savings) { value in
                 self.allSaving.updateFromSelfSavingArray()
             }
+            .onChange(of: self.allSaving.costs) { value in
+                self.allSaving.updateFromSelfCostArray()
+            }
+            .onChange(of: self.errorWrapper.count) { value in
+                self.hasError = value > 0 ? true : false
+            }
             .onAppear {
-                UIView.appearance().backgroundColor = .clear
                 if fetchOnAppear {
                     self.getAllSavingFromServer(sortDesc: true)
                     self.getAllCostFromServer(sortDesc: true)
@@ -151,12 +157,15 @@ struct SavingsListView: View {
                 self.getSum()
             }
             .mask(LinearGradient(gradient: Gradient(colors: [Color("FrontColor"), Color("FrontColor"), Color("FrontColor"), Color("FrontColor").opacity(0)]), startPoint: .top, endPoint:. bottom))
-            .sheet(item: $errorWrapper, onDismiss: {
-                self.errorWrapper = nil
-            }) { wrapper in
-                ErrorView(errorWrapper: wrapper)
+            .sheet(isPresented: $hasError, onDismiss: {
+                self.errorWrapper.removeAll()
+                self.hasError = false
+            }) {
+                ErrorView(errorWrapper: errorWrapper)
             }
         }
+        .background(Color.clear)
+        .navigationBarTitle("")
         .navigationBarHidden(true)
     }
 }

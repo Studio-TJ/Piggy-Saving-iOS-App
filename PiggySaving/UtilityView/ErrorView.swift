@@ -8,21 +8,23 @@
 import SwiftUI
 
 struct ErrorView: View {
-    let errorWrapper: ErrorWrapper
+    let errorWrapper: [ErrorWrapper]
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         NavigationView {
             VStack {
-                Text("An error has occurred!")
+                Text("Error(s) have occurred!")
                     .font(.title)
                     .padding(.bottom)
-                Text(errorWrapper.error.localizedDescription)
-                    .font(.body)
-                Text(errorWrapper.guidance)
-                    .font(.headline)
-                    .padding(.top)
-                Spacer()
+                ForEach(errorWrapper) { errorWrapper in
+                    Text(errorWrapper.error.localizedDescription)
+                        .font(.body)
+                    Text(errorWrapper.guidance)
+                        .font(.headline)
+                        .padding(.top)
+                    Spacer()
+                }
             }
             .padding()
             .background(.ultraThinMaterial)
@@ -50,6 +52,6 @@ struct ErrorView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        ErrorView(errorWrapper: wrapper)
+        ErrorView(errorWrapper: [wrapper])
     }
 }

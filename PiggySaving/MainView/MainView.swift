@@ -12,11 +12,11 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            SavingsView()
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Savings")
-                }
+//            SavingsView()
+//                .tabItem {
+//                    Image(systemName: "house.fill")
+//                    Text("Savings")
+//                }
             
             SavingsListView(configs: configs)
                 .tabItem {
