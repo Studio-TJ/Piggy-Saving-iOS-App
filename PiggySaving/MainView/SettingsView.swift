@@ -14,56 +14,60 @@ struct SettingsView: View {
     @State private var toReset: Bool = false
     
     var body: some View {
-        List {
-            HStack {
-                Text("Running Mode")
-                Spacer()
-                let mode = configs.configs.usingExternalURL ? "Self-Hosted" : "Local"
-                Text(mode)
-            }
-            if configs.configs.usingExternalURL {
-                VStack(alignment: .leading) {
-                    Text("Server address:")
-                    Text(configs.configs.externalURL!)
+        NavigationView {
+            Form {
+                HStack {
+                    Text("Running Mode")
+                    Spacer()
+                    let mode = configs.configs.usingExternalURL ? "Self-Hosted" : "Local"
+                    Text(mode)
                 }
-            }
-            Picker("Currency", selection: $configs.configs.currency) {
-                Text("Chinese Yuan").tag(Currency.chineseYuan.id)
-                Text("Euro").tag(Currency.euro.id)
-                Text("US Dollar").tag(Currency.usDollar.id)
-            }
-            HStack {
-                Toggle(isOn: $configs.configs.ableToWithdraw)
-                {
-                    Text("Withdraw")
-                    
+                if configs.configs.usingExternalURL {
+                    VStack(alignment: .leading) {
+                        Text("Server address:")
+                        Text(configs.configs.externalURL!)
+                    }
                 }
+                Picker("Currency", selection: $configs.configs.currency) {
+                    Text("Chinese Yuan").tag(Currency.chineseYuan.id)
+                    Text("Euro").tag(Currency.euro.id)
+                    Text("US Dollar").tag(Currency.usDollar.id)
+                        .navigationTitle("Choose Currency")
+                }
+                HStack {
+                    Toggle(isOn: $configs.configs.ableToWithdraw)
+                    {
+                        Text("Withdraw")
+                        
+                    }
+                }
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        resetAppConfirmation = true
+                    },
+                           label: {
+                        Text("Reset App!")
+                            .foregroundColor(Color.red)
+                    })
+                    Spacer()
+                }
+                .navigationTitle("")
+                .navigationBarHidden(true)
             }
-            HStack {
-                Spacer()
-                Button(action: {
-                    resetAppConfirmation = true
-                },
-                       label: {
-                    Text("Reset App!")
-                        .foregroundColor(Color.red)
-                })
-                Spacer()
-            }
-        }
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
-        .sheet(isPresented: $resetAppConfirmation) {
-        } content: {
-            WarningConfirmationView(description: "You are about to reset the App. This action will erase all data stored on this devices and it is not undoable.") {
-                self.resetAppConfirmation = false
-            } confirmAction: {
-                self.toReset = true
-                self.resetAppConfirmation = false
-            }
-            .onDisappear {
-                if toReset {
-                    configs.resetConfig()
+            .padding(.top, 20)
+            .sheet(isPresented: $resetAppConfirmation) {
+            } content: {
+                WarningConfirmationView(description: "You are about to reset the App. This action will erase all data stored on this devices and it is not undoable.") {
+                    self.resetAppConfirmation = false
+                } confirmAction: {
+                    self.toReset = true
+                    self.resetAppConfirmation = false
+                }
+                .onDisappear {
+                    if toReset {
+                        configs.resetConfig()
+                    }
                 }
             }
         }

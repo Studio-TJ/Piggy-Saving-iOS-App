@@ -146,7 +146,8 @@ struct SavingsListView: View {
                 self.hasError = value > 0 ? true : false
             }
             .onAppear {
-                if fetchOnAppear {
+                // TODO: Ths and condition is a temporary fix for crashing when resetting
+                if configs.configs.isInitialized && fetchOnAppear {
                     self.getAllSavingFromServer(sortDesc: true)
                     self.getAllCostFromServer(sortDesc: true)
                     self.getSum()
@@ -165,8 +166,6 @@ struct SavingsListView: View {
             }
         }
         .background(Color.clear)
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
     }
 }
 

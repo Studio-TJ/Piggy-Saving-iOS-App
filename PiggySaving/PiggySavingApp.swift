@@ -14,17 +14,14 @@ struct PiggySavingApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                if (configStore.configs.isInitialized == false) {
-                    ChooseSourceView(configs: configStore)
-                } else {
-                    MainView(configs: configStore)
-                }
+            if (configStore.configs.isInitialized == false) {
+                ChooseSourceView(configs: configStore)
+            } else {
+                MainView(configs: configStore)
             }
-            .environment(\.managedObjectContext, configStore.container.viewContext)
-            .onChange(of: configStore.configs.hasChanges) { configs in
-                configStore.updateConfig()
-            }
+        }
+        .onChange(of: configStore.configs.hasChanges) { configs in
+            configStore.updateConfig()
         }
     }
 }

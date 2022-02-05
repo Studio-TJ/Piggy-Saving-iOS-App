@@ -11,30 +11,32 @@ struct ChooseSourceView: View {
     @ObservedObject var configs: ConfigStore
     
     var body: some View {
-        VStack {
-            Text("Select Source")
-            Button(action: {}) {
-                NavigationLink(destination: EnterServerURLView(configs: configs)) {
-                    Text("Use with self-hosted server")
+        NavigationView {
+            VStack {
+                Text("Select Source")
+                Button(action: {}) {
+                    NavigationLink(destination: EnterServerURLView(configs: configs)) {
+                        Text("Use with self-hosted server")
+                    }
                 }
-            }
-            .font(.headline)
-            .padding(.all)
-            .background(Color.black)
-            .foregroundColor(Color.white)
-            .cornerRadius(45)
-            
-            
-            Button(action: {}) {
-                NavigationLink(destination: LocalUsageView()) {
-                    Text("Use Locally")
+                .font(.headline)
+                .padding(.all)
+                .background(Color.black)
+                .foregroundColor(Color.white)
+                .cornerRadius(45)
+                
+                
+                Button(action: {}) {
+                    NavigationLink(destination: LocalUsageView()) {
+                        Text("Use Locally")
+                    }
                 }
+                .font(.headline)
+                .padding(.all)
+                .background(Color.black)
+                .foregroundColor(Color.white)
+                .cornerRadius(45)
             }
-            .font(.headline)
-            .padding(.all)
-            .background(Color.black)
-            .foregroundColor(Color.white)
-            .cornerRadius(45)
         }
     }
 }
