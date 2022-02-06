@@ -29,9 +29,11 @@ struct SettingsView: View {
                     }
                 }
                 Picker("Currency", selection: $configs.configs.currency) {
-                    Text("Chinese Yuan").tag(Currency.chineseYuan.id)
-                    Text("Euro").tag(Currency.euro.id)
-                    Text("US Dollar").tag(Currency.usDollar.id)
+                    ForEach(Currency.allCases) { currency in
+                        if currency.id != Currency.undefined.id {
+                            Text(currency.displayName).tag(currency.id)
+                        }
+                    }
                         .navigationTitle("Choose Currency")
                 }
                 HStack {
@@ -52,9 +54,9 @@ struct SettingsView: View {
                     })
                     Spacer()
                 }
-                .navigationTitle("")
-                .navigationBarHidden(true)
             }
+            .navigationTitle("")
+            .navigationBarHidden(true)
             .padding(.top, 20)
             .sheet(isPresented: $resetAppConfirmation) {
             } content: {
@@ -71,6 +73,7 @@ struct SettingsView: View {
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
