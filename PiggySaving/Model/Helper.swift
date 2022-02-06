@@ -9,4 +9,14 @@ import Foundation
 import SwiftUI
 
 
-let screenSize: CGRect = UIScreen.main.bounds
+let SCREEN_SIZE: CGRect = UIScreen.main.bounds
+
+struct Fonts {
+    static var TITLE_SEMIBOLD: Font {
+        return Font.custom("PingFangSC-Semibold", size: 34)
+    }
+    
+    static var BODY_CHINESE_NORMAL: Font {
+        return Font.custom("PingFangSC-Regular", size: 16)
+    }
+}

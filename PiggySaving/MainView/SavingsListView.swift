@@ -84,7 +84,7 @@ struct SavingsListView: View {
         VStack(spacing: 0) {
             ZStack {
                 RoundedRectangle(cornerRadius: 21).stroke(Color.accentColor, lineWidth: 1)
-                    .frame(width: screenSize.width * 0.92, height: screenSize.height * 0.26)
+                    .frame(width: SCREEN_SIZE.width * 0.92, height: SCREEN_SIZE.height * 0.26)
                 VStack {
                     HStack {
                         Text("Currently saved: " + String(self.sumSaving))
@@ -102,9 +102,9 @@ struct SavingsListView: View {
                         Spacer()
                     }
                 }
-                .frame(width: screenSize.width * 0.92 - 10, height: screenSize.height * 0.26, alignment: .leading)
+                .frame(width: SCREEN_SIZE.width * 0.92 - 10, height: SCREEN_SIZE.height * 0.26, alignment: .leading)
             }
-            .frame(width: screenSize.width, height: screenSize.height * 0.32)
+            .frame(width: SCREEN_SIZE.width, height: SCREEN_SIZE.height * 0.32)
             .background(Color("MainPink"))
             if configs.configs.ableToWithdraw {
                 Picker("", selection: $displayOption) {
@@ -172,5 +172,6 @@ struct SavingsListView: View {
 struct SavingsListView_Previews: PreviewProvider {
     static var previews: some View {
         SavingsListView(configs: ConfigStore(), allSaving: SavingDataStore(savings: Saving.sampleData, cost: Cost.sampleData), fetchOnAppear: false)
+.previewInterfaceOrientation(.portraitUpsideDown)
     }
 }

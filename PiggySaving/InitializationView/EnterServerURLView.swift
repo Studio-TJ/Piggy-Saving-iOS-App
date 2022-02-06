@@ -16,7 +16,7 @@ struct EnterServerURLView: View {
         VStack {
             Text("Enter server URL:")
             TextField("https://", text: $externalURL)
-                .frame(width: screenSize.width * 0.8)
+                .frame(width: SCREEN_SIZE.width * 0.8)
                 .disableAutocorrection(true)
                 .keyboardType(.URL)
         }

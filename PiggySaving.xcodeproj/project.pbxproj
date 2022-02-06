@@ -32,6 +32,12 @@
 		ABD0DF2127AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABD0DF1F27AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld */; };
 		ABD3336827AD8BA700A72D23 /* CostListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3336727AD8BA700A72D23 /* CostListItemView.swift */; };
 		ABD3337527ADD84D00A72D23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABD3337327ADD84D00A72D23 /* Localizable.strings */; };
+		ABE8886527AFEE9A006B3246 /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886427AFEE9A006B3246 /* WelcomePage.swift */; };
+		ABE8886727B01664006B3246 /* GoalSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886627B01664006B3246 /* GoalSettingView.swift */; };
+		ABE8886927B01681006B3246 /* DataStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886827B01681006B3246 /* DataStorageView.swift */; };
+		ABE8886B27B01693006B3246 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886A27B01693006B3246 /* NotificationView.swift */; };
+		ABE8886D27B016B1006B3246 /* DoneSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886C27B016B1006B3246 /* DoneSettingView.swift */; };
+		ABE8886F27B016D0006B3246 /* SettingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886E27B016D0006B3246 /* SettingTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +68,12 @@
 		ABD3336727AD8BA700A72D23 /* CostListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostListItemView.swift; sourceTree = "<group>"; };
 		ABD3337427ADD84D00A72D23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ABD3337627ADD85400A72D23 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		ABE8886427AFEE9A006B3246 /* WelcomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePage.swift; sourceTree = "<group>"; };
+		ABE8886627B01664006B3246 /* GoalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingView.swift; sourceTree = "<group>"; };
+		ABE8886827B01681006B3246 /* DataStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorageView.swift; sourceTree = "<group>"; };
+		ABE8886A27B01693006B3246 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		ABE8886C27B016B1006B3246 /* DoneSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneSettingView.swift; sourceTree = "<group>"; };
+		ABE8886E27B016D0006B3246 /* SettingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +172,12 @@
 				AB43A30927A1E4BF0046740D /* ChooseSourceView.swift */,
 				AB43A30B27A1EC220046740D /* EnterServerURLView.swift */,
 				AB1530E027A334DB006FD2FF /* LocalUsageView.swift */,
+				ABE8886E27B016D0006B3246 /* SettingTabView.swift */,
+				ABE8886427AFEE9A006B3246 /* WelcomePage.swift */,
+				ABE8886627B01664006B3246 /* GoalSettingView.swift */,
+				ABE8886827B01681006B3246 /* DataStorageView.swift */,
+				ABE8886A27B01693006B3246 /* NotificationView.swift */,
+				ABE8886C27B016B1006B3246 /* DoneSettingView.swift */,
 			);
 			path = InitializationView;
 			sourceTree = "<group>";
@@ -246,7 +264,11 @@
 				AB1530DF27A33425006FD2FF /* ErrorWrapper.swift in Sources */,
 				AB1530E827A3E5F1006FD2FF /* Data.swift in Sources */,
 				AB1530E427A33A54006FD2FF /* MainView.swift in Sources */,
+				ABE8886B27B01693006B3246 /* NotificationView.swift in Sources */,
 				ABCCCBFB27A8186D00ECAE6F /* SavingListItemView.swift in Sources */,
+				ABE8886927B01681006B3246 /* DataStorageView.swift in Sources */,
+				ABE8886727B01664006B3246 /* GoalSettingView.swift in Sources */,
+				ABE8886D27B016B1006B3246 /* DoneSettingView.swift in Sources */,
 				AB1530E127A334DB006FD2FF /* LocalUsageView.swift in Sources */,
 				ABC6EA0227A9BD4400E6D487 /* Helper.swift in Sources */,
 				ABD0DF2127AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld in Sources */,
@@ -254,9 +276,11 @@
 				ABA6D2B427A1A62000F62E42 /* PiggySavingApp.swift in Sources */,
 				AB43A30C27A1EC220046740D /* EnterServerURLView.swift in Sources */,
 				ABC6EA0027A988B400E6D487 /* TrailingIconLabelStyle.swift in Sources */,
+				ABE8886527AFEE9A006B3246 /* WelcomePage.swift in Sources */,
 				AB01CC2427A3FA9200C4E448 /* OverviewView.swift in Sources */,
 				AB1F410B27AD47970059D50F /* WarningConfirmationView.swift in Sources */,
 				AB01CC2827A3FB0D00C4E448 /* SavingsView.swift in Sources */,
+				ABE8886F27B016D0006B3246 /* SettingTabView.swift in Sources */,
 				ABD3336827AD8BA700A72D23 /* CostListItemView.swift in Sources */,
 				AB43A30A27A1E4BF0046740D /* ChooseSourceView.swift in Sources */,
 				AB8AC01727A6FAB200EDFD62 /* ErrorView.swift in Sources */,
@@ -416,7 +440,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -446,7 +470,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
