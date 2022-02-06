@@ -31,7 +31,6 @@ struct SavingsListView: View {
     @State var sumSaving: Double = 0.0
     @State var listItemHasChange: Bool = false
     @State private var errorWrapper: [ErrorWrapper] = []
-    var fetchOnAppear = true
     let displayOptions = ["Saving", "Cost"]
     @State var displayOption = "Saving"
     @State var hasError = false
@@ -147,7 +146,7 @@ struct SavingsListView: View {
             }
             .onAppear {
                 // TODO: Ths and condition is a temporary fix for crashing when resetting
-                if configs.configs.isInitialized && fetchOnAppear {
+                if configs.configs.isInitialized {
                     self.getAllSavingFromServer(sortDesc: true)
                     self.getAllCostFromServer(sortDesc: true)
                     self.getSum()
@@ -171,7 +170,6 @@ struct SavingsListView: View {
 
 struct SavingsListView_Previews: PreviewProvider {
     static var previews: some View {
-        SavingsListView(configs: ConfigStore(), allSaving: SavingDataStore(savings: Saving.sampleData, cost: Cost.sampleData), fetchOnAppear: false)
-.previewInterfaceOrientation(.portraitUpsideDown)
+        SavingsListView(configs: ConfigStore(), allSaving: SavingDataStore(savings: Saving.sampleData, cost: Cost.sampleData))
     }
 }

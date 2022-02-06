@@ -38,6 +38,10 @@
 		ABE8886B27B01693006B3246 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886A27B01693006B3246 /* NotificationView.swift */; };
 		ABE8886D27B016B1006B3246 /* DoneSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886C27B016B1006B3246 /* DoneSettingView.swift */; };
 		ABE8886F27B016D0006B3246 /* SettingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886E27B016D0006B3246 /* SettingTabView.swift */; };
+		ABE8887227B06237006B3246 /* GoalSettingSetMinimalUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8887127B06237006B3246 /* GoalSettingSetMinimalUnitView.swift */; };
+		ABE8887427B0630B006B3246 /* GoalSettingSetCurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8887327B0630B006B3246 /* GoalSettingSetCurrencyView.swift */; };
+		ABE8887627B06395006B3246 /* GoalSettingSetEndDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8887527B06395006B3246 /* GoalSettingSetEndDateView.swift */; };
+		ABE8887827B075DD006B3246 /* GoalSettingResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8887727B075DD006B3246 /* GoalSettingResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +78,10 @@
 		ABE8886A27B01693006B3246 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		ABE8886C27B016B1006B3246 /* DoneSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneSettingView.swift; sourceTree = "<group>"; };
 		ABE8886E27B016D0006B3246 /* SettingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTabView.swift; sourceTree = "<group>"; };
+		ABE8887127B06237006B3246 /* GoalSettingSetMinimalUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingSetMinimalUnitView.swift; sourceTree = "<group>"; };
+		ABE8887327B0630B006B3246 /* GoalSettingSetCurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingSetCurrencyView.swift; sourceTree = "<group>"; };
+		ABE8887527B06395006B3246 /* GoalSettingSetEndDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingSetEndDateView.swift; sourceTree = "<group>"; };
+		ABE8887727B075DD006B3246 /* GoalSettingResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingResultView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +183,7 @@
 				ABE8886E27B016D0006B3246 /* SettingTabView.swift */,
 				ABE8886427AFEE9A006B3246 /* WelcomePage.swift */,
 				ABE8886627B01664006B3246 /* GoalSettingView.swift */,
+				ABE8887027B06223006B3246 /* GoalSettingViews */,
 				ABE8886827B01681006B3246 /* DataStorageView.swift */,
 				ABE8886A27B01693006B3246 /* NotificationView.swift */,
 				ABE8886C27B016B1006B3246 /* DoneSettingView.swift */,
@@ -187,6 +196,17 @@
 			children = (
 			);
 			path = Shape;
+			sourceTree = "<group>";
+		};
+		ABE8887027B06223006B3246 /* GoalSettingViews */ = {
+			isa = PBXGroup;
+			children = (
+				ABE8887327B0630B006B3246 /* GoalSettingSetCurrencyView.swift */,
+				ABE8887127B06237006B3246 /* GoalSettingSetMinimalUnitView.swift */,
+				ABE8887527B06395006B3246 /* GoalSettingSetEndDateView.swift */,
+				ABE8887727B075DD006B3246 /* GoalSettingResultView.swift */,
+			);
+			path = GoalSettingViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,10 +294,14 @@
 				ABD0DF2127AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld in Sources */,
 				ABA6D2D327A1BC8700F62E42 /* ConfigStore.swift in Sources */,
 				ABA6D2B427A1A62000F62E42 /* PiggySavingApp.swift in Sources */,
+				ABE8887627B06395006B3246 /* GoalSettingSetEndDateView.swift in Sources */,
 				AB43A30C27A1EC220046740D /* EnterServerURLView.swift in Sources */,
+				ABE8887227B06237006B3246 /* GoalSettingSetMinimalUnitView.swift in Sources */,
 				ABC6EA0027A988B400E6D487 /* TrailingIconLabelStyle.swift in Sources */,
+				ABE8887827B075DD006B3246 /* GoalSettingResultView.swift in Sources */,
 				ABE8886527AFEE9A006B3246 /* WelcomePage.swift in Sources */,
 				AB01CC2427A3FA9200C4E448 /* OverviewView.swift in Sources */,
+				ABE8887427B0630B006B3246 /* GoalSettingSetCurrencyView.swift in Sources */,
 				AB1F410B27AD47970059D50F /* WarningConfirmationView.swift in Sources */,
 				AB01CC2827A3FB0D00C4E448 /* SavingsView.swift in Sources */,
 				ABE8886F27B016D0006B3246 /* SettingTabView.swift in Sources */,

@@ -9,7 +9,17 @@ import SwiftUI
 
 struct DataStorageView: View {
     var body: some View {
-        Text("Data will be stored...")
+        VStack {
+            Text("By default, your data will be stored locally on this device. In the future we will add iCloud storage and backup features. ")
+            Spacer()
+            Button {
+            } label: {
+                Text("If you are a power user and want to self-host your PiggySaving backend, click here for detail.")
+                    .underline()
+                    .foregroundColor(Color.gray)
+            }
+
+        }
     }
 }
 

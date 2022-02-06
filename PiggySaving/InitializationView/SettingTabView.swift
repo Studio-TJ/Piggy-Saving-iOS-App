@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct SettingTabView: View {
-    
+    @ObservedObject var configs: ConfigStore
     
     var body: some View {
         TabView {
             WelcomePage()
-            GoalSettingView()
+            GoalSettingView(configs: configs)
             DataStorageView()
             NotificationView()
             DoneSettingView()
@@ -25,6 +25,7 @@ struct SettingTabView: View {
 
 struct SettingTabView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingTabView()
+        let configConst = ConfigStore()
+        SettingTabView(configs: configConst)
     }
 }

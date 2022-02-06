@@ -8,30 +8,6 @@
 import Foundation
 import CoreData
 
-enum Currency: Int32, Identifiable, CaseIterable {
-    case chineseYuan = 1
-    case euro = 2
-    case usDollar = 3
-    
-    case undefined = 0
-    
-    var id: Int32 { self.rawValue }
-    
-    var displayName: String {
-        switch self {
-        case.chineseYuan:
-            return NSLocalizedString("Chinese Yuan", comment: "Chinese Yuan")
-        case.euro:
-            return NSLocalizedString("Euro", comment: "Euro")
-        case.usDollar:
-            return NSLocalizedString("US Dollar", comment: "US Dollar")
-            
-        default:
-            return NSLocalizedString("Undefined", comment: "Undefined")
-        }
-    }
-}
-
 class ConfigStore: ObservableObject {
     @Published var configs: Configs
     let container = NSPersistentContainer(name: "PiggySavingConfig")
@@ -58,9 +34,16 @@ class ConfigStore: ObservableObject {
             self.configs.ableToWithdraw = false
             self.configs.currency = Currency.undefined.rawValue
             self.configs.amountRatio = 1
-            self.configs.totalDaysOfSaving = 0
+            self.configs.endDate = Date()
+            self.configs.minimalUnit = 0.0
             try? context.save()
         }
+    }
+    
+    convenience init(currency: Int32) {
+        self.init()
+        self.configs.currency = currency
+        self.configs.endDate = Date()
     }
     
     public func updateConfig() {
