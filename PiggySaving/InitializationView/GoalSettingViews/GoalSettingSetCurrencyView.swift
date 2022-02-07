@@ -25,8 +25,10 @@ struct GoalSettingSetCurrencyView: View {
             }
             Spacer()
             Picker("Currency", selection: $configs.configs.currency) {
-                ForEach(CURRENCIES, id: \.self) {
-                    Text(Locale.current.localizedString(forCurrencyCode: $0)!).tag($0 as String?)
+                ForEach(Currency.allCases) { currency in
+                    if currency.id != Currency.undefined.id {
+                        Text(currency.displayName).tag(currency.id)
+                    }
                 }
             }
             .pickerStyle(MenuPickerStyle())
@@ -36,7 +38,7 @@ struct GoalSettingSetCurrencyView: View {
 
 struct GoalSettingSetCurrencyView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = ConfigStore(currency: "CNY")
+        let configConst = ConfigStore(currency: Currency.chineseYuan.rawValue)
         GoalSettingSetCurrencyView(configs: configConst)
             .previewLayout(.sizeThatFits)
     }

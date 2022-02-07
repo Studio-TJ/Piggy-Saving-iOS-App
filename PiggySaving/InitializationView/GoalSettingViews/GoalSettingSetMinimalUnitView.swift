@@ -31,7 +31,7 @@ struct GoalSettingSetMinimalUnitView: View {
                     .keyboardType(.decimalPad)
                     .textFieldStyle(.roundedBorder)
                     .frame(width: 100)
-                Text(configs.getSymbolForCurrencyCode())
+                Text(Currency(rawValue: configs.configs.currency)!.currencyUnit)
                     .font(Fonts.CAPTION)
                     .frame(alignment: .bottom)
                 Spacer()
@@ -42,7 +42,7 @@ struct GoalSettingSetMinimalUnitView: View {
 
 struct GoalSettingSetMinimalUnitView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = ConfigStore(currency: "CNY")
+        let configConst = ConfigStore(currency: Currency.chineseYuan.rawValue)
         GoalSettingSetMinimalUnitView(configs: configConst)
             .previewLayout(.sizeThatFits)
     }

@@ -16,7 +16,7 @@ struct GoalSettingResultView: View {
 
 struct GoalSettingResultView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = ConfigStore(currency: "CNY")
+        let configConst = ConfigStore(currency: Currency.chineseYuan.rawValue)
         GoalSettingResultView(configs: configConst)
     }
 }

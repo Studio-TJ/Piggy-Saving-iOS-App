@@ -7,10 +7,8 @@
 
 import SwiftUI
 
-
 struct GoalSettingView: View {
-     
-    @ObservedObject var configs: ConfigStore = ConfigStore(currency: "CNY")
+    @ObservedObject var configs: ConfigStore
     
     var body: some View {
         VStack {
@@ -19,15 +17,17 @@ struct GoalSettingView: View {
                     .font(Fonts.TITLE_SEMIBOLD)
                 Spacer(minLength: 35)
             }
-//            GoalSettingSetCurrencyView(configs: configs)
-//            GoalSettingSetMinimalUnitView(configs: configs)
-//                .padding(.top, 50)
-//            GoalSettingSetEndDateView(configs: configs)
-//            Divider()
-//            if configs.configs.minimalUnit != 0 && configs.configs.endDate != nil {
-//                GoalSettingResultView(configs: configs)
-//            }
-//            Spacer()
+            GoalSettingSetCurrencyView(configs: configs)
+            if configs.configs.currency != Currency.undefined.rawValue {
+                GoalSettingSetMinimalUnitView(configs: configs)
+                .padding(.top, 50)
+            }
+            GoalSettingSetEndDateView(configs: configs)
+            Divider()
+            if configs.configs.minimalUnit != 0 && configs.configs.endDate != nil {
+                GoalSettingResultView(configs: configs)
+            }
+            Spacer()
         }
         .frame(width: SCREEN_SIZE.width * 0.86)
     }
@@ -35,7 +35,7 @@ struct GoalSettingView: View {
 
 struct GoalSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = ConfigStore(currency: "CNY")
+        let configConst = ConfigStore(currency: Currency.chineseYuan.rawValue)
         GoalSettingView(configs: configConst)
     }
 }

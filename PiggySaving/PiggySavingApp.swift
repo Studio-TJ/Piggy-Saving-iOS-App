@@ -14,12 +14,12 @@ struct PiggySavingApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if (configStore.configs.isInitialized == false) {
-                ChooseSourceView(configs: configStore)
-            } else {
-                MainView(configs: configStore)
-            }
-//            SettingTabView(configs: configStore)
+//            if (configStore.configs.isInitialized == false) {
+//                ChooseSourceView(configs: configStore)
+//            } else {
+//                MainView(configs: configStore)
+//            }
+            SettingTabView(configs: configStore)
         }
         .onChange(of: configStore.configs.hasChanges) { configs in
             configStore.updateConfig()
