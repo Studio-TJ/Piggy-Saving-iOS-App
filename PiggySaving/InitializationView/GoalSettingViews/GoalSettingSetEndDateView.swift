@@ -79,7 +79,7 @@ struct GoalSettingSetEndDateView: View {
 
 struct GoalSettingSetEndDateView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = ConfigStore(currency: Currency.chineseYuan.rawValue)
+        let configConst = ConfigStore(currency: "CNY")
         GoalSettingSetEndDateView(configs: configConst)
             .previewLayout(.sizeThatFits)
     }

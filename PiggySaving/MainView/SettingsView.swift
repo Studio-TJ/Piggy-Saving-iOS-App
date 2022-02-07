@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct SettingsView: View {
     @ObservedObject var configs: ConfigStore = ConfigStore()
@@ -29,10 +28,8 @@ struct SettingsView: View {
                     }
                 }
                 Picker("Currency", selection: $configs.configs.currency) {
-                    ForEach(Currency.allCases) { currency in
-                        if currency.id != Currency.undefined.id {
-                            Text(currency.displayName).tag(currency.id)
-                        }
+                    ForEach(0..<CURRENCIES.count) {
+                        Text(Locale.current.localizedString(forCurrencyCode: CURRENCIES[$0])!).tag(CURRENCIES[$0])
                     }
                         .navigationTitle("Choose Currency")
                 }

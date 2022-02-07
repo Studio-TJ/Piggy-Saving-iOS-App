@@ -25,7 +25,7 @@ struct SettingTabView: View {
 
 struct SettingTabView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = ConfigStore()
+        let configConst = ConfigStore(currency: "CNY")
         SettingTabView(configs: configConst)
     }
 }

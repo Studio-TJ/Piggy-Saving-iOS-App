@@ -32,7 +32,7 @@ class ConfigStore: ObservableObject {
             self.configs.usingExternalURL = false
             self.configs.externalURL = ""
             self.configs.ableToWithdraw = false
-            self.configs.currency = Currency.undefined.rawValue
+            self.configs.currency = "CNY"
             self.configs.amountRatio = 1
             self.configs.endDate = Date()
             self.configs.minimalUnit = 0.0
@@ -40,7 +40,12 @@ class ConfigStore: ObservableObject {
         }
     }
     
-    convenience init(currency: Int32) {
+    public func getSymbolForCurrencyCode() -> String {
+        let result = Locale.availableIdentifiers.map { Locale(identifier: $0) }.first { $0.currencyCode == self.configs.currency }
+        return result?.currencySymbol ?? ""
+    }
+    
+    convenience init(currency: String) {
         self.init()
         self.configs.currency = currency
         self.configs.endDate = Date()
