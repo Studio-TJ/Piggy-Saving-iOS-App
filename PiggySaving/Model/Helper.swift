@@ -8,45 +8,19 @@
 import Foundation
 import SwiftUI
 
-enum Currency: Int32, Identifiable, CaseIterable {
-    case chineseYuan = 1
-    case euro = 2
-    case usDollar = 3
-    
-    case undefined = 0
-    
-    var id: Int32 { self.rawValue }
-    
-    var displayName: String {
-        switch self {
-        case.chineseYuan:
-            return NSLocalizedString("Chinese Yuan", comment: "Chinese Yuan")
-        case.euro:
-            return NSLocalizedString("Euro", comment: "Euro")
-        case.usDollar:
-            return NSLocalizedString("US Dollar", comment: "US Dollar")
-            
-        default:
-            return NSLocalizedString("Undefined", comment: "Undefined")
-        }
-    }
-    
-    var currencyUnit: String {
-        switch self {
-        case.chineseYuan:
-            return NSLocalizedString("Yuan", comment: "Chinese Yuan unit")
-        case.euro:
-            return NSLocalizedString("Euro", comment: "Euro unit")
-        case.usDollar:
-            return NSLocalizedString("Dollar", comment: "US Dollar unit")
-            
-        default:
-            return NSLocalizedString("Undefined", comment: "Undefined")
-        }
+let SCREEN_SIZE: CGRect = UIScreen.main.bounds
+
+let CURRENCY_SYMBOL: String = NSLocale.current.currencySymbol!
+
+extension Calendar {
+     func numberOfDaysBetweenExclStartingDate(_ from: Date, and to: Date) -> Int {
+        let fromDate = startOfDay(for: from)
+        let toDate = startOfDay(for: to)
+        let numberOfDays = dateComponents([.day], from: fromDate, to: toDate)
+        
+        return numberOfDays.day!
     }
 }
-
-let SCREEN_SIZE: CGRect = UIScreen.main.bounds
 
 struct Fonts {
     static var TITLE_SEMIBOLD: Font {

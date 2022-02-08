@@ -32,7 +32,6 @@ class ConfigStore: ObservableObject {
             self.configs.usingExternalURL = false
             self.configs.externalURL = ""
             self.configs.ableToWithdraw = false
-            self.configs.currency = Currency.undefined.rawValue
             self.configs.amountRatio = 1
             self.configs.endDate = Date()
             self.configs.minimalUnit = 0.0
@@ -40,10 +39,10 @@ class ConfigStore: ObservableObject {
         }
     }
     
-    convenience init(currency: Int32) {
+    convenience init(placeholder: Bool) {
         self.init()
-        self.configs.currency = currency
-        self.configs.endDate = Date()
+        self.configs.minimalUnit = 0.1
+        self.configs.endDate = Calendar.current.date(byAdding: .month, value: 1, to: Date())!
     }
     
     public func updateConfig() {

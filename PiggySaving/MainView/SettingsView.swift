@@ -28,14 +28,6 @@ struct SettingsView: View {
                         Text(configs.configs.externalURL!)
                     }
                 }
-                Picker("Currency", selection: $configs.configs.currency) {
-                    ForEach(Currency.allCases) { currency in
-                        if currency.id != Currency.undefined.id {
-                            Text(currency.displayName).tag(currency.id)
-                        }
-                    }
-                        .navigationTitle("Choose Currency")
-                }
                 HStack {
                     Toggle(isOn: $configs.configs.ableToWithdraw)
                     {
