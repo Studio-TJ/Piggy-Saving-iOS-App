@@ -8,9 +8,13 @@
 import Foundation
 import SwiftUI
 
-let SCREEN_SIZE: CGRect = UIScreen.main.bounds
+var SCREEN_SIZE: CGRect {
+    UIScreen.main.bounds
+}
 
-let CURRENCY_SYMBOL: String = NSLocale.current.currencySymbol!
+var CURRENCY_SYMBOL: String {
+    NSLocale.current.currencySymbol!
+}
 
 extension Calendar {
      func numberOfDaysBetweenExclStartingDate(_ from: Date, and to: Date) -> Int {

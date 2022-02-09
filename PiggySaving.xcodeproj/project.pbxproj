@@ -20,6 +20,7 @@
 		AB1F410B27AD47970059D50F /* WarningConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1F410A27AD47970059D50F /* WarningConfirmationView.swift */; };
 		AB43A30A27A1E4BF0046740D /* ChooseSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43A30927A1E4BF0046740D /* ChooseSourceView.swift */; };
 		AB43A30C27A1EC220046740D /* EnterServerURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43A30B27A1EC220046740D /* EnterServerURLView.swift */; };
+		AB53BBCC27B4126400695EA5 /* DataStoragePowerUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB53BBCB27B4126400695EA5 /* DataStoragePowerUserView.swift */; };
 		AB8AC01727A6FAB200EDFD62 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8AC01627A6FAB200EDFD62 /* ErrorView.swift */; };
 		ABA6D2B427A1A62000F62E42 /* PiggySavingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA6D2B327A1A62000F62E42 /* PiggySavingApp.swift */; };
 		ABA6D2B827A1A62100F62E42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABA6D2B727A1A62100F62E42 /* Assets.xcassets */; };
@@ -57,6 +58,7 @@
 		AB1F410A27AD47970059D50F /* WarningConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningConfirmationView.swift; sourceTree = "<group>"; };
 		AB43A30927A1E4BF0046740D /* ChooseSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSourceView.swift; sourceTree = "<group>"; };
 		AB43A30B27A1EC220046740D /* EnterServerURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterServerURLView.swift; sourceTree = "<group>"; };
+		AB53BBCB27B4126400695EA5 /* DataStoragePowerUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoragePowerUserView.swift; sourceTree = "<group>"; };
 		AB8AC01627A6FAB200EDFD62 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		ABA6D2B027A1A62000F62E42 /* Piggy Saving.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Piggy Saving.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA6D2B327A1A62000F62E42 /* PiggySavingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiggySavingApp.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				ABE8886627B01664006B3246 /* GoalSettingView.swift */,
 				ABE8887027B06223006B3246 /* GoalSettingViews */,
 				ABE8886827B01681006B3246 /* DataStorageView.swift */,
+				AB53BBCB27B4126400695EA5 /* DataStoragePowerUserView.swift */,
 				ABE8886A27B01693006B3246 /* NotificationView.swift */,
 				ABE8886C27B016B1006B3246 /* DoneSettingView.swift */,
 			);
@@ -293,6 +296,7 @@
 				ABA6D2B427A1A62000F62E42 /* PiggySavingApp.swift in Sources */,
 				ABE8887627B06395006B3246 /* GoalSettingSetEndDateView.swift in Sources */,
 				AB43A30C27A1EC220046740D /* EnterServerURLView.swift in Sources */,
+				AB53BBCC27B4126400695EA5 /* DataStoragePowerUserView.swift in Sources */,
 				ABE8887227B06237006B3246 /* GoalSettingSetMinimalUnitView.swift in Sources */,
 				ABC6EA0027A988B400E6D487 /* TrailingIconLabelStyle.swift in Sources */,
 				ABE8887827B075DD006B3246 /* GoalSettingResultView.swift in Sources */,
