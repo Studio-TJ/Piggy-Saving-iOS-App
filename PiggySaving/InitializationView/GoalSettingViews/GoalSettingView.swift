@@ -22,9 +22,7 @@ struct GoalSettingView: View {
                 .padding(.top, 50)
             GoalSettingSetEndDateView(configs: configs)
             Divider()
-//            if configs.configs.minimalUnit != 0 && configs.configs.endDate != nil {
-                GoalSettingResultView(configs: configs)
-//            }
+            GoalSettingResultView(configs: configs)
             Spacer()
         }
         .frame(width: SCREEN_SIZE.width * 0.86)

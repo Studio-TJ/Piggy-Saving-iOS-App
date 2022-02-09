@@ -14,12 +14,19 @@ struct SavingListItemView: View {
     let saving: Saving
     
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(saving.date)
-                    .font(.headline)
-                if !saving.isSaved {
-                    Spacer()
+        HStack {
+            VStack(alignment: .leading) {
+                Text(saving.dateLocalizedMonthDay)
+                    .font(Fonts.CAPTION)
+                    .foregroundColor(Color("Grey"))
+                Text("+" + String(format: "%.2f", saving.amount))
+            }
+            Spacer()
+            if saving.isSaved {
+                Text("Saved")
+                    .foregroundColor(Color("Grey"))
+            } else {
+                VStack(alignment: .trailing) {
                     Button(action: {
                         Task {
                             do {
@@ -33,28 +40,21 @@ struct SavingListItemView: View {
                            label: {
                         Text("Save Now!")
                     })
+                    Text("Not saved yet.")
                 }
             }
-            .sheet(item: $errorWrapper, onDismiss: {
-                self.errorWrapper = nil
-            }) { wrapper in
-                ErrorView(errorWrapper: [wrapper])
-            }
-            HStack {
-                Label(String(format: "%.2f", saving.amount), systemImage: "eurosign.circle")
-                Spacer()
-                let isSavedImage = saving.isSaved ? "checkmark.circle" : "xmark.circle"
-                let isSavedText = saving.isSaved ? "Saved" : "Not saved"
-                Label(isSavedText, systemImage: isSavedImage)
-                    .labelStyle(.trailingIcon)
-            }
+        }
+        .sheet(item: $errorWrapper, onDismiss: {
+            self.errorWrapper = nil
+        }) { wrapper in
+            ErrorView(errorWrapper: [wrapper])
         }
     }
 }
 
 struct ListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let savingConst = Saving()
+        let savingConst = Saving(saved: 0)
         SavingListItemView(externalURL: .constant(""), itemUpdated: .constant(false), saving: savingConst)
             .previewLayout(.sizeThatFits)
     }

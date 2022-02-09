@@ -19,7 +19,7 @@ struct Sum: Codable {
 
 // TODO: later saving and cost struct can be combined, requires backend change
 // Saving struct
-struct Saving: Codable, Identifiable, Equatable {
+struct Saving: Codable, Identifiable, Equatable, Hashable {
     let id = UUID().uuidString
     var date: String
     var amount: Double
@@ -41,10 +41,40 @@ struct Saving: Codable, Identifiable, Equatable {
         return dateFormatter.date(from: self.date) ?? Date()
     }
     
+    var dateLocalizedMonthDay: String {
+        let format = "MMMM d"
+        let dateFormat = DateFormatter.dateFormat(fromTemplate: format, options: 0, locale: Locale.current)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.string(from: self.dateFormatted)
+    }
+    
+    var dateLocalizedMonth: String {
+        let format = "MMMM"
+        let dateFormat = DateFormatter.dateFormat(fromTemplate: format, options: 0, locale: Locale.current)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.string(from: self.dateFormatted)
+    }
+    
+    var dateLocalizedYear: String {
+        let format = "yyyy"
+        let dateFormat = DateFormatter.dateFormat(fromTemplate: format, options: 0, locale: Locale.current)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.string(from: self.dateFormatted)
+    }
+    
     init() {
         self.date = "2000-01-01"
         self.amount = 1
         self.saved = 0
+    }
+    
+    init(saved: Int) {
+        self.date = "2000-01-01"
+        self.amount = 1
+        self.saved = saved
     }
     
     init(savingData: SavingData) {
@@ -61,11 +91,25 @@ struct Saving: Codable, Identifiable, Equatable {
         self.saved = saved
     }
     
-    static let sampleData: [Saving] =
+    static let sampleData1: [Saving] =
     [
         Saving(date: "2000-01-01", amount: 10.0, saved: 1),
         Saving(date: "2000-01-02", amount: 10.1, saved: 1),
         Saving(date: "2000-01-03", amount: 10.2, saved: 0)
+    ]
+    
+    static let sampleData2: [Saving] =
+    [
+        Saving(date: "2000-02-01", amount: 10.0, saved: 1),
+        Saving(date: "2000-02-02", amount: 10.1, saved: 1),
+        Saving(date: "2000-02-03", amount: 10.2, saved: 0)
+    ]
+    
+    static let sampleData3: [Saving] =
+    [
+        Saving(date: "2001-02-01", amount: 10.0, saved: 1),
+        Saving(date: "2001-02-02", amount: 10.1, saved: 1),
+        Saving(date: "2001-02-03", amount: 10.2, saved: 0)
     ]
 }
 

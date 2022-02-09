@@ -7,17 +7,6 @@
 
 import SwiftUI
 
-struct Window: Shape {
-    let size: CGSize
-    func path(in rect: CGRect) -> Path {
-        var path = Rectangle().path(in: rect)
-        
-        let origin = CGPoint(x: rect.midX - size.width / 2, y: rect.midY - size.height / 2)
-        path.addRect(CGRect(origin: origin, size: size))
-        return path
-    }
-}
-
 func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
     Binding(
         get: { lhs.wrappedValue ?? rhs },
@@ -81,30 +70,7 @@ struct SavingsListView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 21).stroke(Color.accentColor, lineWidth: 1)
-                    .frame(width: SCREEN_SIZE.width * 0.92, height: SCREEN_SIZE.height * 0.26)
-                VStack {
-                    HStack {
-                        Text("Currently saved: " + String(self.sumSaving))
-                            .font(Font.custom("SFProDisplay-Bold", size: 23))
-                        Spacer()
-                    }
-                    HStack {
-                        Text("Total amount till now: " + String(format: "%.2f", allSaving.totalSaving))
-                            .font(Font.custom("SFProDisplay-Bold", size: 23))
-                        Spacer()
-                    }
-                    HStack {
-                        Text("Total cost: " + String(format: "%.2f", allSaving.totalCost))
-                            .font(Font.custom("SFProDisplay-Bold", size: 23))
-                        Spacer()
-                    }
-                }
-                .frame(width: SCREEN_SIZE.width * 0.92 - 10, height: SCREEN_SIZE.height * 0.26, alignment: .leading)
-            }
-            .frame(width: SCREEN_SIZE.width, height: SCREEN_SIZE.height * 0.32)
-            .background(Color("MainPink"))
+            SavingListOverviewView(sumSaving: self.sumSaving, totalSaving: allSaving.totalSaving, totalCost: allSaving.totalCost)
             if configs.configs.ableToWithdraw {
                 Picker("", selection: $displayOption) {
                     ForEach(displayOptions, id: \.self) {
@@ -156,13 +122,12 @@ struct SavingsListView: View {
                 self.getAllSavingFromServer(sortDesc: true)
                 self.getSum()
             }
-            .mask(LinearGradient(gradient: Gradient(colors: [Color("FrontColor"), Color("FrontColor"), Color("FrontColor"), Color("FrontColor").opacity(0)]), startPoint: .top, endPoint:. bottom))
-            .sheet(isPresented: $hasError, onDismiss: {
-                self.errorWrapper.removeAll()
-                self.hasError = false
-            }) {
-                ErrorView(errorWrapper: errorWrapper)
-            }
+        }
+        .sheet(isPresented: $hasError, onDismiss: {
+            self.errorWrapper.removeAll()
+            self.hasError = false
+        }) {
+            ErrorView(errorWrapper: errorWrapper)
         }
         .background(Color.clear)
     }
@@ -170,6 +135,6 @@ struct SavingsListView: View {
 
 struct SavingsListView_Previews: PreviewProvider {
     static var previews: some View {
-        SavingsListView(configs: ConfigStore(), allSaving: SavingDataStore(savings: Saving.sampleData, cost: Cost.sampleData))
+        SavingsListView(configs: ConfigStore(), allSaving: SavingDataStore(savings: Saving.sampleData1, cost: Cost.sampleData))
     }
 }
