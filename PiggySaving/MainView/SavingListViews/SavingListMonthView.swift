@@ -54,6 +54,9 @@ struct SavingListMonthView: View {
             if showList {
                 ForEach(savings) { saving in
                     SavingListItemView(externalURL: $externalURL, itemUpdated: .constant(false), saving: saving)
+                    if saving != savings.last {
+                        Divider()
+                    }
                 }
                 .padding(.leading, 10)
                 .padding(.trailing, 10)

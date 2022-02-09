@@ -28,8 +28,10 @@ struct SavingListYearView: View {
             
             ForEach(savings, id: \.self) { monthSavings in
                 SavingListMonthView(savings: monthSavings)
-                Divider()
-                    .padding(.top, 5)
+                if monthSavings != savings.last {
+                    Divider()
+                        .padding(.top, 5)
+                }
             }
         }
     }
