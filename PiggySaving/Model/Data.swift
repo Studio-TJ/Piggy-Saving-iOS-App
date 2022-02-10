@@ -17,13 +17,14 @@ struct Sum: Codable {
     }
 }
 
-// TODO: later saving and cost struct can be combined, requires backend change
 // Saving struct
 struct Saving: Codable, Identifiable, Equatable, Hashable {
     let id = UUID().uuidString
     var date: String
     var amount: Double
     var saved: Int
+    var description: String?
+    var type: String
     
     var isSaved: Bool {
         return saved == 1 ? true : false
@@ -33,6 +34,8 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
         case date
         case amount
         case saved
+        case description
+        case type
     }
     
     var dateFormatted: Date {
@@ -69,12 +72,14 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
         self.date = "2000-01-01"
         self.amount = 1
         self.saved = 0
+        self.type = "saving"
     }
     
     init(saved: Int) {
         self.date = "2000-01-01"
         self.amount = 1
         self.saved = saved
+        self.type = "saving"
     }
     
     init(savingData: SavingData) {
@@ -83,12 +88,15 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
         self.date = dateFormatter.string(from: savingData.date!)
         self.amount = savingData.amount
         self.saved = savingData.saved ? 1 : 0
+        self.description = savingData.comment
+        self.type = savingData.type ?? "saving"
     }
     
     init(date: String, amount: Double, saved: Int) {
         self.date = date
         self.amount = amount
         self.saved = saved
+        self.type = "saving"
     }
     
     static let sampleData1: [Saving] =
@@ -113,53 +121,6 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
     ]
 }
 
-// Cost struct
-struct Cost: Codable, Identifiable, Equatable {
-    let id = UUID().uuidString
-    var date: String
-    var amount: Double
-    var description: String
-    
-    enum CodingKeys: CodingKey {
-        case date
-        case amount
-        case description
-    }
-    
-    var dateFormatted: Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.date(from: self.date) ?? Date()
-    }
-    
-    init() {
-        self.date = "2020-01-01"
-        self.amount = 100
-        self.description = "Test cost description"
-    }
-    
-    init(costData: SavingData) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        self.date = dateFormatter.string(from: costData.date!)
-        self.amount = costData.amount
-        self.description = costData.comment ?? ""
-    }
-    
-    init(date: String, amount: Double, description: String) {
-        self.date = date
-        self.amount = amount
-        self.description = description
-    }
-    
-    static let sampleData =
-    [
-        Cost(date: "2020-01-01", amount: 100, description: "Withdraw 100"),
-        Cost(date: "2022-02-01", amount: 200, description: "Travel"),
-        Cost(date: "2022-01-31", amount: 150, description: "Buy things")
-    ]
-}
-
 // Extension of saving data
 extension SavingData {
     convenience init(context: NSManagedObjectContext, saving: Saving) {
@@ -171,7 +132,7 @@ extension SavingData {
         self.comment = "Saving"
     }
     
-    convenience init(context: NSManagedObjectContext, cost: Cost) {
+    convenience init(context: NSManagedObjectContext, cost: Saving) {
         self.init(context: context)
         self.date = cost.dateFormatted
         self.amount = cost.amount
@@ -183,8 +144,49 @@ extension SavingData {
 
 class SavingDataStore: ObservableObject {
     @Published var savings: [Saving]
-    @Published var costs: [Cost]
+    @Published var costs: [Saving]
     let container = NSPersistentContainer(name: "PiggySavingData")
+    
+    var savingsByYearMonth: [[[Saving]]] {
+        var groupedByYear: [[Saving]] = []
+        var groupedByYearMonth: [[[Saving]]] = []
+        var lastYear = savings[0].dateLocalizedYear
+        var yearArray: [Saving] = []
+        
+        // Group year, source should already be sorted
+        for saving in savings {
+            if saving.dateLocalizedYear != lastYear {
+                groupedByYear.append(yearArray)
+                yearArray = []
+                lastYear = saving.dateLocalizedYear
+            }
+            yearArray.append(saving)
+        }
+        groupedByYear.append(yearArray)
+        
+        // Group by month
+        var yearCount = 0
+        var monthDayArray: [[Saving]] = []
+        var dayArray: [Saving] = []
+        for savingByYear in groupedByYear {
+            var lastMonth = groupedByYear[yearCount][0].dateLocalizedMonth
+            for saving in savingByYear {
+                if saving.dateLocalizedMonth != lastMonth {
+                    monthDayArray.append(dayArray)
+                    dayArray = []
+                    lastMonth = saving.dateLocalizedMonth
+                }
+                dayArray.append(saving)
+            }
+            monthDayArray.append(dayArray)
+            groupedByYearMonth.insert(monthDayArray, at: yearCount)
+            yearCount += 1
+            monthDayArray = []
+            dayArray = []
+        }
+        
+        return groupedByYearMonth
+    }
     
     init() {
         self.savings = []
@@ -209,13 +211,13 @@ class SavingDataStore: ObservableObject {
         let costs = fetchCosts(context: context)
         if let costs = costs {
             costs.forEach { cost in
-                let newCost = Cost(costData: cost)
+                let newCost = Saving(savingData: cost)
                 self.costs.append(newCost)
             }
         }
     }
     
-    convenience init(savings: [Saving], cost: [Cost]) {
+    convenience init(savings: [Saving], cost: [Saving]) {
         self.init()
         self.savings = savings
         self.costs = cost

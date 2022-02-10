@@ -36,18 +36,14 @@ struct SavingListMonthView: View {
                 Text(CURRENCY_SYMBOL + String(format: "%.2f", self.sumOfMonth))
                     .font(Fonts.BODY_CHINESE_NORMAL)
                     .foregroundColor(Color("MainPink"))
-                Button {
-                    withAnimation {
-                        showList.toggle()
+                Image(systemName: "chevron.right")
+                    .padding()
+                    .onTapGesture {
+                        withAnimation {
+                            showList.toggle()
+                        }
                     }
-                } label: {
-                    Label("List", systemImage: "chevron.right")
-                        .foregroundColor(Color("Grey"))
-                        .labelStyle(.iconOnly)
-                        .imageScale(.small)
-                        .rotationEffect(.degrees(showList ? 90 : 0))
-                        .padding()
-                }
+                    .rotationEffect(.degrees(showList ? 90 : 0))
             }
             .padding(.leading, 10)
             

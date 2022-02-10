@@ -58,7 +58,6 @@ class ServerApi {
                 return
             }
             do {
-                // TODO: for all REST result, check if data is available
                 if let data = data {
                     let sum = try JSONDecoder().decode(Sum.self, from: data)
                     DispatchQueue.main.async {
@@ -131,7 +130,7 @@ class ServerApi {
         }.resume()
     }
     
-    static func getAllCost(externalURL: String) async throws -> [Cost] {
+    static func getAllCost(externalURL: String) async throws -> [Saving] {
         try await withCheckedThrowingContinuation { continuation in
             getAllCost(externalURL: externalURL) { result in
                 switch result {
@@ -145,7 +144,7 @@ class ServerApi {
     }
     
     // TODO: modify backend with better handling, more universal
-    private static func getAllCost(externalURL: String, completion: @escaping (Result<[Cost], Error>) -> Void) {
+    private static func getAllCost(externalURL: String, completion: @escaping (Result<[Saving], Error>) -> Void) {
         let json: [String: Bool] = [
             "desc": true,
             "withdraw": true
@@ -171,9 +170,9 @@ class ServerApi {
                 return
             }
             do {
-                var costs: [Cost] = []
+                var costs: [Saving] = []
                 if let data = data {
-                    let allCosts = try JSONDecoder().decode([String: Cost].self, from: data)
+                    let allCosts = try JSONDecoder().decode([String: Saving].self, from: data)
                     for allCost in allCosts {
                         costs.append(allCost.value)
                     }

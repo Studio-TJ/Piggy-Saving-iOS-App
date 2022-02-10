@@ -81,8 +81,8 @@ struct SavingsListView: View {
             }
             List {
                 if self.displayOption == "Saving" {
-                    ForEach(allSaving.savings) { saving in
-                        SavingListItemView(externalURL: $configs.configs.externalURL ?? "", itemUpdated: $listItemHasChange, saving: saving)
+                    ForEach(allSaving.savingsByYearMonth, id: \.self) { savingsByYear in
+                        SavingListYearView(savings: savingsByYear)
                     }
                     .listRowBackground(Color.clear)
                 } else {
@@ -135,6 +135,6 @@ struct SavingsListView: View {
 
 struct SavingsListView_Previews: PreviewProvider {
     static var previews: some View {
-        SavingsListView(configs: ConfigStore(), allSaving: SavingDataStore(savings: Saving.sampleData1, cost: Cost.sampleData))
+        SavingsListView(configs: ConfigStore(), allSaving: SavingDataStore(savings: Saving.sampleData1 + Saving.sampleData2 + Saving.sampleData3, cost: Saving.sampleData1))
     }
 }

@@ -27,6 +27,7 @@ struct SavingListItemView: View {
                     .foregroundColor(Color("Grey"))
             } else {
                 VStack(alignment: .trailing) {
+                    // TODO: button will be modified to onTapGesture because of list behavior
                     Button(action: {
                         Task {
                             do {

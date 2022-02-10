@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CostListItemView: View {
-    let cost: Cost
+    let cost: Saving
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -18,14 +18,14 @@ struct CostListItemView: View {
                 Label(String(format: "%.2f", cost.amount), systemImage: "eurosign.circle")
                     .labelStyle(.trailingIcon)
             }
-            Text(cost.description)
+            Text(cost.description ?? "")
         }
     }
 }
 
 struct CostListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let costConst = Cost()
+        let costConst = Saving()
         CostListItemView(cost: costConst)
             .previewLayout(.sizeThatFits)
 

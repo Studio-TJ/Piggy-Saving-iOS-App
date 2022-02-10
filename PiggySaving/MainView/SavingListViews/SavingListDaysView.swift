@@ -11,7 +11,7 @@ struct SavingListDaysView: View {
     @Binding var listItemHasChange: Bool
     @Binding var externalURL: String
     var savings: [Saving] = []
-    var costs: [Cost] = []
+    var costs: [Saving] = []
     var displayOption = "Saving"
     var body: some View {
         List {
