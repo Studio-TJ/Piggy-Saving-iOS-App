@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct DataStorageView: View {
+    @ObservedObject var configs: Configs
+    @State var serverURL = ""
     @State var showPowerUserGuide = false
-    @State private var serverURL = ""
     var body: some View {
         VStack {
             HStack {
@@ -44,8 +45,8 @@ struct DataStorageView: View {
                             ToolbarItem(placement: .confirmationAction) {
                                 Button("Save") {
                                     showPowerUserGuide = false
-                                    // TODO: add url to configs later.
-                                    print(self.serverURL)
+                                    self.configs.externalURL = serverURL
+                                    self.configs.usingExternalURL = true
                                 }
                             }
                         }
@@ -58,6 +59,7 @@ struct DataStorageView: View {
 
 struct DataStorageView_Previews: PreviewProvider {
     static var previews: some View {
-        DataStorageView()
+        let configs = ConfigStore(placeholder: true)
+        DataStorageView(configs: configs.configs)
     }
 }

@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct GoalSettingResultView: View {
-    @ObservedObject var configs: ConfigStore
+    @ObservedObject var configs: Configs
     
     var maximalDayValue: Double {
-        Double(Calendar.current.numberOfDaysBetweenExclStartingDate(Date(), and: configs.configs.endDate!)) * configs.configs.minimalUnit
+        Double(Calendar.current.numberOfDaysBetweenExclStartingDate(Date(), and: configs.endDate ?? Date())) * configs.minimalUnit
     }
     
     var sumAfterEndDate: Double {
-        ((configs.configs.minimalUnit + maximalDayValue) * Double(Calendar.current.numberOfDaysBetweenExclStartingDate(Date(), and: configs.configs.endDate!))) / 2
+        ((configs.minimalUnit + maximalDayValue) * Double(Calendar.current.numberOfDaysBetweenExclStartingDate(Date(), and: configs.endDate ?? Date()))) / 2
     }
     
     var body: some View {
@@ -28,7 +28,7 @@ struct GoalSettingResultView: View {
             HStack {
                 Spacer(minLength: SCREEN_SIZE.width * 0.1)
                 Text(CURRENCY_SYMBOL
-                     + String(configs.configs.minimalUnit)
+                     + String(configs.minimalUnit)
                      + " ~ "
                      + CURRENCY_SYMBOL
                      + String(format: "%.2f", maximalDayValue))
@@ -54,8 +54,8 @@ struct GoalSettingResultView: View {
 
 struct GoalSettingResultView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = ConfigStore(placeholder: true)
-        GoalSettingResultView(configs: configConst)
+        let configConst = ConfigStore()
+        GoalSettingResultView(configs: configConst.configs)
             .previewLayout(.sizeThatFits)
     }
 }

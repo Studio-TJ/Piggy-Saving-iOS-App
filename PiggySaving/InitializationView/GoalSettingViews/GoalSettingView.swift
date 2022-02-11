@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GoalSettingView: View {
-    @ObservedObject var configs: ConfigStore
+    @ObservedObject var configs: Configs
     
     var body: some View {
         VStack {
@@ -31,7 +31,7 @@ struct GoalSettingView: View {
 
 struct GoalSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = ConfigStore(placeholder: true)
-        GoalSettingView(configs: configConst)
+        let configConst = ConfigStore()
+        GoalSettingView(configs: configConst.configs)
     }
 }

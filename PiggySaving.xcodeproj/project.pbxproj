@@ -69,6 +69,7 @@
 		ABA6D2B727A1A62100F62E42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ABA6D2BA27A1A62100F62E42 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ABA6D2D227A1BC8700F62E42 /* ConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigStore.swift; sourceTree = "<group>"; };
+		ABAB8B6927B6B64200E8E80C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ABC6E9FF27A988B400E6D487 /* TrailingIconLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingIconLabelStyle.swift; sourceTree = "<group>"; };
 		ABC6EA0127A9BD4400E6D487 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListItemView.swift; sourceTree = "<group>"; };
@@ -146,6 +147,7 @@
 		ABA6D2B227A1A62000F62E42 /* PiggySaving */ = {
 			isa = PBXGroup;
 			children = (
+				ABAB8B6927B6B64200E8E80C /* Info.plist */,
 				ABA6D2B327A1A62000F62E42 /* PiggySavingApp.swift */,
 				ABA6D2D127A1BC7900F62E42 /* Model */,
 				ABA6D2D427A1D7B900F62E42 /* InitializationView */,
@@ -239,6 +241,7 @@
 				ABA6D2AC27A1A62000F62E42 /* Sources */,
 				ABA6D2AD27A1A62000F62E42 /* Frameworks */,
 				ABA6D2AE27A1A62000F62E42 /* Resources */,
+				AB49C44C27B71D45001558C3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -295,6 +298,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AB49C44C27B71D45001558C3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		ABA6D2AC27A1A62000F62E42 /* Sources */ = {
@@ -479,11 +502,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"PiggySaving/Preview Content\"";
-				DEVELOPMENT_TEAM = W7NMM5932M;
+				DEVELOPMENT_TEAM = F68MNZRCPQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PiggySaving/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -494,8 +519,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tianyu.PiggySaving;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.studiotj.piggysave;
 				PRODUCT_NAME = "Piggy Saving";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -509,11 +534,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"PiggySaving/Preview Content\"";
-				DEVELOPMENT_TEAM = W7NMM5932M;
+				DEVELOPMENT_TEAM = F68MNZRCPQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PiggySaving/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -524,8 +551,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tianyu.PiggySaving;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.studiotj.piggysave;
 				PRODUCT_NAME = "Piggy Saving";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

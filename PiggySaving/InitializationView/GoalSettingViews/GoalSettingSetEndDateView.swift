@@ -42,7 +42,7 @@ struct GoalSettingSetEndDateView: View {
             }
         }
     }
-    @ObservedObject var configs: ConfigStore
+    @ObservedObject var configs: Configs
     @State var endDateChoice: Int = LengthChoice.oneMonth.rawValue
     
     var body: some View {
@@ -57,19 +57,22 @@ struct GoalSettingSetEndDateView: View {
                 }
                 .pickerStyle(.menu)
             }
+            .onAppear {
+                configs.endDate = LengthChoice(rawValue: endDateChoice)!.dateByCase
+            }
             .onChange(of: endDateChoice) { value in
-                configs.configs.endDate = LengthChoice(rawValue: value)!.dateByCase
+                configs.endDate = LengthChoice(rawValue: value)!.dateByCase
             }
             if endDateChoice == LengthChoice.custom.rawValue {
                 DatePicker(
                     "Set End Date",
-                    selection: $configs.configs.endDate ?? Date(),
+                    selection: $configs.endDate ?? Date(),
                     displayedComponents: .date)
             }
             HStack {
                 VStack(alignment:. leading) {
                     Text("End Date")
-                    Text(configs.configs.endDate ?? Date(), style: .date)
+                    Text(configs.endDate ?? Date(), style: .date)
                 }
                 Spacer()
             }
@@ -80,7 +83,7 @@ struct GoalSettingSetEndDateView: View {
 struct GoalSettingSetEndDateView_Previews: PreviewProvider {
     static var previews: some View {
         let configConst = ConfigStore(placeholder: true)
-        GoalSettingSetEndDateView(configs: configConst)
+        GoalSettingSetEndDateView(configs: configConst.configs)
             .previewLayout(.sizeThatFits)
     }
 }

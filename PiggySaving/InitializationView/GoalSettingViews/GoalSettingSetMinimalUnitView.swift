@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct GoalSettingSetMinimalUnitView: View {
-    @ObservedObject var configs: ConfigStore
+    @ObservedObject var configs: Configs
     @State private var showMinimalUnitHelper = false
+    @FocusState private var enteringFocuse: Bool
     
     var body: some View {
         VStack {
@@ -27,13 +28,22 @@ struct GoalSettingSetMinimalUnitView: View {
                 Spacer()
             }
             HStack(alignment: .bottom) {
-                TextField("Minimal Unit", value: $configs.configs.minimalUnit, format: .number)
+                TextField("Minimal Unit", value: $configs.minimalUnit, format: .number)
                     .keyboardType(.decimalPad)
+                    .focused($enteringFocuse)
                     .textFieldStyle(.roundedBorder)
                     .frame(width: 100)
                 Text(CURRENCY_SYMBOL)
                     .font(Fonts.CAPTION)
                     .frame(alignment: .bottom)
+                Button {
+                    enteringFocuse = false
+                } label: {
+                    Text("Done")
+                        .foregroundColor(Color.accentColor)
+                        .frame(minWidth: 0, maxWidth: SCREEN_SIZE.width * 0.2, minHeight: 20)
+                }
+
                 Spacer()
             }
         }
@@ -42,8 +52,8 @@ struct GoalSettingSetMinimalUnitView: View {
 
 struct GoalSettingSetMinimalUnitView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = ConfigStore(placeholder: true)
-        GoalSettingSetMinimalUnitView(configs: configConst)
+        let configConst = ConfigStore()
+        GoalSettingSetMinimalUnitView(configs: configConst.configs)
             .previewLayout(.sizeThatFits)
     }
 }

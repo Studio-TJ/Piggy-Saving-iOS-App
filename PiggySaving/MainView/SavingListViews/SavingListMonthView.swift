@@ -39,9 +39,9 @@ struct SavingListMonthView: View {
                 Image(systemName: "chevron.right")
                     .padding()
                     .onTapGesture {
-                        withAnimation {
+//                        withAnimation {
                             showList.toggle()
-                        }
+//                        }
                     }
                     .rotationEffect(.degrees(showList ? 90 : 0))
             }

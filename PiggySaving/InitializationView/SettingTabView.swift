@@ -13,10 +13,10 @@ struct SettingTabView: View {
     var body: some View {
         TabView {
             WelcomePage()
-            GoalSettingView(configs: configs)
-            DataStorageView()
+            GoalSettingView(configs: configs.configs)
+            DataStorageView(configs: configs.configs)
             NotificationView()
-            DoneSettingView()
+            DoneSettingView(configs: configs)
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))

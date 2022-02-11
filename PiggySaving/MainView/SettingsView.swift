@@ -50,6 +50,9 @@ struct SettingsView: View {
             .navigationTitle("")
             .navigationBarHidden(true)
             .padding(.top, 20)
+            .onChange(of: configs.configs.ableToWithdraw) { value in
+                configs.updateConfig()
+            }
             .sheet(isPresented: $resetAppConfirmation) {
             } content: {
                 WarningConfirmationView(description: "You are about to reset the App. This action will erase all data stored on this devices and it is not undoable.") {

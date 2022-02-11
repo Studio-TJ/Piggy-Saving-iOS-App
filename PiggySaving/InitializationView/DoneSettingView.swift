@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct DoneSettingView: View {
+    @ObservedObject var configs: ConfigStore
     var body: some View {
         VStack {
             Text("Start your first saving.")
                 .padding(.top, SCREEN_SIZE.height * 0.55)
             Button(action: {
-                print("Done")
+                configs.configs.isInitialized = true
+                configs.updateConfig()
             }) {
                 Text("Done")
                     .frame(minWidth: 0, maxWidth: SCREEN_SIZE.width * 0.3, minHeight: 50)
@@ -30,6 +32,7 @@ struct DoneSettingView: View {
 
 struct DoneSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        DoneSettingView()
+        let configs = ConfigStore()
+        DoneSettingView(configs: configs)
     }
 }

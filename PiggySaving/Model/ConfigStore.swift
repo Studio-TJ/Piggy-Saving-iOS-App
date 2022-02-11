@@ -41,13 +41,19 @@ class ConfigStore: ObservableObject {
     
     convenience init(placeholder: Bool) {
         self.init()
-        self.configs.minimalUnit = 0.1
+        self.configs.minimalUnit = 0.2
         self.configs.endDate = Calendar.current.date(byAdding: .month, value: 1, to: Date())!
     }
     
     public func updateConfig() {
         if let context = configs.managedObjectContext {
             try? context.save()
+        }
+        let context = self.container.viewContext
+        let fetchRequest = Configs.fetchRequest()
+        let conf = try? context.fetch(fetchRequest).first
+        if let conf = conf {
+            self.configs = conf
         }
     }
     

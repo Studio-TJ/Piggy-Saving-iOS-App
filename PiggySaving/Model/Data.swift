@@ -148,6 +148,9 @@ class SavingDataStore: ObservableObject {
     let container = NSPersistentContainer(name: "PiggySavingData")
     
     var savingsByYearMonth: [[[Saving]]] {
+        if savings.count == 0 {
+            return []
+        }
         var groupedByYear: [[Saving]] = []
         var groupedByYearMonth: [[[Saving]]] = []
         var lastYear = savings[0].dateLocalizedYear
