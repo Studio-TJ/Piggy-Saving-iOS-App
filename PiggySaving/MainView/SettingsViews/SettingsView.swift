@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 
 struct SettingsView: View {
+    
     @ObservedObject var configs: ConfigStore = ConfigStore()
     @State private var resetAppConfirmation: Bool = false
     @State private var toReset: Bool = false
@@ -16,25 +17,8 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             Form {
-                HStack {
-                    Text("Running Mode")
-                    Spacer()
-                    let mode = configs.configs.usingExternalURL ? "Self-Hosted" : "Local"
-                    Text(mode)
-                }
-                if configs.configs.usingExternalURL {
-                    VStack(alignment: .leading) {
-                        Text("Server address:")
-                        Text(configs.configs.externalURL!)
-                    }
-                }
-                HStack {
-                    Toggle(isOn: $configs.configs.ableToWithdraw)
-                    {
-                        Text("Withdraw")
-                        
-                    }
-                }
+                SettingsRunningModeView(usingExternalURL: configs.configs.usingExternalURL, externalURL: configs.configs.externalURL)
+                SettingsViewOperationView()
                 HStack {
                     Spacer()
                     Button(action: {
@@ -46,12 +30,13 @@ struct SettingsView: View {
                     })
                     Spacer()
                 }
+                SettingsViewFooterInfoView()
             }
             .navigationTitle("")
             .navigationBarHidden(true)
             .padding(.top, 20)
             .onChange(of: configs.configs.ableToWithdraw) { value in
-                configs.updateConfig()
+                configs.finishInitialConfiguration()
             }
             .sheet(isPresented: $resetAppConfirmation) {
             } content: {
@@ -75,5 +60,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environment(\.isPreview, true)
     }
 }

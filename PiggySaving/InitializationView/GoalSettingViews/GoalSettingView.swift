@@ -8,7 +8,17 @@
 import SwiftUI
 
 struct GoalSettingView: View {
-    @ObservedObject var configs: Configs
+    @FetchRequest(entity: Configs.entity(), sortDescriptors: []) var fetchedConfigs: FetchedResults<Configs>
+    @Environment(\.managedObjectContext) var moc
+    var preview: Bool = false
+    
+    var configs: Configs {
+        if preview {
+            return ConfigStore().configs
+        } else {
+            return fetchedConfigs.first ?? Configs(context: moc)
+        }
+    }
     
     var body: some View {
         VStack {
@@ -26,12 +36,14 @@ struct GoalSettingView: View {
             Spacer()
         }
         .frame(width: SCREEN_SIZE.width * 0.86)
+        .onDisappear {
+            try? moc.save()
+        }
     }
 }
 
 struct GoalSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = ConfigStore()
-        GoalSettingView(configs: configConst.configs)
+        GoalSettingView(preview: true)
     }
 }

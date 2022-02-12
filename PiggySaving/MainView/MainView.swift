@@ -11,13 +11,7 @@ struct MainView: View {
     @ObservedObject var configs: ConfigStore = ConfigStore()
     
     var body: some View {
-        TabView {
-//            SavingsView()
-//                .tabItem {
-//                    Image(systemName: "house.fill")
-//                    Text("Savings")
-//                }
-            
+        TabView {          
             SavingsListView(configs: configs)
                 .tabItem {
                     Image(systemName: "list.dash")

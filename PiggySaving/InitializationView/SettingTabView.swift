@@ -8,24 +8,22 @@
 import SwiftUI
 
 struct SettingTabView: View {
-    @ObservedObject var configs: ConfigStore
-    
+ 
     var body: some View {
         TabView {
             WelcomePage()
-            GoalSettingView(configs: configs.configs)
-            DataStorageView(configs: configs.configs)
+            GoalSettingView()
+            DataStorageView()
             NotificationView()
-            DoneSettingView(configs: configs)
+            DoneSettingView()
         }
-        .tabViewStyle(.page)
+        .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(.page(backgroundDisplayMode: .always))
     }
 }
 
 struct SettingTabView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = ConfigStore()
-        SettingTabView(configs: configConst)
+        SettingTabView()
     }
 }

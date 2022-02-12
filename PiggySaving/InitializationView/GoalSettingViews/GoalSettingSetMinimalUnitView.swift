@@ -40,8 +40,12 @@ struct GoalSettingSetMinimalUnitView: View {
                     enteringFocuse = false
                 } label: {
                     Text("Done")
-                        .foregroundColor(Color.accentColor)
-                        .frame(minWidth: 0, maxWidth: SCREEN_SIZE.width * 0.2, minHeight: 20)
+                        .frame(minWidth: 80, minHeight: 25)
+                        .background {
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(Color.accentColor)
+                        }
+                        .foregroundColor(Color("FrontColor"))
                 }
 
                 Spacer()
@@ -52,8 +56,8 @@ struct GoalSettingSetMinimalUnitView: View {
 
 struct GoalSettingSetMinimalUnitView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = ConfigStore()
-        GoalSettingSetMinimalUnitView(configs: configConst.configs)
+        let configConst = Configs()
+        GoalSettingSetMinimalUnitView(configs: configConst)
             .previewLayout(.sizeThatFits)
     }
 }

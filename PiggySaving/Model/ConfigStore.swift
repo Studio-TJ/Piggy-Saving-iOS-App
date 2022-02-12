@@ -45,16 +45,11 @@ class ConfigStore: ObservableObject {
         self.configs.endDate = Calendar.current.date(byAdding: .month, value: 1, to: Date())!
     }
     
-    public func updateConfig() {
+    public func finishInitialConfiguration() {
         if let context = configs.managedObjectContext {
             try? context.save()
         }
-        let context = self.container.viewContext
-        let fetchRequest = Configs.fetchRequest()
-        let conf = try? context.fetch(fetchRequest).first
-        if let conf = conf {
-            self.configs = conf
-        }
+        self.configs = configs
     }
     
     public func resetConfig() {

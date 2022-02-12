@@ -8,7 +8,18 @@
 import SwiftUI
 
 struct DataStorageView: View {
-    @ObservedObject var configs: Configs
+    @FetchRequest(entity: Configs.entity(), sortDescriptors: []) var fetchedConfigs: FetchedResults<Configs>
+    @Environment(\.managedObjectContext) var moc
+    var preview: Bool = false
+    
+    var configs: Configs {
+        if preview {
+            return ConfigStore().configs
+        } else {
+            return fetchedConfigs.first ?? Configs(context: moc)
+        }
+    }
+    
     @State var serverURL = ""
     @State var showPowerUserGuide = false
     var body: some View {
@@ -21,21 +32,23 @@ struct DataStorageView: View {
             .padding(20)
             Image(systemName: "internaldrive")
                 .font(.system(size: 120))
-            Text("By default, your data will be stored locally on this device. No other party will have access of your data.")
+            Text("By default, your data will be stored locally on this device. No other party will have access of your data. If you are a power user, you can also choose to self-host your backend server. ")
                 .padding(20)
             Spacer()
             Button {
-                print("Power user")
                 showPowerUserGuide = true
             } label: {
                 Text("Power user? Click here.")
                     .underline()
                     .foregroundColor(Color.gray)
             }
+            .onAppear {
+                print("data")
+            }
             .padding(.bottom, SCREEN_SIZE.height * 0.1)
             .sheet(isPresented: $showPowerUserGuide) {
                 NavigationView {
-                    DataStoragePowerUserView(serverURL: $serverURL)
+                    DataStoragePowerUserView(configs: configs)
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {
                                 Button("Cancel") {
@@ -45,8 +58,8 @@ struct DataStorageView: View {
                             ToolbarItem(placement: .confirmationAction) {
                                 Button("Save") {
                                     showPowerUserGuide = false
-                                    self.configs.externalURL = serverURL
-                                    self.configs.usingExternalURL = true
+                                    configs.usingExternalURL = true
+                                    try? moc.save()
                                 }
                             }
                         }
@@ -59,7 +72,6 @@ struct DataStorageView: View {
 
 struct DataStorageView_Previews: PreviewProvider {
     static var previews: some View {
-        let configs = ConfigStore(placeholder: true)
-        DataStorageView(configs: configs.configs)
+        DataStorageView(preview: true)
     }
 }

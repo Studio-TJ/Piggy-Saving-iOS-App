@@ -8,12 +8,23 @@
 import Foundation
 import SwiftUI
 
+let APP_VERSION: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+let APP_BUILD_NUMBER: String = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
+let VERSION_STRING: String = "Piggy Saving " + "v" + APP_VERSION + " (" + APP_BUILD_NUMBER + ")"
+
 var SCREEN_SIZE: CGRect {
     UIScreen.main.bounds
 }
 
 var CURRENCY_SYMBOL: String {
     NSLocale.current.currencySymbol!
+}
+
+func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
+    Binding(
+        get: { lhs.wrappedValue ?? rhs },
+        set: { lhs.wrappedValue = $0 }
+    )
 }
 
 extension Calendar {
@@ -37,5 +48,16 @@ struct Fonts {
     
     static var CAPTION: Font {
         return Font.custom("PingFangSC-Regular", size: 11)
+    }
+}
+
+private struct PreviewKey: EnvironmentKey {
+    static let defaultValue: Bool = false
+}
+
+extension EnvironmentValues {
+    var isPreview: Bool {
+        get { self[PreviewKey.self] }
+        set { self[PreviewKey.self] = newValue }
     }
 }

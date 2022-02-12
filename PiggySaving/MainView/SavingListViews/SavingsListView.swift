@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
-    Binding(
-        get: { lhs.wrappedValue ?? rhs },
-        set: { lhs.wrappedValue = $0 }
-    )
-}
-
 struct SavingsListView: View {
     @ObservedObject var configs: ConfigStore
     @StateObject var allSaving: SavingDataStore = SavingDataStore()
@@ -90,6 +83,12 @@ struct SavingsListView: View {
                         CostListItemView(cost: cost)
                     }
                     .listRowBackground(Color.clear)
+                    .swipeActions {
+                        Button("Edit") {
+                            print("edit")
+                        }
+                        .tint(.blue)
+                    }
                 }
             }
             .zIndex(-1)

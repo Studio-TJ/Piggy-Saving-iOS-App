@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DataStoragePowerUserView: View {
-    @Binding var serverURL: String
+    @ObservedObject var configs: Configs
     @State private var showURLHelper = false
     var body: some View {
         VStack {
@@ -37,7 +37,7 @@ struct DataStoragePowerUserView: View {
                     Button("OK", role: .cancel) {}
                 }
             }
-            TextField("https://", text: $serverURL)
+            TextField("https://", text: $configs.externalURL ?? "")
                 .padding(.top, 5)
                 .frame(width: SCREEN_SIZE.width * 0.8)
                 .disableAutocorrection(true)
@@ -49,7 +49,7 @@ struct DataStoragePowerUserView: View {
 
 struct DataStoragePowerUserView_Previews: PreviewProvider {
     static var previews: some View {
-        let serverURL = ""
-        DataStoragePowerUserView(serverURL: .constant(serverURL))
+        let config = Configs()
+        DataStoragePowerUserView(configs: config)
     }
 }

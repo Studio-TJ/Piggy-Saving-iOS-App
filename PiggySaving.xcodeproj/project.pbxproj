@@ -8,18 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		AB01CC2227A3F89300C4E448 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB01CC2127A3F89300C4E448 /* SettingsView.swift */; };
-		AB01CC2427A3FA9200C4E448 /* OverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB01CC2327A3FA9200C4E448 /* OverviewView.swift */; };
 		AB01CC2627A3FAC300C4E448 /* SavingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB01CC2527A3FAC300C4E448 /* SavingsListView.swift */; };
-		AB01CC2827A3FB0D00C4E448 /* SavingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB01CC2727A3FB0D00C4E448 /* SavingsView.swift */; };
 		AB1530DD27A33149006FD2FF /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530DC27A33149006FD2FF /* CardView.swift */; };
 		AB1530DF27A33425006FD2FF /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530DE27A33425006FD2FF /* ErrorWrapper.swift */; };
-		AB1530E127A334DB006FD2FF /* LocalUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530E027A334DB006FD2FF /* LocalUsageView.swift */; };
 		AB1530E427A33A54006FD2FF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530E327A33A54006FD2FF /* MainView.swift */; };
 		AB1530E627A3DE42006FD2FF /* ServerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530E527A3DE42006FD2FF /* ServerApi.swift */; };
 		AB1530E827A3E5F1006FD2FF /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1530E727A3E5F1006FD2FF /* Data.swift */; };
 		AB1F410B27AD47970059D50F /* WarningConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1F410A27AD47970059D50F /* WarningConfirmationView.swift */; };
-		AB43A30A27A1E4BF0046740D /* ChooseSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43A30927A1E4BF0046740D /* ChooseSourceView.swift */; };
-		AB43A30C27A1EC220046740D /* EnterServerURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43A30B27A1EC220046740D /* EnterServerURLView.swift */; };
+		AB49C45027B84E26001558C3 /* SettingsRunningModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49C44F27B84E26001558C3 /* SettingsRunningModeView.swift */; };
+		AB49C45227B84EEB001558C3 /* SettingsViewFooterInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49C45127B84EEB001558C3 /* SettingsViewFooterInfoView.swift */; };
+		AB49C45427B84F7D001558C3 /* SettingsViewOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49C45327B84F7D001558C3 /* SettingsViewOperationView.swift */; };
+		AB49C45727B85330001558C3 /* SettingsViewOperationWithdrawModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49C45627B85330001558C3 /* SettingsViewOperationWithdrawModeView.swift */; };
+		AB49C45927B8541C001558C3 /* SettingsViewOperationSetMinimalUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49C45827B8541C001558C3 /* SettingsViewOperationSetMinimalUnitView.swift */; };
+		AB49C45B27B8561D001558C3 /* SettingsViewOperationsSetEndDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49C45A27B8561D001558C3 /* SettingsViewOperationsSetEndDateView.swift */; };
 		AB53BBCC27B4126400695EA5 /* DataStoragePowerUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB53BBCB27B4126400695EA5 /* DataStoragePowerUserView.swift */; };
 		AB8AC01727A6FAB200EDFD62 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8AC01627A6FAB200EDFD62 /* ErrorView.swift */; };
 		ABA6D2B427A1A62000F62E42 /* PiggySavingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA6D2B327A1A62000F62E42 /* PiggySavingApp.swift */; };
@@ -50,18 +51,19 @@
 
 /* Begin PBXFileReference section */
 		AB01CC2127A3F89300C4E448 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		AB01CC2327A3FA9200C4E448 /* OverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewView.swift; sourceTree = "<group>"; };
 		AB01CC2527A3FAC300C4E448 /* SavingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsListView.swift; sourceTree = "<group>"; };
-		AB01CC2727A3FB0D00C4E448 /* SavingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsView.swift; sourceTree = "<group>"; };
 		AB1530DC27A33149006FD2FF /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		AB1530DE27A33425006FD2FF /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
-		AB1530E027A334DB006FD2FF /* LocalUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUsageView.swift; sourceTree = "<group>"; };
 		AB1530E327A33A54006FD2FF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		AB1530E527A3DE42006FD2FF /* ServerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerApi.swift; sourceTree = "<group>"; };
 		AB1530E727A3E5F1006FD2FF /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		AB1F410A27AD47970059D50F /* WarningConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningConfirmationView.swift; sourceTree = "<group>"; };
-		AB43A30927A1E4BF0046740D /* ChooseSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSourceView.swift; sourceTree = "<group>"; };
-		AB43A30B27A1EC220046740D /* EnterServerURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterServerURLView.swift; sourceTree = "<group>"; };
+		AB49C44F27B84E26001558C3 /* SettingsRunningModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRunningModeView.swift; sourceTree = "<group>"; };
+		AB49C45127B84EEB001558C3 /* SettingsViewFooterInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewFooterInfoView.swift; sourceTree = "<group>"; };
+		AB49C45327B84F7D001558C3 /* SettingsViewOperationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewOperationView.swift; sourceTree = "<group>"; };
+		AB49C45627B85330001558C3 /* SettingsViewOperationWithdrawModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewOperationWithdrawModeView.swift; sourceTree = "<group>"; };
+		AB49C45827B8541C001558C3 /* SettingsViewOperationSetMinimalUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewOperationSetMinimalUnitView.swift; sourceTree = "<group>"; };
+		AB49C45A27B8561D001558C3 /* SettingsViewOperationsSetEndDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewOperationsSetEndDateView.swift; sourceTree = "<group>"; };
 		AB53BBCB27B4126400695EA5 /* DataStoragePowerUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoragePowerUserView.swift; sourceTree = "<group>"; };
 		AB8AC01627A6FAB200EDFD62 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		ABA6D2B027A1A62000F62E42 /* Piggy Saving.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Piggy Saving.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,7 +71,6 @@
 		ABA6D2B727A1A62100F62E42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ABA6D2BA27A1A62100F62E42 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ABA6D2D227A1BC8700F62E42 /* ConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigStore.swift; sourceTree = "<group>"; };
-		ABAB8B6927B6B64200E8E80C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ABC6E9FF27A988B400E6D487 /* TrailingIconLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingIconLabelStyle.swift; sourceTree = "<group>"; };
 		ABC6EA0127A9BD4400E6D487 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListItemView.swift; sourceTree = "<group>"; };
@@ -108,10 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				AB1530E327A33A54006FD2FF /* MainView.swift */,
-				AB01CC2327A3FA9200C4E448 /* OverviewView.swift */,
-				AB01CC2727A3FB0D00C4E448 /* SavingsView.swift */,
 				ABDBC08F27B41BC000E49082 /* SavingListViews */,
-				AB01CC2127A3F89300C4E448 /* SettingsView.swift */,
+				AB49C44E27B84BD2001558C3 /* SettingsViews */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -125,6 +124,36 @@
 				AB1F410A27AD47970059D50F /* WarningConfirmationView.swift */,
 			);
 			path = UtilityView;
+			sourceTree = "<group>";
+		};
+		AB49C44D27B839C5001558C3 /* NotificationViews */ = {
+			isa = PBXGroup;
+			children = (
+				ABE8886A27B01693006B3246 /* NotificationView.swift */,
+			);
+			path = NotificationViews;
+			sourceTree = "<group>";
+		};
+		AB49C44E27B84BD2001558C3 /* SettingsViews */ = {
+			isa = PBXGroup;
+			children = (
+				AB01CC2127A3F89300C4E448 /* SettingsView.swift */,
+				AB49C44F27B84E26001558C3 /* SettingsRunningModeView.swift */,
+				AB49C45527B8530A001558C3 /* SettingsViewOperationView */,
+				AB49C45127B84EEB001558C3 /* SettingsViewFooterInfoView.swift */,
+			);
+			path = SettingsViews;
+			sourceTree = "<group>";
+		};
+		AB49C45527B8530A001558C3 /* SettingsViewOperationView */ = {
+			isa = PBXGroup;
+			children = (
+				AB49C45327B84F7D001558C3 /* SettingsViewOperationView.swift */,
+				AB49C45627B85330001558C3 /* SettingsViewOperationWithdrawModeView.swift */,
+				AB49C45827B8541C001558C3 /* SettingsViewOperationSetMinimalUnitView.swift */,
+				AB49C45A27B8561D001558C3 /* SettingsViewOperationsSetEndDateView.swift */,
+			);
+			path = SettingsViewOperationView;
 			sourceTree = "<group>";
 		};
 		ABA6D2A727A1A62000F62E42 = {
@@ -147,7 +176,6 @@
 		ABA6D2B227A1A62000F62E42 /* PiggySaving */ = {
 			isa = PBXGroup;
 			children = (
-				ABAB8B6927B6B64200E8E80C /* Info.plist */,
 				ABA6D2B327A1A62000F62E42 /* PiggySavingApp.swift */,
 				ABA6D2D127A1BC7900F62E42 /* Model */,
 				ABA6D2D427A1D7B900F62E42 /* InitializationView */,
@@ -186,15 +214,12 @@
 		ABA6D2D427A1D7B900F62E42 /* InitializationView */ = {
 			isa = PBXGroup;
 			children = (
-				AB43A30927A1E4BF0046740D /* ChooseSourceView.swift */,
-				AB43A30B27A1EC220046740D /* EnterServerURLView.swift */,
-				AB1530E027A334DB006FD2FF /* LocalUsageView.swift */,
 				ABE8886E27B016D0006B3246 /* SettingTabView.swift */,
 				ABE8886427AFEE9A006B3246 /* WelcomePage.swift */,
 				ABE8887027B06223006B3246 /* GoalSettingViews */,
 				ABE8886827B01681006B3246 /* DataStorageView.swift */,
 				AB53BBCB27B4126400695EA5 /* DataStoragePowerUserView.swift */,
-				ABE8886A27B01693006B3246 /* NotificationView.swift */,
+				AB49C44D27B839C5001558C3 /* NotificationViews */,
 				ABE8886C27B016B1006B3246 /* DoneSettingView.swift */,
 			);
 			path = InitializationView;
@@ -329,30 +354,31 @@
 				AB1530E427A33A54006FD2FF /* MainView.swift in Sources */,
 				ABE8886B27B01693006B3246 /* NotificationView.swift in Sources */,
 				ABCCCBFB27A8186D00ECAE6F /* SavingListItemView.swift in Sources */,
+				AB49C45227B84EEB001558C3 /* SettingsViewFooterInfoView.swift in Sources */,
 				ABE8886927B01681006B3246 /* DataStorageView.swift in Sources */,
+				AB49C45927B8541C001558C3 /* SettingsViewOperationSetMinimalUnitView.swift in Sources */,
 				ABE8886727B01664006B3246 /* GoalSettingView.swift in Sources */,
+				AB49C45427B84F7D001558C3 /* SettingsViewOperationView.swift in Sources */,
 				ABE8886D27B016B1006B3246 /* DoneSettingView.swift in Sources */,
 				ABDBC09527B45CD500E49082 /* SavingListMonthView.swift in Sources */,
-				AB1530E127A334DB006FD2FF /* LocalUsageView.swift in Sources */,
 				ABC6EA0227A9BD4400E6D487 /* Helper.swift in Sources */,
 				ABD0DF2127AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld in Sources */,
 				ABA6D2D327A1BC8700F62E42 /* ConfigStore.swift in Sources */,
 				ABA6D2B427A1A62000F62E42 /* PiggySavingApp.swift in Sources */,
 				ABE8887627B06395006B3246 /* GoalSettingSetEndDateView.swift in Sources */,
-				AB43A30C27A1EC220046740D /* EnterServerURLView.swift in Sources */,
 				AB53BBCC27B4126400695EA5 /* DataStoragePowerUserView.swift in Sources */,
 				ABE8887227B06237006B3246 /* GoalSettingSetMinimalUnitView.swift in Sources */,
 				ABC6EA0027A988B400E6D487 /* TrailingIconLabelStyle.swift in Sources */,
 				ABE8887827B075DD006B3246 /* GoalSettingResultView.swift in Sources */,
 				ABE8886527AFEE9A006B3246 /* WelcomePage.swift in Sources */,
-				AB01CC2427A3FA9200C4E448 /* OverviewView.swift in Sources */,
+				AB49C45B27B8561D001558C3 /* SettingsViewOperationsSetEndDateView.swift in Sources */,
 				ABDBC09327B4502400E49082 /* SavingListDaysView.swift in Sources */,
 				ABDBC09127B41C2200E49082 /* SavingListOverviewView.swift in Sources */,
+				AB49C45727B85330001558C3 /* SettingsViewOperationWithdrawModeView.swift in Sources */,
 				AB1F410B27AD47970059D50F /* WarningConfirmationView.swift in Sources */,
-				AB01CC2827A3FB0D00C4E448 /* SavingsView.swift in Sources */,
+				AB49C45027B84E26001558C3 /* SettingsRunningModeView.swift in Sources */,
 				ABE8886F27B016D0006B3246 /* SettingTabView.swift in Sources */,
 				ABD3336827AD8BA700A72D23 /* CostListItemView.swift in Sources */,
-				AB43A30A27A1E4BF0046740D /* ChooseSourceView.swift in Sources */,
 				AB8AC01727A6FAB200EDFD62 /* ErrorView.swift in Sources */,
 				AB1530E627A3DE42006FD2FF /* ServerApi.swift in Sources */,
 				ABDBC09927B463E300E49082 /* SavingListYearView.swift in Sources */,
@@ -508,7 +534,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PiggySaving/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -540,7 +566,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PiggySaving/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
