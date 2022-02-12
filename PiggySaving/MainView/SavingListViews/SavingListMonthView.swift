@@ -78,7 +78,6 @@ struct SavingListMonthView_Previews: PreviewProvider {
         VStack {
             SavingListMonthView(savings: savings, showList: .constant([:]), itemUpdated: .constant(false), externalURL: "")
                 .previewLayout(.sizeThatFits)
-                .environment(\.savingShowMonthList, [:])
             Spacer()
         }
     }
