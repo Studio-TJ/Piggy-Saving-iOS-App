@@ -68,6 +68,14 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
         return dateFormatter.string(from: self.dateFormatted)
     }
     
+    var dateMonthYear: String {
+        let format = "yyyymm"
+        let dateFormat = DateFormatter.dateFormat(fromTemplate: format, options: 0, locale: Locale.current)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.string(from: self.dateFormatted)
+    }
+    
     init() {
         self.date = "2000-01-01"
         self.amount = 1

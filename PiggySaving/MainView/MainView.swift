@@ -9,10 +9,11 @@ import SwiftUI
 
 struct MainView: View {
     @ObservedObject var configs: ConfigStore = ConfigStore()
+    @State var savingMonthShowList: [String: Bool] = [:]
     
     var body: some View {
         TabView {          
-            SavingsListView(configs: configs)
+            SavingsListView(configs: configs, savingMonthShowList: $savingMonthShowList)
                 .tabItem {
                     Image(systemName: "list.dash")
                     Text("Savings List")

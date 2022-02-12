@@ -16,6 +16,7 @@ struct SavingsListView: View {
     let displayOptions = ["Saving", "Cost"]
     @State var displayOption = "Saving"
     @State var hasError = false
+    @Binding var savingMonthShowList: [String: Bool]
     
     private func getAllSavingFromServer(sortDesc: Bool) {
         Task {
@@ -75,7 +76,8 @@ struct SavingsListView: View {
             List {
                 if self.displayOption == "Saving" {
                     ForEach(allSaving.savingsByYearMonth, id: \.self) { savingsByYear in
-                        SavingListYearView(savings: savingsByYear)
+                        SavingListYearView(savings: savingsByYear, externalURL: configs.configs.externalURL ?? "", savingMonthShowList: $savingMonthShowList, itemUpdated: $listItemHasChange)
+                        
                     }
                     .listRowBackground(Color.clear)
                 } else {
@@ -134,6 +136,6 @@ struct SavingsListView: View {
 
 struct SavingsListView_Previews: PreviewProvider {
     static var previews: some View {
-        SavingsListView(configs: ConfigStore(), allSaving: SavingDataStore(savings: Saving.sampleData1 + Saving.sampleData2 + Saving.sampleData3, cost: Saving.sampleData1))
+        SavingsListView(configs: ConfigStore(), allSaving: SavingDataStore(savings: Saving.sampleData1 + Saving.sampleData2 + Saving.sampleData3, cost: Saving.sampleData1), savingMonthShowList: .constant([:]))
     }
 }

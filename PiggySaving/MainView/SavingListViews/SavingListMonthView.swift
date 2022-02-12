@@ -9,9 +9,13 @@ import SwiftUI
 
 struct SavingListMonthView: View {
     var savings: [Saving]
+    @Binding var showList: [String: Bool]
+    @Binding var itemUpdated: Bool
+    let externalURL: String
     
-    @State var showList = false
-    @State var externalURL = ""
+    var key: String {
+        return savings[0].dateMonthYear
+    }
     
     var month: String {
         savings[0].dateLocalizedMonth
@@ -39,23 +43,30 @@ struct SavingListMonthView: View {
                 Image(systemName: "chevron.right")
                     .padding()
                     .onTapGesture {
-//                        withAnimation {
-                            showList.toggle()
-//                        }
+                        if showList[key] ?? true {
+                            showList.updateValue(false, forKey: key)
+                        } else {
+                            showList.updateValue(true, forKey: key)
+                        }
                     }
-                    .rotationEffect(.degrees(showList ? 90 : 0))
+                    .rotationEffect(.degrees(showList[key] ?? true ? 90 : 0))
             }
             .padding(.leading, 10)
             
-            if showList {
+            if showList[key] ?? true {
                 ForEach(savings) { saving in
-                    SavingListItemView(externalURL: $externalURL, itemUpdated: .constant(false), saving: saving)
+                    SavingListItemView(externalURL: externalURL, itemUpdated: $itemUpdated, saving: saving)
                     if saving != savings.last {
                         Divider()
                     }
                 }
                 .padding(.leading, 10)
                 .padding(.trailing, 10)
+            }
+        }
+        .onAppear {
+            if !showList.keys.contains(key) {
+                showList[key] = false
             }
         }
     }
@@ -65,8 +76,9 @@ struct SavingListMonthView_Previews: PreviewProvider {
     static var previews: some View {
         let savings = Saving.sampleData1
         VStack {
-            SavingListMonthView(savings: savings)
+            SavingListMonthView(savings: savings, showList: .constant([:]), itemUpdated: .constant(false), externalURL: "")
                 .previewLayout(.sizeThatFits)
+                .environment(\.savingShowMonthList, [:])
             Spacer()
         }
     }

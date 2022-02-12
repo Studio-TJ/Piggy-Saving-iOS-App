@@ -9,23 +9,16 @@ import SwiftUI
 
 struct SavingListDaysView: View {
     @Binding var listItemHasChange: Bool
-    @Binding var externalURL: String
+    let externalURL: String
     var savings: [Saving] = []
     var costs: [Saving] = []
     var displayOption = "Saving"
     var body: some View {
         List {
-            if self.displayOption == "Saving" {
-                ForEach(savings) { saving in
-                    SavingListItemView(externalURL: $externalURL, itemUpdated: $listItemHasChange, saving: saving)
-                }
-                .listRowBackground(Color.clear)
-            } else {
-                ForEach(costs) { cost in
-                    CostListItemView(cost: cost)
-                }
-                .listRowBackground(Color.clear)
+            ForEach(savings) { saving in
+                SavingListItemView(externalURL: externalURL, itemUpdated: $listItemHasChange, saving: saving)
             }
+            .listRowBackground(Color.clear)
         }
     }
 }
@@ -35,7 +28,7 @@ struct SavingListDaysView_Previews: PreviewProvider {
         let listItemHasChange = false
         let externalURL = ""
         let savingsSample = Saving.sampleData1
-        SavingListDaysView(listItemHasChange: .constant(listItemHasChange), externalURL: .constant(externalURL), savings: savingsSample)
+        SavingListDaysView(listItemHasChange: .constant(listItemHasChange), externalURL: externalURL, savings: savingsSample)
             .previewLayout(.sizeThatFits)
     }
 }
