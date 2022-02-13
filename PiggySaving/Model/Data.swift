@@ -69,7 +69,7 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
     }
     
     var dateMonthYear: String {
-        let format = "yyyymm"
+        let format = "yyyyMM"
         let dateFormat = DateFormatter.dateFormat(fromTemplate: format, options: 0, locale: Locale.current)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat

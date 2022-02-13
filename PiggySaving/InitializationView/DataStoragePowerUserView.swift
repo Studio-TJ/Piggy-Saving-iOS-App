@@ -10,6 +10,7 @@ import SwiftUI
 struct DataStoragePowerUserView: View {
     @ObservedObject var configs: Configs
     @State private var showURLHelper = false
+    
     var body: some View {
         VStack {
             HStack {
@@ -39,7 +40,8 @@ struct DataStoragePowerUserView: View {
             }
             TextField("https://", text: $configs.externalURL ?? "")
                 .padding(.top, 5)
-                .frame(width: SCREEN_SIZE.width * 0.8)
+                .padding(.leading, SCREEN_SIZE.width * 0.05)
+                .padding(.trailing, SCREEN_SIZE.width * 0.05)
                 .disableAutocorrection(true)
                 .keyboardType(.URL)
         }

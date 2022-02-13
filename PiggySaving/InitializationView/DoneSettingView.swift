@@ -9,6 +9,9 @@ import SwiftUI
 
 struct DoneSettingView: View {
     @EnvironmentObject var configs: ConfigStore
+    
+    @Binding var selectedItem: InitializationTabItem
+    
     var body: some View {
         VStack {
             Text("Start your first saving.")
@@ -32,7 +35,7 @@ struct DoneSettingView: View {
 
 struct DoneSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        DoneSettingView()
+        DoneSettingView(selectedItem: .constant(InitializationTabItem.DONE_SETTING))
             .environmentObject(ConfigStore())
     }
 }

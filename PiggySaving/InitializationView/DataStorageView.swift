@@ -12,6 +12,8 @@ struct DataStorageView: View {
     @Environment(\.managedObjectContext) var moc
     var preview: Bool = false
     
+    @Binding var selectedItem: InitializationTabItem
+    
     var configs: Configs {
         if preview {
             return ConfigStore().configs
@@ -42,9 +44,6 @@ struct DataStorageView: View {
                     .underline()
                     .foregroundColor(Color.gray)
             }
-            .onAppear {
-                print("data")
-            }
             .padding(.bottom, SCREEN_SIZE.height * 0.1)
             .sheet(isPresented: $showPowerUserGuide) {
                 NavigationView {
@@ -72,6 +71,6 @@ struct DataStorageView: View {
 
 struct DataStorageView_Previews: PreviewProvider {
     static var previews: some View {
-        DataStorageView(preview: true)
+        DataStorageView(preview: true, selectedItem: .constant(InitializationTabItem.DATA_STORAGE))
     }
 }

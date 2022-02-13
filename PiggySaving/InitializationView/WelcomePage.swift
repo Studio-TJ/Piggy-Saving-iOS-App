@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct WelcomePage: View {
+    @Binding var selectedItem: InitializationTabItem
+    
     var body: some View {
         VStack {
             HStack {
@@ -31,6 +33,6 @@ struct WelcomePage: View {
 
 struct WelcomePage_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomePage()
+        WelcomePage(selectedItem: .constant(InitializationTabItem.WELCOME))
     }
 }

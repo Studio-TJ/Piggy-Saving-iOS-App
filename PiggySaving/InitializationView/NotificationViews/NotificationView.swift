@@ -11,6 +11,8 @@ import UserNotifications
 struct NotificationView: View {
     @State var notificationAllowed = true
     
+    @Binding var selectedItem: InitializationTabItem
+    
     func updateNotificationStatus() -> Void {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             if settings.authorizationStatus == .authorized {
@@ -27,14 +29,6 @@ struct NotificationView: View {
                 Button("test") {
                     notificationAllowed.toggle()
                 }
-            }
-            .onAppear {
-                print("notification")
-                updateNotificationStatus()
-                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                    notificationAllowed = success
-                }
-                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             }
             if notificationAllowed == true {
                 Button("Settings") {
@@ -53,11 +47,20 @@ struct NotificationView: View {
                 Text("You choose not to use notifications. You won't be notified if you haven't recorded a saving. If you decide to enable notification at a later time, you can always change it in system settings. ")
             }
         }
+        .onChange(of: selectedItem) { value in
+            if (value == InitializationTabItem.NOTIFICATION) {
+                updateNotificationStatus()
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                    notificationAllowed = success
+                }
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            }
+        }
     }
 }
 
 struct NotificationView_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationView()
+        NotificationView(selectedItem: .constant(InitializationTabItem.NOTIFICATION))
     }
 }

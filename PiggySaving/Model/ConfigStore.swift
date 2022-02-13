@@ -32,7 +32,6 @@ class ConfigStore: ObservableObject {
             self.configs.usingExternalURL = false
             self.configs.externalURL = ""
             self.configs.ableToWithdraw = false
-            self.configs.amountRatio = 1
             self.configs.endDate = Date()
             self.configs.minimalUnit = 0.0
             try? context.save()

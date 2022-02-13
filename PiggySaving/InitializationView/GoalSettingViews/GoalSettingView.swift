@@ -12,6 +12,8 @@ struct GoalSettingView: View {
     @Environment(\.managedObjectContext) var moc
     var preview: Bool = false
     
+    @Binding var selectedItem: InitializationTabItem
+    
     var configs: Configs {
         if preview {
             return ConfigStore().configs
@@ -36,14 +38,16 @@ struct GoalSettingView: View {
             Spacer()
         }
         .frame(width: SCREEN_SIZE.width * 0.86)
-        .onDisappear {
-            try? moc.save()
+        .onChange(of: selectedItem) { value in
+            if value != InitializationTabItem.GOAL_SETTINGS {
+                try? moc.save()
+            }
         }
     }
 }
 
 struct GoalSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalSettingView(preview: true)
+        GoalSettingView(preview: true, selectedItem: .constant(InitializationTabItem.GOAL_SETTINGS))
     }
 }

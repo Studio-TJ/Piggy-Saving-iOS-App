@@ -56,7 +56,7 @@ struct GoalSettingSetMinimalUnitView: View {
 
 struct GoalSettingSetMinimalUnitView_Previews: PreviewProvider {
     static var previews: some View {
-        let configConst = Configs()
+        let configConst = ConfigStore().configs
         GoalSettingSetMinimalUnitView(configs: configConst)
             .previewLayout(.sizeThatFits)
     }

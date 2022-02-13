@@ -25,14 +25,6 @@ struct PiggySavingApp: App {
                 MainView(configs: configStore)
                     .environment(\.managedObjectContext, configStore.container.viewContext)
             }
-//            SettingTabView(configs: configStore)
         }
-        .onChange(of: configStore.configs.isInitialized) { value in
-            print(value)
-        }
-//        .onChange(of: configStore.configs.hasChanges) { configs in
-//            print(configs)
-//            configStore.updateConfig()
-//        }
     }
 }
