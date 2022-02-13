@@ -14,12 +14,13 @@ struct SavingListDaysView: View {
     var costs: [Saving] = []
     var displayOption = "Saving"
     var body: some View {
-        List {
-            ForEach(savings) { saving in
-                SavingListItemView(externalURL: externalURL, itemUpdated: $listItemHasChange, saving: saving)
-            }
-            .listRowBackground(Color.clear)
-        }
+//        List {
+//            ForEach(savings) { saving in
+//                SavingListItemView(externalURL: externalURL, itemUpdated: $listItemHasChange, saving: saving)
+//            }
+//            .listRowBackground(Color.clear)
+//        }
+        Text("Test")
     }
 }
 

@@ -10,7 +10,7 @@ import CoreData
 
 struct SettingsView: View {
     
-    @ObservedObject var configs: ConfigStore = ConfigStore()
+    @EnvironmentObject var configs: ConfigStore
     @State private var resetAppConfirmation: Bool = false
     @State private var toReset: Bool = false
     
@@ -60,6 +60,7 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(ConfigStore())
             .environment(\.isPreview, true)
     }
 }

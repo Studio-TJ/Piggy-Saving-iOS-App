@@ -8,18 +8,21 @@
 import SwiftUI
 
 struct MainView: View {
-    @ObservedObject var configs: ConfigStore = ConfigStore()
+    @EnvironmentObject var configs: ConfigStore
+    @StateObject var savingDataStore: SavingDataStore = SavingDataStore()
     @State var savingMonthShowList: [String: Bool] = [:]
     
     var body: some View {
         TabView {          
-            SavingsListView(configs: configs, savingMonthShowList: $savingMonthShowList)
+            SavingsListView(savingDataStore: savingDataStore, savingMonthShowList: $savingMonthShowList)
+                .environment(\.managedObjectContext, savingDataStore.container.viewContext)
                 .tabItem {
                     Image(systemName: "list.dash")
                     Text("Savings List")
                 }
             
-            SettingsView(configs: configs)
+            SettingsView()
+                .environment(\.managedObjectContext, configs.container.viewContext)
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Settings")
@@ -31,5 +34,6 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
+            .environmentObject(ConfigStore())
     }
 }

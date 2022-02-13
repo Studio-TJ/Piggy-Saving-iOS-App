@@ -16,14 +16,14 @@ struct PiggySavingApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if (configStore.configs.isInitialized == false || configStore.configs.usingExternalURL == false) {
+            if (configStore.configs.isInitialized == false) {
                 SettingTabView()
                     .environmentObject(configStore)
                     .environment(\.managedObjectContext, configStore.container.viewContext)
                 
             } else {
-                MainView(configs: configStore)
-                    .environment(\.managedObjectContext, configStore.container.viewContext)
+                MainView()
+                    .environmentObject(configStore)
             }
         }
     }

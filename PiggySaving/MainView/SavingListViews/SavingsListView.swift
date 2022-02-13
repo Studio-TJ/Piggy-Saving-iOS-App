@@ -8,21 +8,101 @@
 import SwiftUI
 
 struct SavingsListView: View {
-    @ObservedObject var configs: ConfigStore
-    @StateObject var allSaving: SavingDataStore = SavingDataStore()
+    let displayOptions = ["Saving", "Cost"]
+    
+    @EnvironmentObject var configs: ConfigStore
+    @ObservedObject var savingDataStore: SavingDataStore
+    
     @State var sumSaving: Double = 0.0
     @State var listItemHasChange: Bool = false
     @State private var errorWrapper: [ErrorWrapper] = []
-    let displayOptions = ["Saving", "Cost"]
     @State var displayOption = "Saving"
     @State var hasError = false
+    @State var showWithDrawPicker = false
+    
     @Binding var savingMonthShowList: [String: Bool]
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            SavingListOverviewView(sumSaving: self.sumSaving, totalSaving: savingDataStore.totalSaving, totalCost: savingDataStore.totalCost)
+            if showWithDrawPicker {
+                Picker("", selection: $displayOption) {
+                    ForEach(displayOptions, id: \.self) {
+                        Text($0)
+                    }
+                }
+                .pickerStyle(.segmented)
+            }
+            List {
+                if self.displayOption == "Saving" {
+                    ForEach(savingDataStore.savingsByYearMonth, id: \.self) { savingsByYear in
+                        SavingListYearView(savings: savingsByYear, externalURL: configs.configs.externalURL ?? "", savingMonthShowList: $savingMonthShowList, itemUpdated: $listItemHasChange)
+                        
+                    }
+                    .listRowBackground(Color.clear)
+                } else {
+                    ForEach(savingDataStore.costs) { cost in
+                        CostListItemView(cost: cost)
+                    }
+                    .listRowBackground(Color.clear)
+                    .swipeActions {
+                        Button("Edit") {
+                            print("edit")
+                        }
+                        .tint(.blue)
+                    }
+                }
+            }
+            .zIndex(-1)
+            .onChange(of: self.listItemHasChange) { value in
+                if value == true {
+                    if configs.configs.usingExternalURL == true {
+                        self.getAllSavingFromServer(sortDesc: true)
+                        self.getSum()
+                    } else {
+                        self.savingDataStore.fetchSavingFromPersistent()
+                    }
+                    self.listItemHasChange = false
+                }
+            }
+            .onChange(of: self.savingDataStore.savings) { value in
+                self.savingDataStore.updateFromSelfSavingArray()
+            }
+            .onChange(of: self.savingDataStore.costs) { value in
+                self.savingDataStore.updateFromSelfCostArray()
+            }
+            .onChange(of: self.errorWrapper.count) { value in
+                self.hasError = value > 0 ? true : false
+            }
+            .onAppear {
+                showWithDrawPicker = configs.configs.ableToWithdraw
+                if configs.configs.usingExternalURL {
+                    self.getAllSavingFromServer(sortDesc: true)
+                    self.getAllCostFromServer(sortDesc: true)
+                    self.getSum()
+                }
+            }
+            .refreshable {
+                if configs.configs.usingExternalURL {
+                    self.getAllSavingFromServer(sortDesc: true)
+                    self.getAllCostFromServer(sortDesc: true)
+                    self.getSum()
+                }
+            }
+        }
+        .sheet(isPresented: $hasError, onDismiss: {
+            self.errorWrapper.removeAll()
+            self.hasError = false
+        }) {
+            ErrorView(errorWrapper: errorWrapper)
+        }
+    }
     
     private func getAllSavingFromServer(sortDesc: Bool) {
         Task {
             do {
-                self.allSaving.savings = try await ServerApi.getAllSaving(externalURL: configs.configs.externalURL!)
-                self.allSaving.savings = self.allSaving.savings.sorted {
+                self.savingDataStore.savings = try await ServerApi.getAllSaving(externalURL: configs.configs.externalURL!)
+                self.savingDataStore.savings = self.savingDataStore.savings.sorted {
                     if sortDesc {
                         return $0.dateFormatted > $1.dateFormatted
                     } else {
@@ -38,8 +118,8 @@ struct SavingsListView: View {
     private func getAllCostFromServer(sortDesc: Bool) {
         Task {
             do {
-                self.allSaving.costs = try await ServerApi.getAllCost(externalURL: configs.configs.externalURL!)
-                self.allSaving.costs = self.allSaving.costs.sorted {
+                self.savingDataStore.costs = try await ServerApi.getAllCost(externalURL: configs.configs.externalURL!)
+                self.savingDataStore.costs = self.savingDataStore.costs.sorted {
                     if sortDesc {
                         return $0.dateFormatted > $1.dateFormatted
                     } else {
@@ -61,81 +141,11 @@ struct SavingsListView: View {
             }
         }
     }
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            SavingListOverviewView(sumSaving: self.sumSaving, totalSaving: allSaving.totalSaving, totalCost: allSaving.totalCost)
-            if configs.configs.ableToWithdraw {
-                Picker("", selection: $displayOption) {
-                    ForEach(displayOptions, id: \.self) {
-                        Text($0)
-                    }
-                }
-                .pickerStyle(.segmented)
-            }
-            List {
-                if self.displayOption == "Saving" {
-                    ForEach(allSaving.savingsByYearMonth, id: \.self) { savingsByYear in
-                        SavingListYearView(savings: savingsByYear, externalURL: configs.configs.externalURL ?? "", savingMonthShowList: $savingMonthShowList, itemUpdated: $listItemHasChange)
-                        
-                    }
-                    .listRowBackground(Color.clear)
-                } else {
-                    ForEach(allSaving.costs) { cost in
-                        CostListItemView(cost: cost)
-                    }
-                    .listRowBackground(Color.clear)
-                    .swipeActions {
-                        Button("Edit") {
-                            print("edit")
-                        }
-                        .tint(.blue)
-                    }
-                }
-            }
-            .zIndex(-1)
-            .onChange(of: self.listItemHasChange) { value in
-                // TODO: In the future implement a better event
-                if value == true {
-                    self.getAllSavingFromServer(sortDesc: true)
-                    self.getSum()
-                    self.listItemHasChange = false
-                }
-            }
-            .onChange(of: self.allSaving.savings) { value in
-                self.allSaving.updateFromSelfSavingArray()
-            }
-            .onChange(of: self.allSaving.costs) { value in
-                self.allSaving.updateFromSelfCostArray()
-            }
-            .onChange(of: self.errorWrapper.count) { value in
-                self.hasError = value > 0 ? true : false
-            }
-            .onAppear {
-                // TODO: Ths and condition is a temporary fix for crashing when resetting
-                if configs.configs.isInitialized {
-                    self.getAllSavingFromServer(sortDesc: true)
-                    self.getAllCostFromServer(sortDesc: true)
-                    self.getSum()
-                }
-            }
-            .refreshable {
-                self.getAllSavingFromServer(sortDesc: true)
-                self.getSum()
-            }
-        }
-        .sheet(isPresented: $hasError, onDismiss: {
-            self.errorWrapper.removeAll()
-            self.hasError = false
-        }) {
-            ErrorView(errorWrapper: errorWrapper)
-        }
-        .background(Color.clear)
-    }
 }
 
 struct SavingsListView_Previews: PreviewProvider {
     static var previews: some View {
-        SavingsListView(configs: ConfigStore(), allSaving: SavingDataStore(savings: Saving.sampleData1 + Saving.sampleData2 + Saving.sampleData3, cost: Saving.sampleData1), savingMonthShowList: .constant([:]))
+        SavingsListView(savingDataStore: SavingDataStore(savings: Saving.sampleData1 + Saving.sampleData2 + Saving.sampleData3, cost: Saving.sampleData1), savingMonthShowList: .constant([:]))
+            .environmentObject(ConfigStore())
     }
 }

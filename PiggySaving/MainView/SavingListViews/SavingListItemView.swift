@@ -9,9 +9,14 @@ import SwiftUI
 
 struct SavingListItemView: View {
     let externalURL: String
-    @Binding var itemUpdated: Bool
+    
+    @EnvironmentObject var configs: ConfigStore
+    @Environment(\.managedObjectContext) var context
+    
     @State private var errorWrapper: ErrorWrapper?
-    let saving: Saving
+    
+    @Binding var itemUpdated: Bool
+    @State var saving: Saving
     
     var body: some View {
         HStack {
@@ -29,13 +34,25 @@ struct SavingListItemView: View {
                 VStack(alignment: .trailing) {
                     Text("Save Now!")
                         .onTapGesture {
-                            Task {
-                                do {
-                                    try await ServerApi.save(externalURL: self.externalURL, date: self.saving.date, isSaved: true)
-                                    itemUpdated = true
-                                } catch {
-                                    self.errorWrapper = ErrorWrapper(error: error, guidance: NSLocalizedString("Cannot send save request to server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.", comment: "Saving action to server error guidance."))
+                            if configs.configs.usingExternalURL {
+                                Task {
+                                    do {
+                                        try await ServerApi.save(externalURL: self.externalURL, date: self.saving.date, isSaved: true)
+                                        itemUpdated = true
+                                    } catch {
+                                        self.errorWrapper = ErrorWrapper(error: error, guidance: NSLocalizedString("Cannot send save request to server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.", comment: "Saving action to server error guidance."))
+                                    }
                                 }
+                            } else {
+                                let fetchRequest = SavingData.fetchRequest()
+                         
+                                fetchRequest.predicate = NSPredicate(format: "date == %@", saving.dateFormatted as CVarArg)
+                                let storedSaving = try? context.fetch(fetchRequest).first
+                                if let storedSaving = storedSaving {
+                                    storedSaving.saved = true
+                                    try? context.save()
+                                }
+                                itemUpdated = true
                             }
                         }
                     Text("Not saved yet.")
@@ -54,6 +71,7 @@ struct ListItemView_Previews: PreviewProvider {
     static var previews: some View {
         let savingConst = Saving(saved: 0)
         SavingListItemView(externalURL: "", itemUpdated: .constant(false), saving: savingConst)
+            .environmentObject(ConfigStore())
             .previewLayout(.sizeThatFits)
     }
 }

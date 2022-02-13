@@ -199,6 +199,10 @@ class SavingDataStore: ObservableObject {
         return groupedByYearMonth
     }
     
+    var costsByYearMonth: [[[Saving]]] {
+        return groupSavingByYearMonth(savings: self.costs)
+    }
+    
     init() {
         self.savings = []
         self.costs = []
@@ -250,6 +254,18 @@ class SavingDataStore: ObservableObject {
         }
         
         return total
+    }
+    
+    public func fetchSavingFromPersistent() -> Void {
+        self.savings = []
+        let context = self.container.viewContext
+        let savings = fetchSavings(context: context)
+        if let savings = savings {
+            savings.forEach { saving in
+                let newSaving = Saving(savingData: saving)
+                self.savings.append(newSaving)
+            }
+        }
     }
     
     public func updateFromSelfSavingArray() -> Void {
@@ -312,5 +328,49 @@ class SavingDataStore: ObservableObject {
  
         fetchRequest.predicate = NSPredicate(format: "type == %@", "cost")
         return try? context.fetch(fetchRequest)
+    }
+    
+    private func groupSavingByYearMonth(savings: [Saving]) -> [[[Saving]]] {
+        if savings.count == 0 {
+            return []
+        }
+        var groupedByYear: [[Saving]] = []
+        var groupedByYearMonth: [[[Saving]]] = []
+        var lastYear = savings[0].dateLocalizedYear
+        var yearArray: [Saving] = []
+        
+        // Group year, source should already be sorted
+        for saving in savings {
+            if saving.dateLocalizedYear != lastYear {
+                groupedByYear.append(yearArray)
+                yearArray = []
+                lastYear = saving.dateLocalizedYear
+            }
+            yearArray.append(saving)
+        }
+        groupedByYear.append(yearArray)
+        
+        // Group by month
+        var yearCount = 0
+        var monthDayArray: [[Saving]] = []
+        var dayArray: [Saving] = []
+        for savingByYear in groupedByYear {
+            var lastMonth = groupedByYear[yearCount][0].dateLocalizedMonth
+            for saving in savingByYear {
+                if saving.dateLocalizedMonth != lastMonth {
+                    monthDayArray.append(dayArray)
+                    dayArray = []
+                    lastMonth = saving.dateLocalizedMonth
+                }
+                dayArray.append(saving)
+            }
+            monthDayArray.append(dayArray)
+            groupedByYearMonth.insert(monthDayArray, at: yearCount)
+            yearCount += 1
+            monthDayArray = []
+            dayArray = []
+        }
+        
+        return groupedByYearMonth
     }
 }
