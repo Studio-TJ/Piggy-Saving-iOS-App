@@ -16,11 +16,12 @@ struct SavingsListView: View {
     @State var sumSaving: Double = 0.0
     @State var listItemHasChange: Bool = false
     @State private var errorWrapper: [ErrorWrapper] = []
-    @State var displayOption = "Saving"
+    @State var displayOption = "Cost"
     @State var hasError = false
     @State var showWithDrawPicker = false
     
     @Binding var savingMonthShowList: [String: Bool]
+    @Binding var costMonthShowList: [String: Bool]
     
     var body: some View {
         VStack(spacing: 0) {
@@ -60,13 +61,13 @@ struct SavingsListView: View {
             List {
                 if self.displayOption == "Saving" {
                     ForEach(savingDataStore.savingsByYearMonth, id: \.self) { savingsByYear in
-                        SavingListYearView(savings: savingsByYear, externalURL: configs.configs.externalURL ?? "", savingMonthShowList: $savingMonthShowList, itemUpdated: $listItemHasChange)
+                        SavingListYearView(savings: savingsByYear, externalURL: configs.configs.externalURL ?? "", type: "Saving", monthShowList: $savingMonthShowList, itemUpdated: $listItemHasChange)
                         
                     }
                     .listRowBackground(Color.clear)
                 } else {
-                    ForEach(savingDataStore.costs) { cost in
-                        CostListItemView(cost: cost)
+                    ForEach(savingDataStore.costsByYearMonth, id: \.self) { costByYear in
+                        SavingListYearView(savings: costByYear, externalURL: configs.configs.externalURL ?? "", type: "Cost", monthShowList: $costMonthShowList, itemUpdated: $listItemHasChange)
                     }
                     .listRowBackground(Color.clear)
                     .swipeActions {
@@ -169,7 +170,7 @@ struct SavingsListView: View {
 
 struct SavingsListView_Previews: PreviewProvider {
     static var previews: some View {
-        SavingsListView(savingDataStore: SavingDataStore(savings: Saving.sampleData1 + Saving.sampleData2 + Saving.sampleData3, cost: Saving.sampleData1), savingMonthShowList: .constant([:]))
+        SavingsListView(savingDataStore: SavingDataStore(savings: Saving.sampleData1 + Saving.sampleData2 + Saving.sampleData3, cost: Saving.sampleData1), savingMonthShowList: .constant([:]), costMonthShowList: .constant([:]))
             .environmentObject(ConfigStore())
     }
 }

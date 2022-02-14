@@ -107,6 +107,14 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
         self.type = "saving"
     }
     
+    init(date: String, amount: Double, description: String) {
+        self.date = date
+        self.amount = amount
+        self.saved = 1
+        self.type = "cost"
+        self.description = description
+    }
+    
     static let sampleData1: [Saving] =
     [
         Saving(date: "2000-01-01", amount: 10.0, saved: 1),
@@ -126,6 +134,27 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
         Saving(date: "2001-02-01", amount: 10.0, saved: 1),
         Saving(date: "2001-02-02", amount: 10.1, saved: 1),
         Saving(date: "2001-02-03", amount: 10.2, saved: 0)
+    ]
+    
+    static let sampleData4: [Saving] =
+    [
+        Saving(date: "2002-02-01", amount: -10.0, description: "Test withdraw"),
+        Saving(date: "2002-02-02", amount: -10.1, description: "测试取钱"),
+        Saving(date: "2002-02-03", amount: -10.2, description: "我也不知道为什么取钱")
+    ]
+    
+    static let sampleData5: [Saving] =
+    [
+        Saving(date: "2003-02-01", amount: -10.0, description: "Test withdraw"),
+        Saving(date: "2003-02-02", amount: -10.1, description: "测试取钱"),
+        Saving(date: "2003-02-03", amount: -10.2, description: "我也不知道为什么取钱")
+    ]
+    
+    static let sampleData6: [Saving] =
+    [
+        Saving(date: "2003-03-01", amount: -10.0, description: "Test withdraw"),
+        Saving(date: "2003-03-02", amount: -10.1, description: "测试取钱"),
+        Saving(date: "2003-03-03", amount: -10.2, description: "我也不知道为什么取钱")
     ]
 }
 

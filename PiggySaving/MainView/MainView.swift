@@ -11,10 +11,11 @@ struct MainView: View {
     @EnvironmentObject var configs: ConfigStore
     @StateObject var savingDataStore: SavingDataStore = SavingDataStore()
     @State var savingMonthShowList: [String: Bool] = [:]
+    @State var costMonthShowList: [String: Bool] = [:]
     
     var body: some View {
         TabView {          
-            SavingsListView(savingDataStore: savingDataStore, savingMonthShowList: $savingMonthShowList)
+            SavingsListView(savingDataStore: savingDataStore, savingMonthShowList: $savingMonthShowList, costMonthShowList: $costMonthShowList)
                 .environment(\.managedObjectContext, savingDataStore.container.viewContext)
                 .tabItem {
                     Image(systemName: "list.dash")

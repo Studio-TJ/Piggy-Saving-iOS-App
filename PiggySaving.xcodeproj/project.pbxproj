@@ -35,10 +35,10 @@
 		ABD3336827AD8BA700A72D23 /* CostListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3336727AD8BA700A72D23 /* CostListItemView.swift */; };
 		ABD3337527ADD84D00A72D23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABD3337327ADD84D00A72D23 /* Localizable.strings */; };
 		ABDBC09127B41C2200E49082 /* SavingListOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDBC09027B41C2200E49082 /* SavingListOverviewView.swift */; };
-		ABDBC09327B4502400E49082 /* SavingListDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDBC09227B4502400E49082 /* SavingListDaysView.swift */; };
 		ABDBC09527B45CD500E49082 /* SavingListMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDBC09427B45CD500E49082 /* SavingListMonthView.swift */; };
 		ABDBC09927B463E300E49082 /* SavingListYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDBC09827B463E300E49082 /* SavingListYearView.swift */; };
 		ABE4E83A27BA9848007ECBD3 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE4E83927BA9848007ECBD3 /* ProgressBarView.swift */; };
+		ABE4E83C27BAC029007ECBD3 /* CostListMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE4E83B27BAC029007ECBD3 /* CostListMonthView.swift */; };
 		ABE8886527AFEE9A006B3246 /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886427AFEE9A006B3246 /* WelcomePage.swift */; };
 		ABE8886727B01664006B3246 /* GoalSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886627B01664006B3246 /* GoalSettingView.swift */; };
 		ABE8886927B01681006B3246 /* DataStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886827B01681006B3246 /* DataStorageView.swift */; };
@@ -81,10 +81,10 @@
 		ABD3337427ADD84D00A72D23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ABD3337627ADD85400A72D23 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		ABDBC09027B41C2200E49082 /* SavingListOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListOverviewView.swift; sourceTree = "<group>"; };
-		ABDBC09227B4502400E49082 /* SavingListDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListDaysView.swift; sourceTree = "<group>"; };
 		ABDBC09427B45CD500E49082 /* SavingListMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListMonthView.swift; sourceTree = "<group>"; };
 		ABDBC09827B463E300E49082 /* SavingListYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListYearView.swift; sourceTree = "<group>"; };
 		ABE4E83927BA9848007ECBD3 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		ABE4E83B27BAC029007ECBD3 /* CostListMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostListMonthView.swift; sourceTree = "<group>"; };
 		ABE8886427AFEE9A006B3246 /* WelcomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePage.swift; sourceTree = "<group>"; };
 		ABE8886627B01664006B3246 /* GoalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingView.swift; sourceTree = "<group>"; };
 		ABE8886827B01681006B3246 /* DataStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorageView.swift; sourceTree = "<group>"; };
@@ -121,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				AB1530DC27A33149006FD2FF /* CardView.swift */,
-				ABD3336727AD8BA700A72D23 /* CostListItemView.swift */,
 				AB8AC01627A6FAB200EDFD62 /* ErrorView.swift */,
 				AB1F410A27AD47970059D50F /* WarningConfirmationView.swift */,
 			);
@@ -240,8 +239,9 @@
 				AB01CC2527A3FAC300C4E448 /* SavingsListView.swift */,
 				ABDBC09027B41C2200E49082 /* SavingListOverviewView.swift */,
 				ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */,
-				ABDBC09227B4502400E49082 /* SavingListDaysView.swift */,
 				ABDBC09427B45CD500E49082 /* SavingListMonthView.swift */,
+				ABE4E83B27BAC029007ECBD3 /* CostListMonthView.swift */,
+				ABD3336727AD8BA700A72D23 /* CostListItemView.swift */,
 				ABDBC09827B463E300E49082 /* SavingListYearView.swift */,
 				ABE4E83927BA9848007ECBD3 /* ProgressBarView.swift */,
 			);
@@ -375,7 +375,6 @@
 				ABE8887827B075DD006B3246 /* GoalSettingResultView.swift in Sources */,
 				ABE8886527AFEE9A006B3246 /* WelcomePage.swift in Sources */,
 				AB49C45B27B8561D001558C3 /* SettingsViewOperationsSetEndDateView.swift in Sources */,
-				ABDBC09327B4502400E49082 /* SavingListDaysView.swift in Sources */,
 				ABDBC09127B41C2200E49082 /* SavingListOverviewView.swift in Sources */,
 				ABE4E83A27BA9848007ECBD3 /* ProgressBarView.swift in Sources */,
 				AB49C45727B85330001558C3 /* SettingsViewOperationWithdrawModeView.swift in Sources */,
@@ -388,6 +387,7 @@
 				ABDBC09927B463E300E49082 /* SavingListYearView.swift in Sources */,
 				AB01CC2627A3FAC300C4E448 /* SavingsListView.swift in Sources */,
 				AB1530DD27A33149006FD2FF /* CardView.swift in Sources */,
+				ABE4E83C27BAC029007ECBD3 /* CostListMonthView.swift in Sources */,
 				ABD0DF1E27AA915700B9AAC9 /* PiggySavingConfig.xcdatamodeld in Sources */,
 				AB01CC2227A3F89300C4E448 /* SettingsView.swift in Sources */,
 			);
