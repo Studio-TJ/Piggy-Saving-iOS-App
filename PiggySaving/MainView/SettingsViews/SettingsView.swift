@@ -16,7 +16,7 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationView {
-            Form {
+            List {
                 SettingsRunningModeView(usingExternalURL: configs.configs.usingExternalURL, externalURL: configs.configs.externalURL)
                 SettingsViewOperationView()
                 HStack {

@@ -60,7 +60,7 @@ struct SavingListMonthView: View {
                         if !allFinished {
                             Image(systemName: "circle.fill")
                                 .foregroundColor(Color("Grey"))
-                            .scaleEffect(x: 0.4, y: 0.4)
+                            .scaleEffect(x: 0.3, y: 0.3)
                             .offset(x: -2, y: -8)
                         }
                     }
@@ -76,7 +76,7 @@ struct SavingListMonthView: View {
                         .rotationEffect(.degrees(showList[key] ?? true ? 90 : 0))
                 }
                 HStack {
-                    ProgressBarView(actual: sumOfMonthActual, total: sumOfMonth)
+                    ProgressBarView(actual: sumOfMonthActual, total: sumOfMonth, frontColor: Color("MainPink"), backgroundColor: Color("Grey"))
                     Spacer(minLength: SCREEN_SIZE.width * 0.45)
                 }
             }

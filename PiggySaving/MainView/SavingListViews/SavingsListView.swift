@@ -25,13 +25,37 @@ struct SavingsListView: View {
     var body: some View {
         VStack(spacing: 0) {
             SavingListOverviewView(sumSaving: self.sumSaving, totalSaving: savingDataStore.totalSaving, totalCost: savingDataStore.totalCost)
-            if showWithDrawPicker {
-                Picker("", selection: $displayOption) {
-                    ForEach(displayOptions, id: \.self) {
-                        Text($0)
+            if true {
+                HStack {
+                    Picker("", selection: $displayOption) {
+                        ForEach(displayOptions, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(maxWidth: 160)
+                    Spacer(minLength: 50)
+                    if displayOption == "Cost" {
+                        Button("Record Saving") {
+                            
+                        }
+                        .frame(width: 100, height: 44)
+                        .background(RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.green))
+                        .padding(.trailing, 25)
+                    } else {
+                        Button("Record Saving") {
+                            
+                        }
+                        .frame(width: 100, height: 44)
+                        .foregroundColor(Color.clear)
+                        .background(RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.clear))
+                        .padding(.trailing, 25)
                     }
                 }
-                .pickerStyle(.segmented)
+                .padding(.top, 20)
+                .background(Color("ListBG"))
             }
             List {
                 if self.displayOption == "Saving" {

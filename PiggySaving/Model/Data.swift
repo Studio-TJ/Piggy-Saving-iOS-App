@@ -156,47 +156,7 @@ class SavingDataStore: ObservableObject {
     let container = NSPersistentContainer(name: "PiggySavingData")
     
     var savingsByYearMonth: [[[Saving]]] {
-        if savings.count == 0 {
-            return []
-        }
-        var groupedByYear: [[Saving]] = []
-        var groupedByYearMonth: [[[Saving]]] = []
-        var lastYear = savings[0].dateLocalizedYear
-        var yearArray: [Saving] = []
-        
-        // Group year, source should already be sorted
-        for saving in savings {
-            if saving.dateLocalizedYear != lastYear {
-                groupedByYear.append(yearArray)
-                yearArray = []
-                lastYear = saving.dateLocalizedYear
-            }
-            yearArray.append(saving)
-        }
-        groupedByYear.append(yearArray)
-        
-        // Group by month
-        var yearCount = 0
-        var monthDayArray: [[Saving]] = []
-        var dayArray: [Saving] = []
-        for savingByYear in groupedByYear {
-            var lastMonth = groupedByYear[yearCount][0].dateLocalizedMonth
-            for saving in savingByYear {
-                if saving.dateLocalizedMonth != lastMonth {
-                    monthDayArray.append(dayArray)
-                    dayArray = []
-                    lastMonth = saving.dateLocalizedMonth
-                }
-                dayArray.append(saving)
-            }
-            monthDayArray.append(dayArray)
-            groupedByYearMonth.insert(monthDayArray, at: yearCount)
-            yearCount += 1
-            monthDayArray = []
-            dayArray = []
-        }
-        
-        return groupedByYearMonth
+        return groupSavingByYearMonth(savings: self.savings)
     }
     
     var costsByYearMonth: [[[Saving]]] {
