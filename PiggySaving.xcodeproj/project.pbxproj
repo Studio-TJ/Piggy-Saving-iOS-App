@@ -48,6 +48,7 @@
 		ABE8887227B06237006B3246 /* GoalSettingSetMinimalUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8887127B06237006B3246 /* GoalSettingSetMinimalUnitView.swift */; };
 		ABE8887627B06395006B3246 /* GoalSettingSetEndDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8887527B06395006B3246 /* GoalSettingSetEndDateView.swift */; };
 		ABE8887827B075DD006B3246 /* GoalSettingResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8887727B075DD006B3246 /* GoalSettingResultView.swift */; };
+		ABF1710A27BAF99E00CEA215 /* SaveConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF1710927BAF99E00CEA215 /* SaveConfirmationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,7 @@
 		ABE8887127B06237006B3246 /* GoalSettingSetMinimalUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingSetMinimalUnitView.swift; sourceTree = "<group>"; };
 		ABE8887527B06395006B3246 /* GoalSettingSetEndDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingSetEndDateView.swift; sourceTree = "<group>"; };
 		ABE8887727B075DD006B3246 /* GoalSettingResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingResultView.swift; sourceTree = "<group>"; };
+		ABF1710927BAF99E00CEA215 /* SaveConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveConfirmationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +241,7 @@
 				AB01CC2527A3FAC300C4E448 /* SavingsListView.swift */,
 				ABDBC09027B41C2200E49082 /* SavingListOverviewView.swift */,
 				ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */,
+				ABF1710927BAF99E00CEA215 /* SaveConfirmationView.swift */,
 				ABDBC09427B45CD500E49082 /* SavingListMonthView.swift */,
 				ABE4E83B27BAC029007ECBD3 /* CostListMonthView.swift */,
 				ABD3336727AD8BA700A72D23 /* CostListItemView.swift */,
@@ -353,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABF1710A27BAF99E00CEA215 /* SaveConfirmationView.swift in Sources */,
 				AB1530DF27A33425006FD2FF /* ErrorWrapper.swift in Sources */,
 				AB1530E827A3E5F1006FD2FF /* Data.swift in Sources */,
 				AB1530E427A33A54006FD2FF /* MainView.swift in Sources */,

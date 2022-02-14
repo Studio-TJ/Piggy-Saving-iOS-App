@@ -37,7 +37,7 @@ struct CostListMonthView: View {
                 Spacer()
                 HStack(spacing: 0) {
                     Text("-" + CURRENCY_SYMBOL + String(format: "%.2f", -self.sumOfMonth))
-                        .font(Fonts.BODY_CHINESE_NORMAL)
+                        .font(.system(size: 16).monospacedDigit())
                         .foregroundColor(Color("MainPink"))
                 }
                 Image(systemName: "chevron.right")

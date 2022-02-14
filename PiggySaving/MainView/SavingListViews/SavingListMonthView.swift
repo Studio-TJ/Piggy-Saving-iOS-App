@@ -55,14 +55,12 @@ struct SavingListMonthView: View {
                     Spacer()
                     HStack(spacing: 0) {
                         Text(CURRENCY_SYMBOL + String(format: "%.2f", self.sumOfMonth))
-                            .font(Fonts.BODY_CHINESE_NORMAL)
-                        .foregroundColor(Color("MainPink"))
-                        if !allFinished {
-                            Image(systemName: "circle.fill")
-                                .foregroundColor(Color("Grey"))
+                            .font(.system(size: 16).monospacedDigit())
+                            .foregroundColor(Color("MainPink"))
+                        Image(systemName: "circle.fill")
+                            .foregroundColor(allFinished ? Color.clear : Color("Grey"))
                             .scaleEffect(x: 0.3, y: 0.3)
                             .offset(x: -2, y: -8)
-                        }
                     }
                     Image(systemName: "chevron.right")
                         .padding()

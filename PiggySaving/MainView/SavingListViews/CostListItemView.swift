@@ -16,8 +16,10 @@ struct CostListItemView: View {
                 Text(cost.dateLocalizedMonthDay)
                     .font(Fonts.CAPTION)
                     .foregroundColor(Color("Grey"))
-                Text(cost.description ?? "")
-                    .frame(maxWidth: SCREEN_SIZE.width * 0.6)
+                HStack {
+                    Text(cost.description ?? "")
+                    Spacer(minLength: 30)
+                }
             }
             Spacer()
             Text("-" + CURRENCY_SYMBOL + String(format: "%.2f", -cost.amount))
@@ -28,7 +30,7 @@ struct CostListItemView: View {
 
 struct CostListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let costConst = Saving(date: "2020-02-10", amount: -10.8, description: "我这里有一段非常长的文字用来测试取钱可能我很啰嗦就是要记这么多")
+        let costConst = Saving(date: "2020-02-10", amount: -10.8, description: "我这里有一个非常长的解释不知道为什么但是我就是要搞这么长测试一下再说8")
         CostListItemView(cost: costConst)
             .previewLayout(.sizeThatFits)
 

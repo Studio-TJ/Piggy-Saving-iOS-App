@@ -16,7 +16,7 @@ struct SavingsListView: View {
     @State var sumSaving: Double = 0.0
     @State var listItemHasChange: Bool = false
     @State private var errorWrapper: [ErrorWrapper] = []
-    @State var displayOption = "Cost"
+    @State var displayOption = "Saving"
     @State var hasError = false
     @State var showWithDrawPicker = false
     
@@ -26,7 +26,7 @@ struct SavingsListView: View {
     var body: some View {
         VStack(spacing: 0) {
             SavingListOverviewView(sumSaving: self.sumSaving, totalSaving: savingDataStore.totalSaving, totalCost: savingDataStore.totalCost)
-            if true {
+            if configs.configs.ableToWithdraw {
                 HStack {
                     Picker("", selection: $displayOption) {
                         ForEach(displayOptions, id: \.self) {
@@ -37,7 +37,7 @@ struct SavingsListView: View {
                     .frame(maxWidth: 160)
                     Spacer(minLength: 50)
                     if displayOption == "Cost" {
-                        Button("Record Saving") {
+                        Button("Record Withdraw") {
                             
                         }
                         .frame(width: 100, height: 44)
@@ -45,8 +45,7 @@ struct SavingsListView: View {
                                         .fill(Color.green))
                         .padding(.trailing, 25)
                     } else {
-                        Button("Record Saving") {
-                            
+                        Button("Record Withdraw") {
                         }
                         .frame(width: 100, height: 44)
                         .foregroundColor(Color.clear)
@@ -170,7 +169,7 @@ struct SavingsListView: View {
 
 struct SavingsListView_Previews: PreviewProvider {
     static var previews: some View {
-        SavingsListView(savingDataStore: SavingDataStore(savings: Saving.sampleData1 + Saving.sampleData2 + Saving.sampleData3, cost: Saving.sampleData1), savingMonthShowList: .constant([:]), costMonthShowList: .constant([:]))
+        SavingsListView(savingDataStore: SavingDataStore(savings: Saving.sampleData1 + Saving.sampleData2 + Saving.sampleData3, cost: Saving.sampleData4 + Saving.sampleData5 + Saving.sampleData6), savingMonthShowList: .constant([:]), costMonthShowList: .constant([:]))
             .environmentObject(ConfigStore())
     }
 }
