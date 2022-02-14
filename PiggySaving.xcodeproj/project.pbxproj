@@ -269,7 +269,7 @@
 				ABA6D2AC27A1A62000F62E42 /* Sources */,
 				ABA6D2AD27A1A62000F62E42 /* Frameworks */,
 				ABA6D2AE27A1A62000F62E42 /* Resources */,
-				AB49C44C27B71D45001558C3 /* ShellScript */,
+				AB49C44C27B71D45001558C3 /* Set Build Number */,
 			);
 			buildRules = (
 			);
@@ -328,22 +328,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AB49C44C27B71D45001558C3 /* ShellScript */ = {
+		AB49C44C27B71D45001558C3 /* Set Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
 			);
 			inputPaths = (
 			);
+			name = "Set Build Number";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\npushd ${PROJECT_DIR}\n# buildNumber=$(($buildNumber + 1))\nbuildNumber=$(git describe --tags --always)\npopd\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -532,7 +533,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"PiggySaving/Preview Content\"";
 				DEVELOPMENT_TEAM = F68MNZRCPQ;
 				ENABLE_PREVIEWS = YES;
@@ -564,7 +564,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"PiggySaving/Preview Content\"";
 				DEVELOPMENT_TEAM = F68MNZRCPQ;
 				ENABLE_PREVIEWS = YES;
