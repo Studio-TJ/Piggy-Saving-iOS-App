@@ -30,26 +30,55 @@ struct SavingListMonthView: View {
         return sum
     }
     
+    var sumOfMonthActual: Double {
+        var sum: Double = 0
+        savings.forEach { saving in
+            if saving.isSaved {
+                sum += saving.amount
+            }
+        }
+        
+        return sum
+    }
+    
+    var allFinished: Bool {
+        return sumOfMonthActual == sumOfMonth
+    }
+    
     var body: some View {
         VStack {
-            HStack {
-                Text(self.month)
-                    .font(Fonts.BODY_CHINESE_NORMAL)
-                    .foregroundColor(Color("MainPink"))
-                Spacer()
-                Text(CURRENCY_SYMBOL + String(format: "%.2f", self.sumOfMonth))
-                    .font(Fonts.BODY_CHINESE_NORMAL)
-                    .foregroundColor(Color("MainPink"))
-                Image(systemName: "chevron.right")
-                    .padding()
-                    .onTapGesture {
-                        if showList[key] ?? true {
-                            showList.updateValue(false, forKey: key)
-                        } else {
-                            showList.updateValue(true, forKey: key)
+            VStack(spacing: 0) {
+                HStack {
+                    Text(self.month)
+                        .font(Fonts.BODY_CHINESE_NORMAL)
+                        .foregroundColor(Color.accentColor)
+                    Spacer()
+                    HStack(spacing: 0) {
+                        Text(CURRENCY_SYMBOL + String(format: "%.2f", self.sumOfMonth))
+                            .font(Fonts.BODY_CHINESE_NORMAL)
+                        .foregroundColor(Color("MainPink"))
+                        if !allFinished {
+                            Image(systemName: "circle.fill")
+                                .foregroundColor(Color("Grey"))
+                            .scaleEffect(x: 0.4, y: 0.4)
+                            .offset(x: -2, y: -8)
                         }
                     }
-                    .rotationEffect(.degrees(showList[key] ?? true ? 90 : 0))
+                    Image(systemName: "chevron.right")
+                        .padding()
+                        .onTapGesture {
+                            if showList[key] ?? true {
+                                showList.updateValue(false, forKey: key)
+                            } else {
+                                showList.updateValue(true, forKey: key)
+                            }
+                        }
+                        .rotationEffect(.degrees(showList[key] ?? true ? 90 : 0))
+                }
+                HStack {
+                    ProgressBarView(actual: sumOfMonthActual, total: sumOfMonth)
+                    Spacer(minLength: SCREEN_SIZE.width * 0.45)
+                }
             }
             .padding(.leading, 10)
             

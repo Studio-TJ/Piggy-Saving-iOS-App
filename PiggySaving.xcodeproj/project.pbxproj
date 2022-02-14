@@ -38,6 +38,7 @@
 		ABDBC09327B4502400E49082 /* SavingListDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDBC09227B4502400E49082 /* SavingListDaysView.swift */; };
 		ABDBC09527B45CD500E49082 /* SavingListMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDBC09427B45CD500E49082 /* SavingListMonthView.swift */; };
 		ABDBC09927B463E300E49082 /* SavingListYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDBC09827B463E300E49082 /* SavingListYearView.swift */; };
+		ABE4E83A27BA9848007ECBD3 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE4E83927BA9848007ECBD3 /* ProgressBarView.swift */; };
 		ABE8886527AFEE9A006B3246 /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886427AFEE9A006B3246 /* WelcomePage.swift */; };
 		ABE8886727B01664006B3246 /* GoalSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886627B01664006B3246 /* GoalSettingView.swift */; };
 		ABE8886927B01681006B3246 /* DataStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886827B01681006B3246 /* DataStorageView.swift */; };
@@ -83,6 +84,7 @@
 		ABDBC09227B4502400E49082 /* SavingListDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListDaysView.swift; sourceTree = "<group>"; };
 		ABDBC09427B45CD500E49082 /* SavingListMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListMonthView.swift; sourceTree = "<group>"; };
 		ABDBC09827B463E300E49082 /* SavingListYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListYearView.swift; sourceTree = "<group>"; };
+		ABE4E83927BA9848007ECBD3 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		ABE8886427AFEE9A006B3246 /* WelcomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePage.swift; sourceTree = "<group>"; };
 		ABE8886627B01664006B3246 /* GoalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingView.swift; sourceTree = "<group>"; };
 		ABE8886827B01681006B3246 /* DataStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorageView.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				ABDBC09227B4502400E49082 /* SavingListDaysView.swift */,
 				ABDBC09427B45CD500E49082 /* SavingListMonthView.swift */,
 				ABDBC09827B463E300E49082 /* SavingListYearView.swift */,
+				ABE4E83927BA9848007ECBD3 /* ProgressBarView.swift */,
 			);
 			path = SavingListViews;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				AB49C45B27B8561D001558C3 /* SettingsViewOperationsSetEndDateView.swift in Sources */,
 				ABDBC09327B4502400E49082 /* SavingListDaysView.swift in Sources */,
 				ABDBC09127B41C2200E49082 /* SavingListOverviewView.swift in Sources */,
+				ABE4E83A27BA9848007ECBD3 /* ProgressBarView.swift in Sources */,
 				AB49C45727B85330001558C3 /* SettingsViewOperationWithdrawModeView.swift in Sources */,
 				AB1F410B27AD47970059D50F /* WarningConfirmationView.swift in Sources */,
 				AB49C45027B84E26001558C3 /* SettingsRunningModeView.swift in Sources */,
