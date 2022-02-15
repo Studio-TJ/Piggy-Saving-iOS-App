@@ -11,11 +11,11 @@ struct SavingListItemView: View {
     let externalURL: String
     
     @EnvironmentObject var configs: ConfigStore
+    @EnvironmentObject var states: States
     @Environment(\.managedObjectContext) var context
     
     @State private var errorWrapper: ErrorWrapper?
     
-    @Binding var itemUpdated: Bool
     @State var saving: Saving
     
     var body: some View {
@@ -25,6 +25,7 @@ struct SavingListItemView: View {
                     .font(Fonts.CAPTION)
                     .foregroundColor(Color("Grey"))
                 Text("+" + String(format: "%.2f", saving.amount))
+                    .font(.system(size: 16).monospacedDigit())
             }
             Spacer()
             if saving.isSaved {
@@ -38,7 +39,7 @@ struct SavingListItemView: View {
                                 Task {
                                     do {
                                         try await ServerApi.save(externalURL: self.externalURL, date: self.saving.date, isSaved: true)
-                                        itemUpdated = true
+                                        states.savingDataChanged = true
                                     } catch {
                                         self.errorWrapper = ErrorWrapper(error: error, guidance: NSLocalizedString("Cannot send save request to server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.", comment: "Saving action to server error guidance."))
                                     }
@@ -52,7 +53,7 @@ struct SavingListItemView: View {
                                     storedSaving.saved = true
                                     try? context.save()
                                 }
-                                itemUpdated = true
+                                states.savingDataChanged = true
                             }
                         }
                     Text("Not saved yet.")
@@ -70,7 +71,7 @@ struct SavingListItemView: View {
 struct ListItemView_Previews: PreviewProvider {
     static var previews: some View {
         let savingConst = Saving(saved: 0)
-        SavingListItemView(externalURL: "", itemUpdated: .constant(false), saving: savingConst)
+        SavingListItemView(externalURL: "", saving: savingConst)
             .environmentObject(ConfigStore())
             .previewLayout(.sizeThatFits)
     }

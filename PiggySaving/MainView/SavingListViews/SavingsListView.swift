@@ -12,9 +12,8 @@ struct SavingsListView: View {
     
     @EnvironmentObject var configs: ConfigStore
     @ObservedObject var savingDataStore: SavingDataStore
-    
     @State var sumSaving: Double = 0.0
-    @State var listItemHasChange: Bool = false
+    @StateObject var states: States = States()
     @State private var errorWrapper: [ErrorWrapper] = []
     @State var displayOption = "Saving"
     @State var hasError = false
@@ -23,102 +22,114 @@ struct SavingsListView: View {
     @Binding var savingMonthShowList: [String: Bool]
     @Binding var costMonthShowList: [String: Bool]
     
+    @EnvironmentObject var popupHandler: PopupHandler
+    
     var body: some View {
-        VStack(spacing: 0) {
-            SavingListOverviewView(sumSaving: self.sumSaving, totalSaving: savingDataStore.totalSaving, totalCost: savingDataStore.totalCost)
-            if configs.configs.ableToWithdraw {
-                HStack {
-                    Picker("", selection: $displayOption) {
-                        ForEach(displayOptions, id: \.self) {
-                            Text($0)
+        ZStack {
+            ScrollView {
+                SavingListOverviewView(sumSaving: self.sumSaving, totalSaving: savingDataStore.totalSaving, totalCost: savingDataStore.totalCost)
+                if configs.configs.ableToWithdraw {
+                    HStack {
+                        Picker("", selection: $displayOption) {
+                            ForEach(displayOptions, id: \.self) {
+                                Text($0)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                        .frame(maxWidth: 160)
+                        Spacer(minLength: 50)
+                        if displayOption == "Cost" {
+                            Button("Record Withdraw") {
+                                popupHandler.view = AnyView(CostAddView().environmentObject(popupHandler))
+                                withAnimation(.linear(duration: 1)) {
+                                    popupHandler.popuped = true
+                                }
+                            }
+                            .frame(width: 100, height: 44)
+                            .background(RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color.green))
+                            .padding(.trailing, 25)
+                        } else {
+                            Button("Record Withdraw") {
+                            }
+                            .frame(width: 100, height: 44)
+                            .foregroundColor(Color.clear)
+                            .background(RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color.clear))
+                            .padding(.trailing, 25)
                         }
                     }
-                    .pickerStyle(.segmented)
-                    .frame(maxWidth: 160)
-                    Spacer(minLength: 50)
-                    if displayOption == "Cost" {
-                        Button("Record Withdraw") {
-                            
+                    .padding(.top, 20)
+                }
+                Section {
+                    if self.displayOption == "Saving" {
+                        ForEach(savingDataStore.savingsByYearMonth, id: \.self) { savingsByYear in
+                            SavingListYearView(savings: savingsByYear, externalURL: configs.configs.externalURL ?? "", type: "Saving", monthShowList: $savingMonthShowList)
+                                .environmentObject(states)
                         }
-                        .frame(width: 100, height: 44)
-                        .background(RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color.green))
-                        .padding(.trailing, 25)
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets())
+                        .listRowBackground(Color.clear)
                     } else {
-                        Button("Record Withdraw") {
+                        ForEach(savingDataStore.costsByYearMonth, id: \.self) { costByYear in
+                            SavingListYearView(savings: costByYear, externalURL: configs.configs.externalURL ?? "", type: "Cost", monthShowList: $costMonthShowList)
+                                .environmentObject(states)
                         }
-                        .frame(width: 100, height: 44)
-                        .foregroundColor(Color.clear)
-                        .background(RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color.clear))
-                        .padding(.trailing, 25)
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets())
+                        .listRowBackground(Color.clear)
                     }
                 }
-                .padding(.top, 20)
-                .background(Color("ListBG"))
-            }
-            List {
-                if self.displayOption == "Saving" {
-                    ForEach(savingDataStore.savingsByYearMonth, id: \.self) { savingsByYear in
-                        SavingListYearView(savings: savingsByYear, externalURL: configs.configs.externalURL ?? "", type: "Saving", monthShowList: $savingMonthShowList, itemUpdated: $listItemHasChange)
-                        
-                    }
-                    .listRowBackground(Color.clear)
-                } else {
-                    ForEach(savingDataStore.costsByYearMonth, id: \.self) { costByYear in
-                        SavingListYearView(savings: costByYear, externalURL: configs.configs.externalURL ?? "", type: "Cost", monthShowList: $costMonthShowList, itemUpdated: $listItemHasChange)
-                    }
-                    .listRowBackground(Color.clear)
-                    .swipeActions {
-                        Button("Edit") {
-                            print("edit")
+                .onChange(of: self.states.savingDataChanged) { value in
+                    if value == true {
+                        if configs.configs.usingExternalURL == true {
+                            self.getAllSavingFromServer(sortDesc: true)
+                            self.getSum()
+                        } else {
+                            self.savingDataStore.fetchSavingFromPersistent()
                         }
-                        .tint(.blue)
+                        self.states.savingDataChanged = false
                     }
                 }
-            }
-            .zIndex(-1)
-            .onChange(of: self.listItemHasChange) { value in
-                if value == true {
-                    if configs.configs.usingExternalURL == true {
+                .onChange(of: self.savingDataStore.savings) { value in
+                    self.savingDataStore.updateFromSelfSavingArray()
+                }
+                .onChange(of: self.savingDataStore.costs) { value in
+                    self.savingDataStore.updateFromSelfCostArray()
+                }
+                .onChange(of: self.errorWrapper.count) { value in
+                    self.hasError = value > 0 ? true : false
+                }
+                .onAppear {
+                    showWithDrawPicker = configs.configs.ableToWithdraw
+                    if configs.configs.usingExternalURL {
                         self.getAllSavingFromServer(sortDesc: true)
+                        self.getAllCostFromServer(sortDesc: true)
                         self.getSum()
-                    } else {
-                        self.savingDataStore.fetchSavingFromPersistent()
                     }
-                    self.listItemHasChange = false
+                }
+                .refreshable {
+                    if configs.configs.usingExternalURL {
+                        self.getAllSavingFromServer(sortDesc: true)
+                        self.getAllCostFromServer(sortDesc: true)
+                        self.getSum()
+                    }
                 }
             }
-            .onChange(of: self.savingDataStore.savings) { value in
-                self.savingDataStore.updateFromSelfSavingArray()
+            .sheet(isPresented: $hasError, onDismiss: {
+                self.errorWrapper.removeAll()
+                self.hasError = false
+            }) {
+                ErrorView(errorWrapper: errorWrapper)
             }
-            .onChange(of: self.savingDataStore.costs) { value in
-                self.savingDataStore.updateFromSelfCostArray()
+            .padding(.leading, 20)
+            .padding(.trailing, 20)
+            .blur(radius: popupHandler.popuped ? 5 : 0)
+            .disabled(popupHandler.popuped)
+            
+            if popupHandler.popuped {
+                popupHandler.view
             }
-            .onChange(of: self.errorWrapper.count) { value in
-                self.hasError = value > 0 ? true : false
-            }
-            .onAppear {
-                showWithDrawPicker = configs.configs.ableToWithdraw
-                if configs.configs.usingExternalURL {
-                    self.getAllSavingFromServer(sortDesc: true)
-                    self.getAllCostFromServer(sortDesc: true)
-                    self.getSum()
-                }
-            }
-            .refreshable {
-                if configs.configs.usingExternalURL {
-                    self.getAllSavingFromServer(sortDesc: true)
-                    self.getAllCostFromServer(sortDesc: true)
-                    self.getSum()
-                }
-            }
-        }
-        .sheet(isPresented: $hasError, onDismiss: {
-            self.errorWrapper.removeAll()
-            self.hasError = false
-        }) {
-            ErrorView(errorWrapper: errorWrapper)
         }
     }
     

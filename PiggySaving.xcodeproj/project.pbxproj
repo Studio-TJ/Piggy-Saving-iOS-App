@@ -49,6 +49,8 @@
 		ABE8887627B06395006B3246 /* GoalSettingSetEndDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8887527B06395006B3246 /* GoalSettingSetEndDateView.swift */; };
 		ABE8887827B075DD006B3246 /* GoalSettingResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8887727B075DD006B3246 /* GoalSettingResultView.swift */; };
 		ABF1710A27BAF99E00CEA215 /* SaveConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF1710927BAF99E00CEA215 /* SaveConfirmationView.swift */; };
+		ABF1710E27BC163500CEA215 /* PopupHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF1710D27BC163500CEA215 /* PopupHandler.swift */; };
+		ABF1711027BC188800CEA215 /* CostAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF1710F27BC188800CEA215 /* CostAddView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,8 @@
 		ABE8887527B06395006B3246 /* GoalSettingSetEndDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingSetEndDateView.swift; sourceTree = "<group>"; };
 		ABE8887727B075DD006B3246 /* GoalSettingResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingResultView.swift; sourceTree = "<group>"; };
 		ABF1710927BAF99E00CEA215 /* SaveConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveConfirmationView.swift; sourceTree = "<group>"; };
+		ABF1710D27BC163500CEA215 /* PopupHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupHandler.swift; sourceTree = "<group>"; };
+		ABF1710F27BC188800CEA215 /* CostAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostAddView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +147,6 @@
 				AB01CC2127A3F89300C4E448 /* SettingsView.swift */,
 				AB49C44F27B84E26001558C3 /* SettingsRunningModeView.swift */,
 				AB49C45527B8530A001558C3 /* SettingsViewOperationView */,
-				AB49C45127B84EEB001558C3 /* SettingsViewFooterInfoView.swift */,
 			);
 			path = SettingsViews;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 		AB49C45527B8530A001558C3 /* SettingsViewOperationView */ = {
 			isa = PBXGroup;
 			children = (
+				AB49C45127B84EEB001558C3 /* SettingsViewFooterInfoView.swift */,
 				AB49C45327B84F7D001558C3 /* SettingsViewOperationView.swift */,
 				AB49C45627B85330001558C3 /* SettingsViewOperationWithdrawModeView.swift */,
 				AB49C45827B8541C001558C3 /* SettingsViewOperationSetMinimalUnitView.swift */,
@@ -210,6 +214,7 @@
 				AB1530DE27A33425006FD2FF /* ErrorWrapper.swift */,
 				ABC6E9FF27A988B400E6D487 /* TrailingIconLabelStyle.swift */,
 				ABC6EA0127A9BD4400E6D487 /* Helper.swift */,
+				ABF1710D27BC163500CEA215 /* PopupHandler.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 				ABDBC09427B45CD500E49082 /* SavingListMonthView.swift */,
 				ABE4E83B27BAC029007ECBD3 /* CostListMonthView.swift */,
 				ABD3336727AD8BA700A72D23 /* CostListItemView.swift */,
+				ABF1710F27BC188800CEA215 /* CostAddView.swift */,
 				ABDBC09827B463E300E49082 /* SavingListYearView.swift */,
 				ABE4E83927BA9848007ECBD3 /* ProgressBarView.swift */,
 			);
@@ -347,7 +353,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\npushd ${PROJECT_DIR}\n# buildNumber=$(($buildNumber + 1))\n# buildNumber=$(git describe --tags --always)\nbuildNumber=$((16#$(git describe --tags --always)))\npopd\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\npushd ${PROJECT_DIR}\n# buildNumber=20\nbuildNumber=$(($buildNumber + 1))\n# buildNumber=$(git describe --tags --always)\n# buildNumber=$((16#$(git describe --tags --always)))\npopd\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -368,9 +374,11 @@
 				ABE8886727B01664006B3246 /* GoalSettingView.swift in Sources */,
 				AB49C45427B84F7D001558C3 /* SettingsViewOperationView.swift in Sources */,
 				ABE8886D27B016B1006B3246 /* DoneSettingView.swift in Sources */,
+				ABF1711027BC188800CEA215 /* CostAddView.swift in Sources */,
 				ABDBC09527B45CD500E49082 /* SavingListMonthView.swift in Sources */,
 				ABC6EA0227A9BD4400E6D487 /* Helper.swift in Sources */,
 				ABD0DF2127AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld in Sources */,
+				ABF1710E27BC163500CEA215 /* PopupHandler.swift in Sources */,
 				ABA6D2D327A1BC8700F62E42 /* ConfigStore.swift in Sources */,
 				ABA6D2B427A1A62000F62E42 /* PiggySavingApp.swift in Sources */,
 				ABE8887627B06395006B3246 /* GoalSettingSetEndDateView.swift in Sources */,
@@ -553,7 +561,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.11;
 				PRODUCT_BUNDLE_IDENTIFIER = cc.studiotj.piggysave;
 				PRODUCT_NAME = "Piggy Saving";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -584,7 +592,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.11;
 				PRODUCT_BUNDLE_IDENTIFIER = cc.studiotj.piggysave;
 				PRODUCT_NAME = "Piggy Saving";
 				SWIFT_EMIT_LOC_STRINGS = YES;

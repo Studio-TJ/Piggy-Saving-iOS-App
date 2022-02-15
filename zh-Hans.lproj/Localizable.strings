@@ -1,0 +1,3 @@
+/* Saving action to server error guidance. */
+"Cannot send save request to server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now." = "无法将存钱记录请求发送至服务器。请检查您的网络连接并稍后再试。如果您确信你的网络连接正常而此问题仍然存在，请联系开发者。现在您可以安全地关闭这个对话框。";
+

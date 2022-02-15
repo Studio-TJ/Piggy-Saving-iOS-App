@@ -13,8 +13,6 @@ struct SavingListYearView: View {
     let type: String
     @Binding var monthShowList: [String: Bool]
     
-    @Binding var itemUpdated: Bool
-    
     var year: String {
         savings[0][0].dateLocalizedYear
     }
@@ -33,7 +31,7 @@ struct SavingListYearView: View {
             
             if type == "Saving" {
                 ForEach(savings, id: \.self) { monthSavings in
-                    SavingListMonthView(savings: monthSavings, showList: $monthShowList, itemUpdated: $itemUpdated, externalURL: externalURL)
+                    SavingListMonthView(savings: monthSavings, showList: $monthShowList, externalURL: externalURL)
                     if monthSavings != savings.last {
                         Divider()
                             .padding(.top, 5)
@@ -42,6 +40,10 @@ struct SavingListYearView: View {
             } else {
                 ForEach(savings, id: \.self) { monthCosts in
                     CostListMonthView(costs: monthCosts, showList: $monthShowList)
+                    if monthCosts != savings.last {
+                        Divider()
+                            .padding(.top, 5)
+                    }
                 }
             }
         }
@@ -52,7 +54,7 @@ struct SavingListYearView_Previews: PreviewProvider {
     static var previews: some View {
         let savings = [Saving.sampleData1, Saving.sampleData2]
         VStack {
-            SavingListYearView(savings: savings, externalURL: "", type: "Saving", monthShowList: .constant([:]), itemUpdated: .constant(false))
+            SavingListYearView(savings: savings, externalURL: "", type: "Saving", monthShowList: .constant([:]))
             Spacer()
         }
     }

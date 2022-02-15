@@ -13,7 +13,8 @@ struct SavingListOverviewView: View {
     let totalCost: Double
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 21).stroke(Color.accentColor, lineWidth: 1)
+            RoundedRectangle(cornerRadius: 21)
+                .fill(Color("MainPink"))
                 .frame(width: SCREEN_SIZE.width * 0.92, height: SCREEN_SIZE.height * 0.26)
             VStack {
                 HStack {
@@ -34,8 +35,6 @@ struct SavingListOverviewView: View {
             }
             .frame(width: SCREEN_SIZE.width * 0.92 - 10, height: SCREEN_SIZE.height * 0.26, alignment: .leading)
         }
-        .frame(width: SCREEN_SIZE.width, height: SCREEN_SIZE.height * 0.32)
-        .background(Color("MainPink"))
     }
 }
 

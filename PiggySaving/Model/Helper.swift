@@ -20,6 +20,10 @@ var CURRENCY_SYMBOL: String {
     NSLocale.current.currencySymbol!
 }
 
+class States: ObservableObject {
+    @Published var savingDataChanged: Bool = false
+}
+
 func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
     Binding(
         get: { lhs.wrappedValue ?? rhs },

@@ -12,14 +12,14 @@ struct MainView: View {
     @StateObject var savingDataStore: SavingDataStore = SavingDataStore()
     @State var savingMonthShowList: [String: Bool] = [:]
     @State var costMonthShowList: [String: Bool] = [:]
-    
-    @State var showOverlay = true
+    @StateObject var popupHandler = PopupHandler()
     
     var body: some View {
         ZStack {
             TabView {
                 SavingsListView(savingDataStore: savingDataStore, savingMonthShowList: $savingMonthShowList, costMonthShowList: $costMonthShowList)
                     .environment(\.managedObjectContext, savingDataStore.container.viewContext)
+                    .environmentObject(popupHandler)
                     .tabItem {
                         Image(systemName: "list.dash")
                         Text("Savings List")
@@ -32,11 +32,6 @@ struct MainView: View {
                         Text("Settings")
                     }
             }
-            .blur(radius: showOverlay ? 15 : 0)
-            .disabled(showOverlay)
-//            if showOverlay {
-                SaveConfirmationView(toggle: $showOverlay)
-//            }
         }
     }
 }
