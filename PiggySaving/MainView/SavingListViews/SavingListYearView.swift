@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SavingListYearView: View {
     var savings: [[Saving]]
-    let externalURL: String
     let type: String
     @Binding var monthShowList: [String: Bool]
     
@@ -31,7 +30,7 @@ struct SavingListYearView: View {
             
             if type == "Saving" {
                 ForEach(savings, id: \.self) { monthSavings in
-                    SavingListMonthView(savings: monthSavings, showList: $monthShowList, externalURL: externalURL)
+                    SavingListMonthView(savings: monthSavings, showList: $monthShowList)
                     if monthSavings != savings.last {
                         Divider()
                             .padding(.top, 5)
@@ -54,7 +53,7 @@ struct SavingListYearView_Previews: PreviewProvider {
     static var previews: some View {
         let savings = [Saving.sampleData1, Saving.sampleData2]
         VStack {
-            SavingListYearView(savings: savings, externalURL: "", type: "Saving", monthShowList: .constant([:]))
+            SavingListYearView(savings: savings, type: "Saving", monthShowList: .constant([:]))
             Spacer()
         }
     }

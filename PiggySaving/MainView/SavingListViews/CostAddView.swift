@@ -13,7 +13,7 @@ struct CostAddView: View {
     @State private var date = Date()
     @State private var amount: Double = 0.0
     @State private var description: String = ""
-//    @FocusState private var amountFocus: Bool
+    @FocusState private var amountFocus: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -28,14 +28,14 @@ struct CostAddView: View {
                 Text("Amount")
                 TextField("Amount", value: $amount, format: .number)
                     .keyboardType(.decimalPad)
-//                    .focused($amountFocus)
+                    .focused($amountFocus)
                     .textFieldStyle(.roundedBorder)
                     .frame(width: 100)
                 Text(CURRENCY_SYMBOL)
                     .font(Fonts.CAPTION)
                     .frame(alignment: .bottom)
                 Button {
-//                    amountFocus = false
+                    amountFocus = false
                 } label: {
                     Text("Done")
                         .frame(minWidth: 80, minHeight: 25)

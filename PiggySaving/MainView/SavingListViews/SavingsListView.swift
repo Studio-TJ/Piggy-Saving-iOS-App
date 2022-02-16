@@ -42,7 +42,7 @@ struct SavingsListView: View {
                     Image(systemName: "arrow.clockwise.circle")
                     Text("Refresh")
                     Spacer()
-                }
+                }.transition(.opacity)
             }
             ScrollView {
                 ZStack {
@@ -84,7 +84,7 @@ struct SavingsListView: View {
                         Section {
                             if self.displayOption == "Saving" {
                                 ForEach(savingDataStore.savingsByYearMonth, id: \.self) { savingsByYear in
-                                    SavingListYearView(savings: savingsByYear, externalURL: configs.configs.externalURL ?? "", type: "Saving", monthShowList: $savingMonthShowList)
+                                    SavingListYearView(savings: savingsByYear, type: "Saving", monthShowList: $savingMonthShowList)
                                         .environmentObject(states)
                                 }
                                 .listRowSeparator(.hidden)
@@ -92,7 +92,7 @@ struct SavingsListView: View {
                                 .listRowBackground(Color.clear)
                             } else {
                                 ForEach(savingDataStore.costsByYearMonth, id: \.self) { costByYear in
-                                    SavingListYearView(savings: costByYear, externalURL: configs.configs.externalURL ?? "", type: "Cost", monthShowList: $costMonthShowList)
+                                    SavingListYearView(savings: costByYear, type: "Cost", monthShowList: $costMonthShowList)
                                         .environmentObject(states)
                                 }
                                 .listRowSeparator(.hidden)
@@ -138,9 +138,7 @@ struct SavingsListView: View {
             .coordinateSpace(name: "scroll")
             .onPreferenceChange(PositionPreferenceKey.self) { value in
                 if value > 10 {
-                    withAnimation(.linear(duration: 1)) {
-                        offset = true
-                    }
+                    offset = true
                     if refreshed == false && value > SCREEN_SIZE.height * 0.15 {
                         refreshed = true
                         DispatchQueue.main.async {
@@ -151,10 +149,8 @@ struct SavingsListView: View {
                         }
                     }
                 } else {
-                    withAnimation(.linear(duration: 1)) {
-                        offset = false
-                        refreshed = false
-                    }
+                    offset = false
+                    refreshed = false
                 }
             }
             .sheet(isPresented: $hasError, onDismiss: {
@@ -167,7 +163,7 @@ struct SavingsListView: View {
             .disabled(popupHandler.popuped)
             
             if popupHandler.popuped {
-                popupHandler.view
+                popupHandler.view.transition(.opacity)
             }
         }
     }

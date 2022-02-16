@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct SavingListItemView: View {
-    let externalURL: String
-    
-    @EnvironmentObject var configs: ConfigStore
+    @EnvironmentObject var popupHandler: PopupHandler
     @EnvironmentObject var states: States
-    @Environment(\.managedObjectContext) var context
-    
     @State private var errorWrapper: ErrorWrapper?
     
     @State var saving: Saving
@@ -38,37 +34,19 @@ struct SavingListItemView: View {
                 Text("Saved")
                     .foregroundColor(Color("Grey"))
             } else {
-                VStack(alignment: .trailing) {
-                    RoundedRectangle(cornerRadius: 15)
-                        .fill(Color("MainPink"))
-                        .frame(width: 100, height: 23)
-                        .overlay(
-                            Text("Save Now")
-                                .foregroundColor(.white)
-                        )
-                        .onTapGesture {
-//                            if configs.configs.usingExternalURL {
-//                                Task {
-//                                    do {
-//                                        try await ServerApi.save(externalURL: self.externalURL, date: self.saving.date, isSaved: true)
-//                                        states.savingDataChanged = true
-//                                    } catch {
-//                                        self.errorWrapper = ErrorWrapper(error: error, guidance: NSLocalizedString("Cannot send save request to server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.", comment: "Saving action to server error guidance."))
-//                                    }
-//                                }
-//                            } else {
-//                                let fetchRequest = SavingData.fetchRequest()
-//                         
-//                                fetchRequest.predicate = NSPredicate(format: "date == %@", saving.dateFormatted as CVarArg)
-//                                let storedSaving = try? context.fetch(fetchRequest).first
-//                                if let storedSaving = storedSaving {
-//                                    storedSaving.saved = true
-//                                    try? context.save()
-//                                }
-//                                states.savingDataChanged = true
-//                            }
-                        }
+                Button("Save") {
+                    popupHandler.view = AnyView(SavingConfirmationView(saving: saving)
+                                                    .environmentObject(popupHandler)
+                                                    .environmentObject(states))
+                    withAnimation(.linear(duration: 0.2)) {
+                        popupHandler.popuped = true
+                    }
                 }
+                .frame(width: 69, height: 23)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color("MainPink"))
+                )
             }
         }
         .sheet(item: $errorWrapper, onDismiss: {
@@ -82,7 +60,7 @@ struct SavingListItemView: View {
 struct ListItemView_Previews: PreviewProvider {
     static var previews: some View {
         let savingConst = Saving(saved: 0)
-        SavingListItemView(externalURL: "", saving: savingConst)
+        SavingListItemView(saving: savingConst)
             .environmentObject(ConfigStore())
             .previewLayout(.sizeThatFits)
     }

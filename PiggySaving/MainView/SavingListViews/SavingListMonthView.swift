@@ -10,7 +10,6 @@ import SwiftUI
 struct SavingListMonthView: View {
     var savings: [Saving]
     @Binding var showList: [String: Bool]
-    let externalURL: String
     
     var key: String {
         return savings[0].dateMonthYear
@@ -81,7 +80,7 @@ struct SavingListMonthView: View {
             
             if showList[key] ?? true {
                 ForEach(savings) { saving in
-                    SavingListItemView(externalURL: externalURL, saving: saving)
+                    SavingListItemView(saving: saving)
                     if saving != savings.last {
                         Divider()
                     }
@@ -102,7 +101,7 @@ struct SavingListMonthView_Previews: PreviewProvider {
     static var previews: some View {
         let savings = Saving.sampleData1
         VStack {
-            SavingListMonthView(savings: savings, showList: .constant([:]), externalURL: "")
+            SavingListMonthView(savings: savings, showList: .constant([:]))
                 .previewLayout(.sizeThatFits)
             Spacer()
         }
