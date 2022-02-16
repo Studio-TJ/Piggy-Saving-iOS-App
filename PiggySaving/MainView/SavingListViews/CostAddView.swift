@@ -13,7 +13,7 @@ struct CostAddView: View {
     @State private var date = Date()
     @State private var amount: Double = 0.0
     @State private var description: String = ""
-    @FocusState private var amountFocus: Bool
+//    @FocusState private var amountFocus: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -28,20 +28,20 @@ struct CostAddView: View {
                 Text("Amount")
                 TextField("Amount", value: $amount, format: .number)
                     .keyboardType(.decimalPad)
-                    .focused($amountFocus)
+//                    .focused($amountFocus)
                     .textFieldStyle(.roundedBorder)
                     .frame(width: 100)
                 Text(CURRENCY_SYMBOL)
                     .font(Fonts.CAPTION)
                     .frame(alignment: .bottom)
                 Button {
-                    amountFocus = false
+//                    amountFocus = false
                 } label: {
                     Text("Done")
                         .frame(minWidth: 80, minHeight: 25)
                         .background {
                             RoundedRectangle(cornerRadius: 5)
-                                .fill(Color.accentColor)
+                                .fill(Color("AccentColor"))
                         }
                         .foregroundColor(Color("FrontColor"))
                 }
@@ -58,7 +58,7 @@ struct CostAddView: View {
             .padding(.leading, 20)
             HStack {
                 Button("Confirm") {
-                    withAnimation(.linear(duration: 1)) {
+                    withAnimation(.linear(duration: 0.5)) {
                         popupHandler.popuped = false
                     }
                     popupHandler.view = AnyView(EmptyView())
@@ -71,7 +71,7 @@ struct CostAddView: View {
                 .padding(.leading, 60)
                 Spacer()
                 Button("Cancel") {
-                    withAnimation(.linear(duration: 1)) {
+                    withAnimation(.linear(duration: 0.5)) {
                         popupHandler.popuped = false
                     }
                     popupHandler.view = AnyView(EmptyView())
@@ -89,9 +89,9 @@ struct CostAddView: View {
         .frame(width: SCREEN_SIZE.width * 0.9, height: SCREEN_SIZE.height * 0.3)
         .background(
             RoundedRectangle(cornerRadius: 16)
-                .fill(.white)
+                .fill(Color("BackgroundColor"))
                 .frame(minWidth: SCREEN_SIZE.width * 0.9, minHeight: 250)
-                .shadow(radius: 16)
+                .shadow(color: Color("AccentColor").opacity(0.2), radius: 16)
         )
     }
 }

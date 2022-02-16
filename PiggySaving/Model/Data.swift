@@ -236,6 +236,17 @@ class SavingDataStore: ObservableObject {
         return total
     }
     
+    var totalSaingActual: Double {
+        var total: Double = 0
+        savings.forEach { saving in
+            if saving.isSaved {
+                total += saving.amount
+            }
+        }
+        
+        return total + totalCost
+    }
+    
     var totalCost: Double {
         var total: Double = 0
         costs.forEach { cost in

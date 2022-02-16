@@ -24,8 +24,14 @@ struct SavingListItemView: View {
                 Text(saving.dateLocalizedMonthDay)
                     .font(Fonts.CAPTION)
                     .foregroundColor(Color("Grey"))
-                Text("+" + String(format: "%.2f", saving.amount))
-                    .font(.system(size: 16).monospacedDigit())
+                if saving.isSaved {
+                    Text("+" + String(format: "%.2f", saving.amount))
+                        .font(.system(size: 16).monospacedDigit())
+                } else {
+                    Text("Not Saved yet.")
+                        .font(Fonts.BODY_CHINESE_NORMAL)
+                        .foregroundColor(Color("MainPink"))
+                }
             }
             Spacer()
             if saving.isSaved {
@@ -33,30 +39,35 @@ struct SavingListItemView: View {
                     .foregroundColor(Color("Grey"))
             } else {
                 VStack(alignment: .trailing) {
-                    Text("Save Now!")
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(Color("MainPink"))
+                        .frame(width: 100, height: 23)
+                        .overlay(
+                            Text("Save Now")
+                                .foregroundColor(.white)
+                        )
                         .onTapGesture {
-                            if configs.configs.usingExternalURL {
-                                Task {
-                                    do {
-                                        try await ServerApi.save(externalURL: self.externalURL, date: self.saving.date, isSaved: true)
-                                        states.savingDataChanged = true
-                                    } catch {
-                                        self.errorWrapper = ErrorWrapper(error: error, guidance: NSLocalizedString("Cannot send save request to server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.", comment: "Saving action to server error guidance."))
-                                    }
-                                }
-                            } else {
-                                let fetchRequest = SavingData.fetchRequest()
-                         
-                                fetchRequest.predicate = NSPredicate(format: "date == %@", saving.dateFormatted as CVarArg)
-                                let storedSaving = try? context.fetch(fetchRequest).first
-                                if let storedSaving = storedSaving {
-                                    storedSaving.saved = true
-                                    try? context.save()
-                                }
-                                states.savingDataChanged = true
-                            }
+//                            if configs.configs.usingExternalURL {
+//                                Task {
+//                                    do {
+//                                        try await ServerApi.save(externalURL: self.externalURL, date: self.saving.date, isSaved: true)
+//                                        states.savingDataChanged = true
+//                                    } catch {
+//                                        self.errorWrapper = ErrorWrapper(error: error, guidance: NSLocalizedString("Cannot send save request to server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.", comment: "Saving action to server error guidance."))
+//                                    }
+//                                }
+//                            } else {
+//                                let fetchRequest = SavingData.fetchRequest()
+//                         
+//                                fetchRequest.predicate = NSPredicate(format: "date == %@", saving.dateFormatted as CVarArg)
+//                                let storedSaving = try? context.fetch(fetchRequest).first
+//                                if let storedSaving = storedSaving {
+//                                    storedSaving.saved = true
+//                                    try? context.save()
+//                                }
+//                                states.savingDataChanged = true
+//                            }
                         }
-                    Text("Not saved yet.")
                 }
             }
         }
