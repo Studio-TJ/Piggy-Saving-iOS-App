@@ -231,4 +231,50 @@ class ServerApi {
             }
         }.resume()
     }
+    
+    @discardableResult
+    static func withdraw(externalURL: String, date: String, amount: Double, description: String, delete: Bool) async throws -> Bool {
+        try await withCheckedThrowingContinuation { continuation in
+            withdraw(externalURL: externalURL, date: date, amount: amount, description: description, delete: delete ) { result in
+                switch result {
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                case .success(let retval):
+                    continuation.resume(returning: retval)
+                }
+            }
+        }
+    }
+    
+    private static func withdraw(externalURL: String, date: String, amount: Double, description: String, delete: Bool, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let json: [String: Any] = [
+            "date": date,
+            "amount": amount,
+            "description": description,
+            "delete": delete
+        ]
+        
+        guard let url = URL(string: externalURL + "/withdraw") else {
+            completion(.failure(ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL)))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: json)
+        } catch {
+            print(error.localizedDescription)
+        }
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        // TODO: error handle with response and error
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
+            }
+        }.resume()
+    }
 }
