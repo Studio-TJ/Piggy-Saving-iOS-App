@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct CostListItemView: View {
-    @State var cost: Saving
+    let cost: Saving
     
     @State private var offset = CGSize.zero
     
     @EnvironmentObject var popupHandler: PopupHandler
+    @EnvironmentObject var states: States
     
     var body: some View {
         HStack {
@@ -42,7 +43,13 @@ struct CostListItemView: View {
                 }
                 .onEnded { gesture in
                     if gesture.translation.width < -100 {
-                        popupHandler.view = AnyView(CostAddView().environmentObject(popupHandler))
+                        popupHandler.view = AnyView(CostEditView(edit: true,
+                                                                 sequence: cost.sequence,
+                                                                 date: cost.dateFormatted,
+                                                                 amount: -cost.amount,
+                                                                 description: cost.description ?? "")
+                                                        .environmentObject(popupHandler)
+                                                        .environmentObject(states))
                         withAnimation(.linear(duration: 1)) {
                             popupHandler.popuped = true
                         }

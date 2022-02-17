@@ -25,6 +25,7 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
     var saved: Int
     var description: String?
     var type: String
+    var sequence: Int
     
     var isSaved: Bool {
         return saved == 1 ? true : false
@@ -36,6 +37,7 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
         case saved
         case description
         case type
+        case sequence
     }
     
     var dateFormatted: Date {
@@ -81,6 +83,7 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
         self.amount = 1
         self.saved = 0
         self.type = "saving"
+        self.sequence = 0
     }
     
     init(saved: Int) {
@@ -88,6 +91,7 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
         self.amount = 1
         self.saved = saved
         self.type = "saving"
+        self.sequence = 0
     }
     
     init(savingData: SavingData) {
@@ -98,6 +102,7 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
         self.saved = savingData.saved ? 1 : 0
         self.description = savingData.comment
         self.type = savingData.type ?? "saving"
+        self.sequence = Int(savingData.sequence);
     }
     
     init(date: String, amount: Double, saved: Int) {
@@ -105,6 +110,7 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
         self.amount = amount
         self.saved = saved
         self.type = "saving"
+        self.sequence = 0
     }
     
     init(date: String, amount: Double, description: String) {
@@ -113,6 +119,7 @@ struct Saving: Codable, Identifiable, Equatable, Hashable {
         self.saved = 1
         self.type = "cost"
         self.description = description
+        self.sequence = 1
     }
     
     static let sampleData1: [Saving] =
@@ -167,6 +174,7 @@ extension SavingData {
         self.saved = saving.isSaved
         self.type = "saving"
         self.comment = "Saving"
+        self.sequence = Int32(saving.sequence)
     }
     
     convenience init(context: NSManagedObjectContext, cost: Saving) {
@@ -176,6 +184,7 @@ extension SavingData {
         self.saved = true
         self.type = "cost"
         self.comment = cost.description
+        self.sequence = Int32(cost.sequence)
     }
 }
 

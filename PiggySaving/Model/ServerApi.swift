@@ -233,9 +233,9 @@ class ServerApi {
     }
     
     @discardableResult
-    static func withdraw(externalURL: String, date: String, amount: Double, description: String, delete: Bool) async throws -> Bool {
+    static func withdraw(externalURL: String, date: String, amount: Double, description: String, sequence: Int, delete: Bool) async throws -> Bool {
         try await withCheckedThrowingContinuation { continuation in
-            withdraw(externalURL: externalURL, date: date, amount: amount, description: description, delete: delete ) { result in
+            withdraw(externalURL: externalURL, date: date, amount: amount, description: description, sequence: sequence, delete: delete ) { result in
                 switch result {
                 case .failure(let error):
                     continuation.resume(throwing: error)
@@ -246,12 +246,13 @@ class ServerApi {
         }
     }
     
-    private static func withdraw(externalURL: String, date: String, amount: Double, description: String, delete: Bool, completion: @escaping (Result<Bool, Error>) -> Void) {
+    private static func withdraw(externalURL: String, date: String, amount: Double, description: String, sequence: Int, delete: Bool, completion: @escaping (Result<Bool, Error>) -> Void) {
         let json: [String: Any] = [
             "date": date,
             "amount": amount,
             "description": description,
-            "delete": delete
+            "delete": delete,
+            "sequence": sequence
         ]
         
         guard let url = URL(string: externalURL + "/withdraw") else {

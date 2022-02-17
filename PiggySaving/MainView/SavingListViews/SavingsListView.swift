@@ -60,7 +60,9 @@ struct SavingsListView: View {
                                 Spacer(minLength: 50)
                                 if displayOption == "Cost" {
                                     Button("Record Withdraw") {
-                                        popupHandler.view = AnyView(CostAddView().environmentObject(popupHandler))
+                                        popupHandler.view = AnyView(CostEditView()
+                                                                        .environmentObject(popupHandler)
+                                                                        .environmentObject(states))
                                         withAnimation(.linear(duration: 0.2)) {
                                             popupHandler.popuped = true
                                         }
@@ -104,6 +106,7 @@ struct SavingsListView: View {
                             if value == true {
                                 if configs.configs.usingExternalURL == true {
                                     self.getAllSavingFromServer(sortDesc: true)
+                                    self.getAllCostFromServer(sortDesc: true)
                                 } else {
                                     self.savingDataStore.fetchSavingFromPersistent()
                                 }
@@ -138,8 +141,13 @@ struct SavingsListView: View {
             .coordinateSpace(name: "scroll")
             .onPreferenceChange(PositionPreferenceKey.self) { value in
                 if value > 10 {
-                    offset = true
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.prepare()
+                    withAnimation(.linear(duration: 1)) {
+                        offset = true
+                    }
                     if refreshed == false && value > SCREEN_SIZE.height * 0.15 {
+                        generator.notificationOccurred(.success)
                         refreshed = true
                         DispatchQueue.main.async {
                             if configs.configs.usingExternalURL {
@@ -149,7 +157,9 @@ struct SavingsListView: View {
                         }
                     }
                 } else {
-                    offset = false
+                    withAnimation(.linear(duration: 1)) {
+                        offset = false
+                    }
                     refreshed = false
                 }
             }
