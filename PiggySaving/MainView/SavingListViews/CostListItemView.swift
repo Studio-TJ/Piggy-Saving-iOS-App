@@ -43,6 +43,7 @@ struct CostListItemView: View {
                 }
                 .onEnded { gesture in
                     if gesture.translation.width < -100 {
+                        UINotificationFeedbackGenerator().notificationOccurred(.success)
                         popupHandler.view = AnyView(CostEditView(edit: true,
                                                                  sequence: cost.sequence,
                                                                  date: cost.dateFormatted,
