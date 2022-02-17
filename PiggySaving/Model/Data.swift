@@ -193,17 +193,22 @@ class SavingDataStore: ObservableObject {
     @Published var costs: [Saving]
     let container = NSPersistentContainer(name: "PiggySavingData")
     
-    var savingsByYearMonth: [[[Saving]]] {
-        return groupSavingByYearMonth(savings: self.savings)
-    }
+    var savingsByYearMonth: [[[Saving]]]
+    var costsByYearMonth: [[[Saving]]]
     
-    var costsByYearMonth: [[[Saving]]] {
-        return groupSavingByYearMonth(savings: self.costs)
-    }
+//    var savingsByYearMonth: [[[Saving]]] {
+//        return groupSavingByYearMonth(savings: self.savings)
+//    }
+    
+//    var costsByYearMonth: [[[Saving]]] {
+//        return groupSavingByYearMonth(savings: self.costs)
+//    }
     
     init() {
         self.savings = []
         self.costs = []
+        self.savingsByYearMonth = []
+        self.costsByYearMonth = []
         container.loadPersistentStores { description, error in
             if let error = error {
                 print("Core data failed to load: \(error.localizedDescription)")
@@ -218,6 +223,7 @@ class SavingDataStore: ObservableObject {
                 let newSaving = Saving(savingData: saving)
                 self.savings.append(newSaving)
             }
+            
         }
         
         // Get cost into memory
@@ -228,6 +234,7 @@ class SavingDataStore: ObservableObject {
                 self.costs.append(newCost)
             }
         }
+        updateGroup()
     }
     
     convenience init(savings: [Saving], cost: [Saving]) {
@@ -275,6 +282,7 @@ class SavingDataStore: ObservableObject {
                 self.savings.append(newSaving)
             }
         }
+        updateGroup()
     }
     
     public func fetchCostFromPersistent() -> Void {
@@ -287,6 +295,7 @@ class SavingDataStore: ObservableObject {
                 self.costs.append(newCost)
             }
         }
+        updateGroup()
     }
     
     public func updateFromSelfSavingArray() -> Void {
@@ -303,6 +312,7 @@ class SavingDataStore: ObservableObject {
             _ = SavingData(context: context, saving: saving)
         }
         try? context.save()
+        updateGroup()
     }
     
     public func updateFromSelfCostArray() -> Void {
@@ -319,6 +329,7 @@ class SavingDataStore: ObservableObject {
             _ = SavingData(context: context, cost: cost)
         }
         try? context.save()
+        updateGroup()
     }
     
     public func resetData() {
@@ -331,6 +342,11 @@ class SavingDataStore: ObservableObject {
                 context.delete(saving)
             }
         }
+    }
+    
+    private func updateGroup() {
+        savingsByYearMonth = groupSavingByYearMonth(savings: self.savings)
+        costsByYearMonth = groupSavingByYearMonth(savings: self.costs)
     }
     
     private func fetchSavings(context: NSManagedObjectContext) -> [SavingData]? {

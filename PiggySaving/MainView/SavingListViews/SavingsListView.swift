@@ -27,7 +27,7 @@ struct SavingsListView: View {
     @State var displayOption = "Saving"
     @State var hasError = false
     @State var showWithDrawPicker = false
-    @State private var offset = true
+    @State private var offset = CGFloat.zero
     @State private var refreshed = false
     
     @Binding var savingMonthShowList: [String: Bool]
@@ -37,13 +37,11 @@ struct SavingsListView: View {
     
     var body: some View {
         ZStack {
-            if offset {
-                VStack {
-                    Image(systemName: "arrow.clockwise.circle")
-                    Text("Refresh")
-                    Spacer()
-                }.transition(.opacity)
-            }
+            VStack {
+                Image(systemName: "arrow.clockwise.circle")
+                Text("Refresh")
+                Spacer()
+            }.opacity(min(offset / (SCREEN_SIZE.height * 0.1), 1))
             ScrollView {
                 ZStack {
                     LazyVStack {
@@ -141,12 +139,12 @@ struct SavingsListView: View {
             }
             .coordinateSpace(name: "scroll")
             .onPreferenceChange(PositionPreferenceKey.self) { value in
+                let generator = UINotificationFeedbackGenerator()
                 if value > 10 {
-                    let generator = UINotificationFeedbackGenerator()
                     generator.prepare()
-                    withAnimation(.linear(duration: 1)) {
-                        offset = true
-                    }
+                }
+                if value > 0 {
+                    offset = value
                     if refreshed == false && value > SCREEN_SIZE.height * 0.15 {
                         generator.notificationOccurred(.success)
                         refreshed = true
@@ -157,11 +155,11 @@ struct SavingsListView: View {
                             }
                         }
                     }
-                } else {
-                    withAnimation(.linear(duration: 1)) {
-                        offset = false
+                } else  {
+                    offset = 0
+                    if refreshed == true {
+                        refreshed = false
                     }
-                    refreshed = false
                 }
             }
             .sheet(isPresented: $hasError, onDismiss: {
