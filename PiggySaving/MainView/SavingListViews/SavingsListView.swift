@@ -47,7 +47,7 @@ struct SavingsListView: View {
             ScrollView {
                 ZStack {
                     LazyVStack {
-                        SavingListOverviewView(sumSaving: savingDataStore.totalSaingActual, totalSaving: savingDataStore.totalSaving, totalCost: savingDataStore.totalCost)
+                        SavingListOverviewView(sumSaving: savingDataStore.totalSavingActual, totalSaving: savingDataStore.totalSaving, totalCost: savingDataStore.totalCost)
                         if configs.configs.ableToWithdraw {
                             HStack {
                                 Picker("", selection: $displayOption) {
@@ -109,6 +109,7 @@ struct SavingsListView: View {
                                     self.getAllCostFromServer(sortDesc: true)
                                 } else {
                                     self.savingDataStore.fetchSavingFromPersistent()
+                                    self.savingDataStore.fetchCostFromPersistent()
                                 }
                                 self.states.savingDataChanged = false
                             }

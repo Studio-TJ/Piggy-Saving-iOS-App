@@ -12,11 +12,12 @@ struct CostEditView: View {
     @EnvironmentObject var popupHandler: PopupHandler
     @EnvironmentObject var states: States
     @State private var errorWrapper: ErrorWrapper?
+    @Environment(\.managedObjectContext) var context
     
     var edit: Bool = false
     var sequence: Int = 0
     
-    @State var date = Date()
+    @State var date = Calendar.current.startOfDay(for: Date())
     @State var amount: Double = 0.0
     @State var description: String = ""
     @FocusState private var amountFocus: Bool
@@ -132,15 +133,35 @@ struct CostEditView: View {
                 }
             }
         } else {
-//            let fetchRequest = SavingData.fetchRequest()
-//
-//            fetchRequest.predicate = NSPredicate(format: "date == %@ AND type == 'saving'", saving.dateFormatted as CVarArg)
-//            let storedSaving = try? context.fetch(fetchRequest).first
-//            if let storedSaving = storedSaving {
-//                storedSaving.saved = true
-//                try? context.save()
-//            }
-//            states.savingDataChanged = true
+            let fetchRequest = SavingData.fetchRequest()
+            if edit {
+                fetchRequest.predicate = NSPredicate(format: "date == %@ AND sequence == %@", date as CVarArg, NSNumber(value: sequence))
+                
+                let storedCost = try? context.fetch(fetchRequest).first
+                if let storedCost = storedCost {
+                    if delete {
+                        context.delete(storedCost)
+                    } else {
+                        storedCost.amount = -amount
+                        storedCost.comment = description
+                    }
+                }
+            } else {
+                fetchRequest.predicate = NSPredicate(format: "date == %@", date as CVarArg)
+                let storedCosts = try? context.fetch(fetchRequest)
+                var sequence = 1
+                if let storedCosts = storedCosts {
+                    sequence = storedCosts.count
+                }
+                let newCost = SavingData(context: context)
+                newCost.date = date
+                newCost.amount = -amount
+                newCost.comment = description
+                newCost.sequence = Int32(sequence)
+                newCost.type = "cost"
+            }
+            try? context.save()
+            states.savingDataChanged = true
         }
     }
 }

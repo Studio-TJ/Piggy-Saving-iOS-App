@@ -245,7 +245,7 @@ class SavingDataStore: ObservableObject {
         return total
     }
     
-    var totalSaingActual: Double {
+    var totalSavingActual: Double {
         var total: Double = 0
         savings.forEach { saving in
             if saving.isSaved {
@@ -273,6 +273,18 @@ class SavingDataStore: ObservableObject {
             savings.forEach { saving in
                 let newSaving = Saving(savingData: saving)
                 self.savings.append(newSaving)
+            }
+        }
+    }
+    
+    public func fetchCostFromPersistent() -> Void {
+        self.costs = []
+        let context = self.container.viewContext
+        let costs = fetchCosts(context: context)
+        if let costs = costs {
+            costs.forEach { cost in
+                let newCost = Saving(savingData: cost)
+                self.costs.append(newCost)
             }
         }
     }
