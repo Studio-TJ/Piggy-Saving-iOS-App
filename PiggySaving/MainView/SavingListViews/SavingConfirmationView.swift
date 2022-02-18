@@ -14,7 +14,7 @@ struct SavingConfirmationView: View {
     @Environment(\.managedObjectContext) var context
     
     @State private var errorWrapper: ErrorWrapper?
-    let saving: Saving
+    @State var saving: Saving
     
     var body: some View {
         VStack {
@@ -46,7 +46,7 @@ struct SavingConfirmationView: View {
                 )
                 Spacer()
                 Button("Roll Aagin") {
-                    print("roll again")
+                    reRoll()
                 }
                 .background(
                     RoundedRectangle(cornerRadius: 10)
@@ -75,6 +75,22 @@ struct SavingConfirmationView: View {
             popupHandler.popuped = false
         }
         popupHandler.view = AnyView(EmptyView())
+    }
+    
+    private func reRoll() {
+        if configs.configs.usingExternalURL {
+            Task {
+                do {
+                    let newResult = try await ServerApi.roll(externalURL: configs.configs.externalURL ?? "", date: saving.date)
+                    if let newResult = newResult {
+                        saving.amount = newResult
+                        states.savingDataChanged = true
+                    }
+                }
+            }
+        } else {
+            print("Local reroll")
+        }
     }
     
     private func saveNow() {

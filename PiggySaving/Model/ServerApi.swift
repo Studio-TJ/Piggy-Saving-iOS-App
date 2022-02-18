@@ -34,45 +34,6 @@ class ServerApi {
         }
     }
     
-    static func getSum(externalURL: String) async throws -> Sum {
-        try await withCheckedThrowingContinuation { continuation in
-            getSum(externalURL: externalURL) { result in
-                switch result {
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                case .success(let sum):
-                    continuation.resume(returning: sum)
-                }
-            }
-        }
-    }
-    
-    private static func getSum(externalURL: String, completion: @escaping (Result<Sum, Error>) -> Void) {
-        guard let url = URL(string: externalURL + "/sum") else {
-            completion(.failure(ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL)))
-            return
-        }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            do {
-                if let data = data {
-                    let sum = try JSONDecoder().decode(Sum.self, from: data)
-                    DispatchQueue.main.async {
-                        completion(.success(sum))
-                    }
-                } else {
-                    completion(.failure(ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL)))
-                }
-            } catch {
-                completion(.failure(error))
-            }
-        }
-        .resume()
-    }
-    
     static func getAllSaving(externalURL: String) async throws -> [Saving] {
         try await withCheckedThrowingContinuation { continuation in
             getAllSaving(externalURL: externalURL) { result in
@@ -275,6 +236,58 @@ class ServerApi {
                 completion(.failure(error))
             } else {
                 completion(.success(true))
+            }
+        }.resume()
+    }
+    
+    static func roll(externalURL: String, date: String) async throws -> Double? {
+        try await withCheckedThrowingContinuation { continuation in
+            roll(externalURL: externalURL, date: date) { result in
+                switch result {
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                case .success(let retval):
+                    continuation.resume(returning: retval)
+                }
+            }
+        }
+    }
+    
+    private static func roll(externalURL: String, date: String, completion: @escaping (Result<Double?, Error>) -> Void) {
+        let json: [String: Any] = [
+            "date": date
+        ]
+        
+        guard let url = URL(string: externalURL + "/roll") else {
+            completion(.failure(ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL)))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: json)
+        } catch {
+            print(error.localizedDescription)
+        }
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        // TODO: error handle with response and error
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+            }
+            do {
+                if let data = data {
+                    let result = try JSONDecoder().decode([String: Double].self, from: data)
+                    DispatchQueue.main.async {
+                        completion(.success(result["newNum"]))
+                    }
+                } else {
+                    completion(.failure(ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL)))
+                }
+            } catch {
+                completion(.failure(error))
             }
         }.resume()
     }

@@ -193,16 +193,8 @@ class SavingDataStore: ObservableObject {
     @Published var costs: [Saving]
     let container = NSPersistentContainer(name: "PiggySavingData")
     
-    var savingsByYearMonth: [[[Saving]]]
-    var costsByYearMonth: [[[Saving]]]
-    
-//    var savingsByYearMonth: [[[Saving]]] {
-//        return groupSavingByYearMonth(savings: self.savings)
-//    }
-    
-//    var costsByYearMonth: [[[Saving]]] {
-//        return groupSavingByYearMonth(savings: self.costs)
-//    }
+    @Published var savingsByYearMonth: [[[Saving]]]
+    @Published var costsByYearMonth: [[[Saving]]]
     
     init() {
         self.savings = []

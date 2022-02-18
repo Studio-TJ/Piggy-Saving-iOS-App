@@ -247,10 +247,10 @@
 				ABDBC09027B41C2200E49082 /* SavingListOverviewView.swift */,
 				ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */,
 				ABDBC09427B45CD500E49082 /* SavingListMonthView.swift */,
+				AB67F4AB27BD9294002348BE /* SavingConfirmationView.swift */,
 				ABE4E83B27BAC029007ECBD3 /* CostListMonthView.swift */,
 				ABD3336727AD8BA700A72D23 /* CostListItemView.swift */,
 				ABF1710F27BC188800CEA215 /* CostEditView.swift */,
-				AB67F4AB27BD9294002348BE /* SavingConfirmationView.swift */,
 				ABDBC09827B463E300E49082 /* SavingListYearView.swift */,
 				ABE4E83927BA9848007ECBD3 /* ProgressBarView.swift */,
 			);
