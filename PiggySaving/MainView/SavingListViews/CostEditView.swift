@@ -47,18 +47,6 @@ struct CostEditView: View {
                 Text(CURRENCY_SYMBOL)
                     .font(Fonts.CAPTION)
                     .frame(alignment: .bottom)
-                Button {
-                    amountFocus = false
-                } label: {
-                    Text("Done")
-                        .frame(minWidth: 80, minHeight: 25)
-                        .background {
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(Color("AccentColor"))
-                        }
-                        .foregroundColor(Color("FrontColor"))
-                }
-                .padding(.trailing, 20)
             }
             .padding(.leading, 20)
             HStack {
@@ -113,6 +101,11 @@ struct CostEditView: View {
                 .frame(minWidth: SCREEN_SIZE.width * 0.9, minHeight: 250)
                 .shadow(color: Color("AccentColor").opacity(0.2), radius: 16)
         )
+        .onTapGesture {
+            if amountFocus {
+                amountFocus = false
+            }
+        }
     }
     
     private func dismiss() {
