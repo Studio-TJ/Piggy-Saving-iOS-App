@@ -11,6 +11,7 @@ import CoreData
 struct SettingsView: View {
     
     @EnvironmentObject var configs: ConfigStore
+    @EnvironmentObject var states: States
     @State private var resetAppConfirmation: Bool = false
     @State private var toReset: Bool = false
     
@@ -48,6 +49,7 @@ struct SettingsView: View {
                 }
                 .onDisappear {
                     if toReset {
+                        states.mainViewSelection = MainTabItem.SAVINTS_LIST
                         configs.resetConfig()
                     }
                 }

@@ -22,6 +22,7 @@ var CURRENCY_SYMBOL: String {
 
 class States: ObservableObject {
     @Published var savingDataChanged: Bool = false
+    @Published var mainViewSelection = MainTabItem.SAVINTS_LIST
 }
 
 func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {

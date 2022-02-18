@@ -22,7 +22,7 @@ struct SavingsListView: View {
     
     @EnvironmentObject var configs: ConfigStore
     @ObservedObject var savingDataStore: SavingDataStore
-    @StateObject var states: States = States()
+    @EnvironmentObject var states: States
     @State private var errorWrapper: [ErrorWrapper] = []
     @State var displayOption = "Saving"
     @State var hasError = false
@@ -85,7 +85,6 @@ struct SavingsListView: View {
                             if self.displayOption == "Saving" {
                                 ForEach(savingDataStore.savingsByYearMonth, id: \.self) { savingsByYear in
                                     SavingListYearView(savings: savingsByYear, type: "Saving", monthShowList: $savingMonthShowList)
-                                        .environmentObject(states)
                                 }
                                 .listRowSeparator(.hidden)
                                 .listRowInsets(EdgeInsets())
@@ -93,7 +92,6 @@ struct SavingsListView: View {
                             } else {
                                 ForEach(savingDataStore.costsByYearMonth, id: \.self) { costByYear in
                                     SavingListYearView(savings: costByYear, type: "Cost", monthShowList: $costMonthShowList)
-                                        .environmentObject(states)
                                 }
                                 .listRowSeparator(.hidden)
                                 .listRowInsets(EdgeInsets())
