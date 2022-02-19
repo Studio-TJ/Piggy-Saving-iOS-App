@@ -36,259 +36,204 @@ class ServerApi {
     
     static func getAllSaving(externalURL: String) async throws -> [Saving] {
         try await withCheckedThrowingContinuation { continuation in
-            getAllSaving(externalURL: externalURL) { result in
-                switch result {
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                case .success(let savings):
-                    continuation.resume(returning: savings)
-                }
-            }
-        }
-    }
-    
-    private static func getAllSaving(externalURL: String, completion: @escaping (Result<[Saving], Error>) -> Void) {
-        let json: [String: Bool] = [
-            "desc": true,
-            "withdraw": false
-        ]
-        
-        guard let url = URL(string: externalURL + "/all") else {
-            completion(.failure(ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL)))
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: json)
-        } catch {
-            print(error.localizedDescription)
-        }
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
+            let json: [String: Bool] = [
+                "desc": true,
+                "withdraw": false
+            ]
+            
+            guard let url = URL(string: externalURL + "/all") else {
+                continuation.resume(throwing: ServerApiError(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL))
                 return
             }
+            
+            var request = URLRequest(url: url)
             do {
-                var savings: [Saving] = []
-                if let data = data {
-                    let allSavings = try JSONDecoder().decode([String: Saving].self, from: data)
-                    for allSaving in allSavings {
-                        savings.append(allSaving.value)
-                    }
-                    DispatchQueue.main.async {
-                        completion(.success(savings))
-                    }
-                } else {
-                    completion(.failure(ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL)))
-                }
+                request.httpBody = try JSONSerialization.data(withJSONObject: json)
             } catch {
-                completion(.failure(error))
+                print(error.localizedDescription)
             }
-        }.resume()
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+                do {
+                    var savings: [Saving] = []
+                    if let data = data {
+                        let allSavings = try JSONDecoder().decode([String: Saving].self, from: data)
+                        for allSaving in allSavings {
+                            savings.append(allSaving.value)
+                        }
+                        continuation.resume(returning: savings)
+                    } else {
+                        continuation.resume(throwing: ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL))
+                        return
+                    }
+                } catch {
+                    continuation.resume(throwing: error)
+                    return
+                }
+            }.resume()
+        }
     }
     
     static func getAllCost(externalURL: String) async throws -> [Saving] {
         try await withCheckedThrowingContinuation { continuation in
-            getAllCost(externalURL: externalURL) { result in
-                switch result {
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                case .success(let savings):
-                    continuation.resume(returning: savings)
-                }
-            }
-        }
-    }
-    
-    // TODO: modify backend with better handling, more universal
-    private static func getAllCost(externalURL: String, completion: @escaping (Result<[Saving], Error>) -> Void) {
-        let json: [String: Bool] = [
-            "desc": true,
-            "withdraw": true
-        ]
-        
-        guard let url = URL(string: externalURL + "/all") else {
-            completion(.failure(ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL)))
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: json)
-        } catch {
-            print(error.localizedDescription)
-        }
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
+            let json: [String: Bool] = [
+                "desc": true,
+                "withdraw": true
+            ]
+            
+            guard let url = URL(string: externalURL + "/all") else {
+                continuation.resume(throwing: ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL))
                 return
             }
+            
+            var request = URLRequest(url: url)
             do {
-                var costs: [Saving] = []
-                if let data = data {
-                    let allCosts = try JSONDecoder().decode([String: Saving].self, from: data)
-                    for allCost in allCosts {
-                        costs.append(allCost.value)
-                    }
-                    DispatchQueue.main.async {
-                        completion(.success(costs))
-                    }
-                } else {
-                    completion(.failure(ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL)))
-                }
+                request.httpBody = try JSONSerialization.data(withJSONObject: json)
             } catch {
-                completion(.failure(error))
+                print(error.localizedDescription)
             }
-        }.resume()
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+                do {
+                    var costs: [Saving] = []
+                    if let data = data {
+                        let allCosts = try JSONDecoder().decode([String: Saving].self, from: data)
+                        for allCost in allCosts {
+                            costs.append(allCost.value)
+                        }
+                        continuation.resume(returning: costs)
+                    } else {
+                        continuation.resume(throwing: ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL))
+                        return
+                    }
+                } catch {
+                    continuation.resume(throwing: error)
+                    return
+                }
+            }.resume()
+        }
     }
-    
+
     @discardableResult
     static func save(externalURL: String, date: String, isSaved: Bool) async throws -> Bool {
         try await withCheckedThrowingContinuation { continuation in
-            save(externalURL: externalURL, date: date, isSaved: isSaved) { result in
-                switch result {
-                case .failure(let error):
+            let json: [String: Any] = [
+                "date": date,
+                "saved": isSaved
+            ]
+            
+            guard let url = URL(string: externalURL + "/save") else {
+                continuation.resume(throwing: ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL))
+                return
+            }
+            
+            var request = URLRequest(url: url)
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: json)
+            } catch {
+                print(error.localizedDescription)
+            }
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            // TODO: error handle with response and error
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
                     continuation.resume(throwing: error)
-                case .success(let retval):
-                    continuation.resume(returning: retval)
+                } else {
+                    continuation.resume(returning: true)
                 }
-            }
+            }.resume()
         }
-    }
-    
-    private static func save(externalURL: String, date: String, isSaved: Bool, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let json: [String: Any] = [
-            "date": date,
-            "saved": isSaved
-        ]
-        
-        guard let url = URL(string: externalURL + "/save") else {
-            completion(.failure(ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL)))
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: json)
-        } catch {
-            print(error.localizedDescription)
-        }
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        // TODO: error handle with response and error
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(true))
-            }
-        }.resume()
     }
     
     @discardableResult
     static func withdraw(externalURL: String, date: String, amount: Double, description: String, sequence: Int, delete: Bool) async throws -> Bool {
         try await withCheckedThrowingContinuation { continuation in
-            withdraw(externalURL: externalURL, date: date, amount: amount, description: description, sequence: sequence, delete: delete ) { result in
-                switch result {
-                case .failure(let error):
+            let json: [String: Any] = [
+                "date": date,
+                "amount": amount,
+                "description": description,
+                "delete": delete,
+                "sequence": sequence
+            ]
+            
+            guard let url = URL(string: externalURL + "/withdraw") else {
+                continuation.resume(throwing: ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL))
+                return
+            }
+            
+            var request = URLRequest(url: url)
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: json)
+            } catch {
+                print(error.localizedDescription)
+            }
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            // TODO: error handle with response and error
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
                     continuation.resume(throwing: error)
-                case .success(let retval):
-                    continuation.resume(returning: retval)
+                } else {
+                    continuation.resume(returning: true)
                 }
-            }
+            }.resume()
         }
-    }
-    
-    private static func withdraw(externalURL: String, date: String, amount: Double, description: String, sequence: Int, delete: Bool, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let json: [String: Any] = [
-            "date": date,
-            "amount": amount,
-            "description": description,
-            "delete": delete,
-            "sequence": sequence
-        ]
-        
-        guard let url = URL(string: externalURL + "/withdraw") else {
-            completion(.failure(ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL)))
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: json)
-        } catch {
-            print(error.localizedDescription)
-        }
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        // TODO: error handle with response and error
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(true))
-            }
-        }.resume()
     }
     
     static func roll(externalURL: String, date: String) async throws -> Double? {
         try await withCheckedThrowingContinuation { continuation in
-            roll(externalURL: externalURL, date: date) { result in
-                switch result {
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                case .success(let retval):
-                    continuation.resume(returning: retval)
-                }
+            let json: [String: Any] = [
+                "date": date
+            ]
+            
+            guard let url = URL(string: externalURL + "/roll") else {
+                continuation.resume(throwing: ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL))
+                return
             }
-        }
-    }
-    
-    private static func roll(externalURL: String, date: String, completion: @escaping (Result<Double?, Error>) -> Void) {
-        let json: [String: Any] = [
-            "date": date
-        ]
-        
-        guard let url = URL(string: externalURL + "/roll") else {
-            completion(.failure(ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL)))
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: json)
-        } catch {
-            print(error.localizedDescription)
-        }
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        // TODO: error handle with response and error
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-            }
+            
+            var request = URLRequest(url: url)
             do {
-                if let data = data {
-                    let result = try JSONDecoder().decode([String: Double].self, from: data)
-                    DispatchQueue.main.async {
-                        completion(.success(result["newNum"]))
-                    }
-                } else {
-                    completion(.failure(ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL)))
-                }
+                request.httpBody = try JSONSerialization.data(withJSONObject: json)
             } catch {
-                completion(.failure(error))
+                print(error.localizedDescription)
             }
-        }.resume()
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            // TODO: error handle with response and error
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+                do {
+                    if let data = data {
+                        let result = try JSONDecoder().decode([String: Double].self, from: data)
+                        continuation.resume(returning: result["newNum"])
+                    } else {
+                        continuation.resume(throwing: ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL))
+                        return
+                    }
+                } catch {
+                    continuation.resume(throwing: error)
+                    return
+                }
+            }.resume()
+        }
     }
 }
