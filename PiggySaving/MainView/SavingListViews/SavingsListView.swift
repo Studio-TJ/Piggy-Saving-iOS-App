@@ -146,11 +146,9 @@ struct SavingsListView: View {
                     if refreshed == false && value > SCREEN_SIZE.height * 0.15 {
                         generator.notificationOccurred(.success)
                         refreshed = true
-                        DispatchQueue.main.async {
-                            if configs.configs.usingExternalURL {
-                                self.getAllSavingFromServer(sortDesc: true)
-                                self.getAllCostFromServer(sortDesc: true)
-                            }
+                        if configs.configs.usingExternalURL {
+                            self.getAllSavingFromServer(sortDesc: true)
+                            self.getAllCostFromServer(sortDesc: true)
                         }
                     }
                 } else  {

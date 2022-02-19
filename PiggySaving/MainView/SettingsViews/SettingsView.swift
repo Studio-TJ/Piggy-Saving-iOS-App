@@ -12,50 +12,59 @@ struct SettingsView: View {
     
     @EnvironmentObject var configs: ConfigStore
     @EnvironmentObject var states: States
+    @EnvironmentObject var popupHandler: PopupHandler
     @State private var resetAppConfirmation: Bool = false
     @State private var toReset: Bool = false
     
     var body: some View {
-        NavigationView {
-            List {
-                SettingsRunningModeView(usingExternalURL: configs.configs.usingExternalURL, externalURL: configs.configs.externalURL)
-                SettingsViewOperationView()
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        resetAppConfirmation = true
-                    },
-                           label: {
-                        Text("Reset App!")
-                            .foregroundColor(Color.red)
-                    })
-                    Spacer()
+        ZStack {
+            NavigationView {
+                List {
+                    SettingsRunningModeView()
+                    SettingsViewOperationView()
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            resetAppConfirmation = true
+                        },
+                               label: {
+                            Text("Reset App!")
+                                .foregroundColor(Color.red)
+                        })
+                        Spacer()
+                    }
+                    SettingsViewFooterInfoView()
                 }
-                SettingsViewFooterInfoView()
-            }
-            .navigationTitle("")
-            .navigationBarHidden(true)
-            .padding(.top, 20)
-            .onChange(of: configs.configs.ableToWithdraw) { value in
-                configs.finishInitialConfiguration()
-            }
-            .sheet(isPresented: $resetAppConfirmation) {
-            } content: {
-                WarningConfirmationView(description: "You are about to reset the App. This action will erase all data stored on this devices and it is not undoable.") {
-                    self.resetAppConfirmation = false
-                } confirmAction: {
-                    self.toReset = true
-                    self.resetAppConfirmation = false
+                .navigationTitle("")
+                .navigationBarHidden(true)
+                .padding(.top, 20)
+                .onChange(of: configs.configs.ableToWithdraw) { value in
+                    configs.finishInitialConfiguration()
                 }
-                .onDisappear {
-                    if toReset {
-                        states.mainViewSelection = MainTabItem.SAVINTS_LIST
-                        configs.resetConfig()
+                .sheet(isPresented: $resetAppConfirmation) {
+                } content: {
+                    WarningConfirmationView(description: "You are about to reset the App. This action will erase all data stored on this devices and it is not undoable.") {
+                        self.resetAppConfirmation = false
+                    } confirmAction: {
+                        self.toReset = true
+                        self.resetAppConfirmation = false
+                    }
+                    .onDisappear {
+                        if toReset {
+                            states.mainViewSelection = MainTabItem.SAVINTS_LIST
+                            configs.resetConfig()
+                        }
                     }
                 }
             }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .blur(radius: popupHandler.popuped ? 5 : 0)
+            .disabled(popupHandler.popuped)
+            
+            if popupHandler.popuped {
+                popupHandler.view.transition(.opacity)
+            }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
