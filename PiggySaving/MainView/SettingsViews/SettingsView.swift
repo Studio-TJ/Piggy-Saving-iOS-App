@@ -22,6 +22,7 @@ struct SettingsView: View {
                 List {
                     SettingsRunningModeView()
                     SettingsViewOperationView()
+                    SettingsViewSystemView()
                     HStack {
                         Spacer()
                         Button(action: {
@@ -60,7 +61,7 @@ struct SettingsView: View {
             .navigationViewStyle(StackNavigationViewStyle())
             .blur(radius: popupHandler.popuped ? 5 : 0)
             .disabled(popupHandler.popuped)
-            
+
             if popupHandler.popuped {
                 popupHandler.view.transition(.opacity)
             }

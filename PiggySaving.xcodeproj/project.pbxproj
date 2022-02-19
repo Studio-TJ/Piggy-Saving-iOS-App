@@ -39,6 +39,8 @@
 		ABDBC09527B45CD500E49082 /* SavingListMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDBC09427B45CD500E49082 /* SavingListMonthView.swift */; };
 		ABDBC09927B463E300E49082 /* SavingListYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDBC09827B463E300E49082 /* SavingListYearView.swift */; };
 		ABE25B4527C15C7E00EC1BAC /* ModeChangeConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE25B4427C15C7E00EC1BAC /* ModeChangeConfirmationView.swift */; };
+		ABE25B4827C19B8B00EC1BAC /* SettingsViewSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE25B4727C19B8B00EC1BAC /* SettingsViewSystemView.swift */; };
+		ABE25B4A27C19C2E00EC1BAC /* SettingsViewLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE25B4927C19C2E00EC1BAC /* SettingsViewLanguageView.swift */; };
 		ABE4E83A27BA9848007ECBD3 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE4E83927BA9848007ECBD3 /* ProgressBarView.swift */; };
 		ABE4E83C27BAC029007ECBD3 /* CostListMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE4E83B27BAC029007ECBD3 /* CostListMonthView.swift */; };
 		ABE8886527AFEE9A006B3246 /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8886427AFEE9A006B3246 /* WelcomePage.swift */; };
@@ -89,6 +91,8 @@
 		ABDBC09427B45CD500E49082 /* SavingListMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListMonthView.swift; sourceTree = "<group>"; };
 		ABDBC09827B463E300E49082 /* SavingListYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListYearView.swift; sourceTree = "<group>"; };
 		ABE25B4427C15C7E00EC1BAC /* ModeChangeConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeChangeConfirmationView.swift; sourceTree = "<group>"; };
+		ABE25B4727C19B8B00EC1BAC /* SettingsViewSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewSystemView.swift; sourceTree = "<group>"; };
+		ABE25B4927C19C2E00EC1BAC /* SettingsViewLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewLanguageView.swift; sourceTree = "<group>"; };
 		ABE4E83927BA9848007ECBD3 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		ABE4E83B27BAC029007ECBD3 /* CostListMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostListMonthView.swift; sourceTree = "<group>"; };
 		ABE8886427AFEE9A006B3246 /* WelcomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePage.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				AB49C44F27B84E26001558C3 /* SettingsRunningModeView.swift */,
 				ABE25B4427C15C7E00EC1BAC /* ModeChangeConfirmationView.swift */,
 				AB49C45527B8530A001558C3 /* SettingsViewOperationView */,
+				ABE25B4627C19B5400EC1BAC /* SettingsViewSystemView */,
 			);
 			path = SettingsViews;
 			sourceTree = "<group>";
@@ -258,6 +263,15 @@
 				ABE4E83927BA9848007ECBD3 /* ProgressBarView.swift */,
 			);
 			path = SavingListViews;
+			sourceTree = "<group>";
+		};
+		ABE25B4627C19B5400EC1BAC /* SettingsViewSystemView */ = {
+			isa = PBXGroup;
+			children = (
+				ABE25B4727C19B8B00EC1BAC /* SettingsViewSystemView.swift */,
+				ABE25B4927C19C2E00EC1BAC /* SettingsViewLanguageView.swift */,
+			);
+			path = SettingsViewSystemView;
 			sourceTree = "<group>";
 		};
 		ABE8887027B06223006B3246 /* GoalSettingViews */ = {
@@ -369,9 +383,11 @@
 				AB1530E827A3E5F1006FD2FF /* Data.swift in Sources */,
 				AB1530E427A33A54006FD2FF /* MainView.swift in Sources */,
 				ABE8886B27B01693006B3246 /* NotificationView.swift in Sources */,
+				ABE25B4827C19B8B00EC1BAC /* SettingsViewSystemView.swift in Sources */,
 				ABCCCBFB27A8186D00ECAE6F /* SavingListItemView.swift in Sources */,
 				AB49C45227B84EEB001558C3 /* SettingsViewFooterInfoView.swift in Sources */,
 				ABE8886927B01681006B3246 /* DataStorageView.swift in Sources */,
+				ABE25B4A27C19C2E00EC1BAC /* SettingsViewLanguageView.swift in Sources */,
 				AB49C45927B8541C001558C3 /* SettingsViewOperationSetMinimalUnitView.swift in Sources */,
 				ABE8886727B01664006B3246 /* GoalSettingView.swift in Sources */,
 				AB49C45427B84F7D001558C3 /* SettingsViewOperationView.swift in Sources */,
