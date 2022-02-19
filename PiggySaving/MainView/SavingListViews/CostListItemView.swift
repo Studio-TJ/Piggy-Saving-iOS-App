@@ -11,6 +11,7 @@ struct CostListItemView: View {
     let cost: Saving
     
     @State private var offset = CGSize.zero
+    @State private var notified = false
     
     @EnvironmentObject var popupHandler: PopupHandler
     @EnvironmentObject var states: States
@@ -47,12 +48,13 @@ struct CostListItemView: View {
                         if gesture.translation.width < 0 {
                             offset = gesture.translation
                         }
-                        if gesture.translation.width < -70 {
+                        if !notified && gesture.translation.width < -70 {
                             UINotificationFeedbackGenerator().notificationOccurred(.success)
+                            notified = true
                         }
-                        print(offset.width)
                     }
                     .onEnded { gesture in
+                        notified = false
                         if gesture.translation.width < -65 {
                             popupHandler.view = AnyView(CostEditView(edit: true,
                                                                      sequence: cost.sequence,
