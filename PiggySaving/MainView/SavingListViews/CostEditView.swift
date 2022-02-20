@@ -58,7 +58,6 @@ struct CostEditView: View {
             }
             .padding(.leading, 20)
             HStack(alignment: .center) {
-                Spacer()
                 Button("Confirm") {
                     withdraw(delete: false)
                     dismiss()
@@ -89,16 +88,17 @@ struct CostEditView: View {
                             .frame(width: 80, height: 45)
                     )
                 }
-                Spacer()
             }
+            .padding(.leading, 40)
+            .padding(.trailing, 40)
             .padding(.top, 20)
-            Spacer()
+            .padding(.bottom, 30)
         }
-        .frame(width: SCREEN_SIZE.width * 0.9, height: SCREEN_SIZE.height * 0.3)
+        .frame(width: SCREEN_SIZE.width * 0.9)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color("BackgroundColor"))
-                .frame(minWidth: SCREEN_SIZE.width * 0.9, minHeight: 250)
+                .frame(minWidth: SCREEN_SIZE.width * 0.9)
                 .shadow(color: Color("AccentColor").opacity(0.2), radius: 16)
         )
         .onTapGesture {

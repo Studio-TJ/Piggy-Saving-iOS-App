@@ -34,6 +34,7 @@ class ConfigStore: ObservableObject {
             self.configs.ableToWithdraw = false
             self.configs.endDate = Date()
             self.configs.minimalUnit = 0.0
+            self.configs.numberOfDays = 0
             try? context.save()
         }
     }
@@ -42,6 +43,7 @@ class ConfigStore: ObservableObject {
         self.init()
         self.configs.minimalUnit = 0.2
         self.configs.endDate = Calendar.current.date(byAdding: .month, value: 1, to: Date())!
+        self.configs.numberOfDays = 30
     }
     
     public func finishInitialConfiguration() {

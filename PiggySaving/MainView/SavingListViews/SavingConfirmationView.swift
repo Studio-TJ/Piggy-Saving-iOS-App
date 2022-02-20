@@ -23,17 +23,15 @@ struct SavingConfirmationView: View {
                 Image(systemName: "x.square")
             }
             .padding(.trailing, 10)
+            .padding(.top, 10)
             .onTapGesture {
                 dismiss()
             }
             Text(saving.dateFormatted, style: .date)
-                .padding(.top, 10)
             Text("Today to Save")
                 .font(Fonts.TITLE_SEMIBOLD)
-                .padding(.top, 10)
             Text(CURRENCY_SYMBOL + String(format: "%.2f", saving.amount))
                 .font(Fonts.TITLE_SEMIBOLD)
-            Spacer()
             HStack {
                 Button("Save Now"){
                     saveNow()
@@ -55,16 +53,15 @@ struct SavingConfirmationView: View {
                 )
             }
             .padding(.top, 20)
-            .padding(.bottom, 20)
+            .padding(.bottom, 40)
             .padding(.trailing, 50)
             .padding(.leading, 50)
-            Spacer()
         }
-        .frame(width: SCREEN_SIZE.width * 0.9, height: SCREEN_SIZE.height * 0.3)
+        .frame(width: SCREEN_SIZE.width * 0.9)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color("BackgroundColor"))
-                .frame(minWidth: SCREEN_SIZE.width * 0.9, minHeight: 250)
+                .frame(minWidth: SCREEN_SIZE.width * 0.9)
                 .shadow(color: Color("AccentColor").opacity(0.2), radius: 16)
         )
 
