@@ -13,11 +13,14 @@ struct ModeChangeConfirmationView: View {
     @Environment(\.isPreview) var preview
     
     @EnvironmentObject var popupHandler: PopupHandler
+    @EnvironmentObject var configStore: ConfigStore
     
     let description: String
     
     @Binding var selection: RunningMode
     @State private var text: String = ""
+    @State private var errorWrapper: [ErrorWrapper] = []
+    @State private var hasError = false
     
     var configs: Configs {
         if preview {
@@ -51,12 +54,11 @@ struct ModeChangeConfirmationView: View {
                         if selection == .SELF_HOSTED {
                             configs.usingExternalURL = true
                             configs.externalURL = text.lowercased()
+                            try? moc.save()
+                            dismiss()
                         } else {
-                            configs.usingExternalURL = false
-                            configs.externalURL = nil
+                            self.updateAndSwitchToLocalConfig()
                         }
-                        try? moc.save()
-                        dismiss()
                     } label: {
                         Text("Confirm")
                             .foregroundColor(.red)
@@ -81,11 +83,40 @@ struct ModeChangeConfirmationView: View {
                 .frame(width: SCREEN_SIZE.width * 0.9)
                 .shadow(color: Color("AccentColor").opacity(0.2), radius: 16)
         )
+        .onChange(of: self.errorWrapper.count) { value in
+            self.hasError = value > 0 ? true : false
+        }
+        .sheet(isPresented: $hasError, onDismiss: {
+            self.errorWrapper.removeAll()
+            self.hasError = false
+        }) {
+            ErrorView(errorWrapper: errorWrapper)
+        }
     }
     
     private func dismiss() {
         popupHandler.popuped = false
         popupHandler.view = AnyView(EmptyView())
+    }
+    
+    private func updateAndSwitchToLocalConfig() {
+        Task {
+            do {
+                let configRemote = try await ServerApi.retrieveConfig(externalURL: configs.externalURL ?? "")
+                if let configRemote = configRemote {
+                    configs.minimalUnit = configRemote.minimalUnit
+                    configs.endDate = configRemote.endDateFormatted
+                    configs.numberOfDays = Int32(configRemote.numberOfDays)
+                }
+                
+                configs.usingExternalURL = false
+                configs.externalURL = nil
+                try? moc.save()
+                dismiss()
+            } catch {
+                self.errorWrapper.append(ErrorWrapper(error: error, guidance: NSLocalizedString("Cannot retrieve config from server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.", comment: "Retrieve config from server error guidance.")))
+            }
+        }
     }
 }
 

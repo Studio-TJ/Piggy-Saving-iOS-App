@@ -8,6 +8,18 @@
 import Foundation
 import CoreData
 
+struct ConfigServer: Codable {
+    var minimalUnit: Double
+    var endDate: String
+    var numberOfDays: Int
+    
+    var endDateFormatted: Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: self.endDate) ?? Date()
+    }
+}
+
 class ConfigStore: ObservableObject {
     @Published var configs: Configs
     let container = NSPersistentContainer(name: "PiggySavingConfig")
@@ -51,6 +63,20 @@ class ConfigStore: ObservableObject {
             try? context.save()
         }
         self.configs = configs
+    }
+    
+    public func updateLocalConfigFromServer() async throws {
+        do {
+            let config = try await ServerApi.retrieveConfig(externalURL: self.configs.externalURL ?? "")
+            if let config = config {
+                self.configs.minimalUnit = config.minimalUnit
+                self.configs.numberOfDays = Int32(config.numberOfDays)
+                self.configs.endDate = config.endDateFormatted
+                try? self.container.viewContext.save()
+            }
+        } catch {
+            throw error
+        }
     }
     
     public func resetConfig() {

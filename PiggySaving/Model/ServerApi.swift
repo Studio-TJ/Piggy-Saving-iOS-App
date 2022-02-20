@@ -236,4 +236,37 @@ class ServerApi {
             }.resume()
         }
     }
+    
+    static func retrieveConfig(externalURL: String) async throws -> ConfigServer? {
+        try await withCheckedThrowingContinuation { continuation in
+           
+            guard let url = URL(string: externalURL + "/retrieveconfig") else {
+                continuation.resume(throwing: ServerApiError.init(errorType: ServerApiError.ErrorType.invalidURL, errorURL: externalURL))
+                return
+            }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            // TODO: error handle with response and error
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+                do {
+                    if let data = data {
+                        let result = try JSONDecoder().decode(ConfigServer.self, from: data)
+                        continuation.resume(returning: result)
+                    } else {
+                        continuation.resume(throwing: ServerApiError(errorType: ServerApiError.ErrorType.serverDataNotRetrieved, errorURL: externalURL))
+                        return
+                    }
+                } catch {
+                    continuation.resume(throwing: error)
+                    return
+                }
+            }.resume()
+        }
+    }
 }

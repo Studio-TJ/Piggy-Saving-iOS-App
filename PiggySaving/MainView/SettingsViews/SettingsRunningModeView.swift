@@ -25,6 +25,7 @@ struct SettingsRunningModeView: View {
     @Environment(\.isPreview) var preview
     
     @EnvironmentObject var popupHandler: PopupHandler
+    @EnvironmentObject var configStore: ConfigStore
 
     @State private var showRunningModeHelper = false
     @State private var modeSelection: RunningMode = .LOCAL
@@ -81,6 +82,7 @@ struct SettingsRunningModeView: View {
                             description: "You are about to switch from self-hosted mode to local mode. This operation will detach your data on this device from your self-hosting server and is irreversible. Later if you want to switch back to self-hosting mode, your data will be overwritten by the data on server.",
                             selection: $modeSelection)
                                                     .environmentObject(popupHandler)
+                                                    .environmentObject(configStore)
                                                     .environment(\.managedObjectContext, moc)
                     )
                     popupHandler.popuped = true
@@ -90,6 +92,7 @@ struct SettingsRunningModeView: View {
                             description: "You are about to switch from local mode to self-hosted mode. This operation will overwrite your local data by the data on your self-hosting server and is irreversible.",
                             selection: $modeSelection)
                                                     .environmentObject(popupHandler)
+                                                    .environmentObject(configStore)
                                                     .environment(\.managedObjectContext, moc)
                     )
                     popupHandler.popuped = true
