@@ -16,8 +16,8 @@ struct ModeChangeConfirmationView: View {
     
     let description: String
     
-    @State private var text: String = ""
     @Binding var selection: RunningMode
+    @State private var text: String = ""
     
     var configs: Configs {
         if preview {
@@ -28,20 +28,23 @@ struct ModeChangeConfirmationView: View {
     }
     
     var body: some View {
-        GeometryReader { geo in
+        VStack {
             VStack {
                 Text(description)
                     .padding(.top, 20)
-                Spacer()
                 if selection == .SELF_HOSTED {
                     Text("Enter your server url here:")
+                        .padding(.top, 10)
                     TextField("https://", text: $text)
                         .padding(.leading, SCREEN_SIZE.width * 0.05)
                         .padding(.trailing, SCREEN_SIZE.width * 0.05)
                         .disableAutocorrection(true)
                         .keyboardType(.URL)
                 }
+            }
+            VStack {
                 Divider()
+                    .padding(.bottom, 5)
                 HStack {
                     Spacer()
                     Button {
@@ -65,17 +68,17 @@ struct ModeChangeConfirmationView: View {
                     }
                     Spacer()
                 }
-                .padding(.bottom, 10)
-                .frame(height: geo.size.height * 0.15)
             }
+            .padding(.bottom, 10)
+            .frame(height: 50)
         }
         .padding(.leading, 20)
         .padding(.trailing, 20)
-        .frame(width: SCREEN_SIZE.width * 0.9, height: SCREEN_SIZE.height * 0.4)
+        .frame(width: SCREEN_SIZE.width * 0.9)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color("BackgroundColor"))
-                .frame(minWidth: SCREEN_SIZE.width * 0.9, minHeight: 250)
+                .frame(width: SCREEN_SIZE.width * 0.9)
                 .shadow(color: Color("AccentColor").opacity(0.2), radius: 16)
         )
     }
