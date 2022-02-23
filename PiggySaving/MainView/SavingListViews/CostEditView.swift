@@ -37,6 +37,7 @@ struct CostEditView: View {
                 .frame(width: SCREEN_SIZE.width * 0.7)
                 .padding(.top, 20)
                 .padding(.leading, 20)
+                .padding(.trailing, 60)
             HStack {
                 Text("Amount")
                 TextField("Amount", value: $amount, format: .number)
@@ -94,11 +95,11 @@ struct CostEditView: View {
             .padding(.top, 20)
             .padding(.bottom, 30)
         }
-        .frame(width: SCREEN_SIZE.width * 0.9)
+        .frame(width: min(SCREEN_SIZE.width * 0.9, 400))
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color("BackgroundColor"))
-                .frame(minWidth: SCREEN_SIZE.width * 0.9)
+                .frame(minWidth: min(SCREEN_SIZE.width * 0.9, 400))
                 .shadow(color: Color("AccentColor").opacity(0.2), radius: 16)
         )
         .onTapGesture {

@@ -76,11 +76,11 @@ struct ModeChangeConfirmationView: View {
         }
         .padding(.leading, 20)
         .padding(.trailing, 20)
-        .frame(width: SCREEN_SIZE.width * 0.9)
+        .frame(width: min(SCREEN_SIZE.width * 0.9, 400))
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color("BackgroundColor"))
-                .frame(width: SCREEN_SIZE.width * 0.9)
+                .frame(width: min(SCREEN_SIZE.width * 0.9, 400))
                 .shadow(color: Color("AccentColor").opacity(0.2), radius: 16)
         )
         .onChange(of: self.errorWrapper.count) { value in

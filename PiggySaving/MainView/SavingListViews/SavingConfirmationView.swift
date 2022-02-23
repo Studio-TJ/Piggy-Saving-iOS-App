@@ -57,11 +57,11 @@ struct SavingConfirmationView: View {
             .padding(.trailing, 50)
             .padding(.leading, 50)
         }
-        .frame(width: SCREEN_SIZE.width * 0.9)
+        .frame(width: min(SCREEN_SIZE.width * 0.9, 400))
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color("BackgroundColor"))
-                .frame(minWidth: SCREEN_SIZE.width * 0.9)
+                .frame(minWidth: min(SCREEN_SIZE.width * 0.9, 400))
                 .shadow(color: Color("AccentColor").opacity(0.2), radius: 16)
         )
 
