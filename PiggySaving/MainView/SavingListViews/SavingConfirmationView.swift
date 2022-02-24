@@ -86,7 +86,7 @@ struct SavingConfirmationView: View {
                 }
             }
         } else {
-            print("Local reroll")
+            localReRoll()
         }
     }
     
@@ -110,6 +110,20 @@ struct SavingConfirmationView: View {
                 try? context.save()
             }
             states.savingDataChanged = true
+        }
+    }
+    
+    private func localReRoll() {
+        let numberOfDays = configs.configs.numberOfDays
+        print(numberOfDays)
+        let fetchRequest = SavingData.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "type == 'saving'")
+        let savings = try? context.fetch(fetchRequest)
+//        var 
+        if let savings = savings {
+            savings.forEach { saving in
+//                if
+            }
         }
     }
 }

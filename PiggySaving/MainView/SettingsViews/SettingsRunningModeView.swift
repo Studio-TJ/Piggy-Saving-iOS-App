@@ -26,6 +26,7 @@ struct SettingsRunningModeView: View {
     
     @EnvironmentObject var popupHandler: PopupHandler
     @EnvironmentObject var configStore: ConfigStore
+    @EnvironmentObject var savingDataStore: SavingDataStore
 
     @State private var showRunningModeHelper = false
     @State private var modeSelection: RunningMode = .LOCAL
@@ -83,6 +84,7 @@ struct SettingsRunningModeView: View {
                             selection: $modeSelection)
                                                     .environmentObject(popupHandler)
                                                     .environmentObject(configStore)
+                                                    .environmentObject(savingDataStore)
                                                     .environment(\.managedObjectContext, moc)
                     )
                     popupHandler.popuped = true

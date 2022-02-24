@@ -14,6 +14,7 @@ struct ModeChangeConfirmationView: View {
     
     @EnvironmentObject var popupHandler: PopupHandler
     @EnvironmentObject var configStore: ConfigStore
+    @EnvironmentObject var savingDataStore: SavingDataStore
     
     let description: String
     
@@ -108,7 +109,7 @@ struct ModeChangeConfirmationView: View {
                     configs.endDate = configRemote.endDateFormatted
                     configs.numberOfDays = Int32(configRemote.numberOfDays)
                 }
-                
+                rollLocal()
                 configs.usingExternalURL = false
                 configs.externalURL = nil
                 try? moc.save()
@@ -117,6 +118,40 @@ struct ModeChangeConfirmationView: View {
                 self.errorWrapper.append(ErrorWrapper(error: error, guidance: NSLocalizedString("Cannot retrieve config from server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.", comment: "Retrieve config from server error guidance.")))
             }
         }
+    }
+    
+    private func rollLocal() {
+        let today = Calendar.current.startOfDay(for: Date())
+        var newSavings: [Saving] = []
+        var savingAmounts: [Double] = []
+        savingDataStore.savings.forEach { saving in
+            if saving.dateFormatted <= today {
+                newSavings.append(saving)
+                savingAmounts.append(saving.amount)
+            }
+        }
+        var dateDifference = 1
+        repeat {
+            let newDate = Calendar.current.date(byAdding: .day, value: dateDifference, to: today)!
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let newDateStr = dateFormatter.string(from: newDate)
+            var amount = Int.random(in: 1..<Int(configs.numberOfDays))
+            var realAmount = Double(amount) * configs.minimalUnit
+            while savingAmounts.contains(realAmount) {
+                amount = Int.random(in: 1..<Int(configs.numberOfDays))
+                realAmount = Double(amount) * configs.minimalUnit
+            }
+            let newSaving = Saving(date: newDateStr, amount: realAmount, saved: 0)
+            newSavings.append(newSaving)
+            savingAmounts.append(realAmount)
+            dateDifference += 1
+        } while newSavings.count < configs.numberOfDays
+        newSavings.sort {
+            $0.dateFormatted > $1.dateFormatted
+        }
+        savingDataStore.savings = newSavings
+        savingDataStore.updateFromSelfSavingArray()
     }
 }
 

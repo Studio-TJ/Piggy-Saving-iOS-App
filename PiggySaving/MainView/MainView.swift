@@ -31,6 +31,7 @@ struct MainView: View {
                 SettingsView()
                     .tag(MainTabItem.SETTINGS)
                     .environment(\.managedObjectContext, configs.container.viewContext)
+                    .environmentObject(savingDataStore)
                     .environmentObject(popupHandler)
                     .environmentObject(states)
                     .tabItem {
