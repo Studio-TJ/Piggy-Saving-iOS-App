@@ -3,8 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleVersion</key>
-	<string>676</string>
+	<string>742</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SourceCodePro-Medium.otf</string>
+		<string>SourceCodePro-Regular.otf</string>
+		<string>SourceCodePro-Bold.otf</string>
+	</array>
 </dict>
 </plist>

@@ -21,9 +21,15 @@
 		AB49C45727B85330001558C3 /* SettingsViewOperationWithdrawModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49C45627B85330001558C3 /* SettingsViewOperationWithdrawModeView.swift */; };
 		AB49C45927B8541C001558C3 /* SettingsViewOperationSetMinimalUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49C45827B8541C001558C3 /* SettingsViewOperationSetMinimalUnitView.swift */; };
 		AB49C45B27B8561D001558C3 /* SettingsViewOperationsSetEndDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB49C45A27B8561D001558C3 /* SettingsViewOperationsSetEndDateView.swift */; };
+		AB4D12CB27C7760A0045D427 /* SourceCodePro-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4D12C927C6DB020045D427 /* SourceCodePro-Medium.otf */; };
+		AB4D12CC27C7760A0045D427 /* SourceCodePro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4D12C827C6DB010045D427 /* SourceCodePro-Regular.otf */; };
 		AB53BBCC27B4126400695EA5 /* DataStoragePowerUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB53BBCB27B4126400695EA5 /* DataStoragePowerUserView.swift */; };
 		AB67F4AC27BD9294002348BE /* SavingConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB67F4AB27BD9294002348BE /* SavingConfirmationView.swift */; };
+		AB6D55B827C7E39800F9C11F /* SavingsListHeaderBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6D55B727C7E39800F9C11F /* SavingsListHeaderBarView.swift */; };
+		AB6D55BA27C7EAD700F9C11F /* SourceCodePro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB6D55B927C7EAAE00F9C11F /* SourceCodePro-Bold.otf */; };
 		AB8AC01727A6FAB200EDFD62 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8AC01627A6FAB200EDFD62 /* ErrorView.swift */; };
+		ABA2710B27C6D0810096C0B5 /* ModePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA2710A27C6D0810096C0B5 /* ModePickerView.swift */; };
+		ABA2710D27C6D5BC0096C0B5 /* SavingListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA2710C27C6D5BC0096C0B5 /* SavingListHeaderView.swift */; };
 		ABA6D2B427A1A62000F62E42 /* PiggySavingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA6D2B327A1A62000F62E42 /* PiggySavingApp.swift */; };
 		ABA6D2B827A1A62100F62E42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABA6D2B727A1A62100F62E42 /* Assets.xcassets */; };
 		ABA6D2BB27A1A62100F62E42 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABA6D2BA27A1A62100F62E42 /* Preview Assets.xcassets */; };
@@ -71,9 +77,15 @@
 		AB49C45627B85330001558C3 /* SettingsViewOperationWithdrawModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewOperationWithdrawModeView.swift; sourceTree = "<group>"; };
 		AB49C45827B8541C001558C3 /* SettingsViewOperationSetMinimalUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewOperationSetMinimalUnitView.swift; sourceTree = "<group>"; };
 		AB49C45A27B8561D001558C3 /* SettingsViewOperationsSetEndDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewOperationsSetEndDateView.swift; sourceTree = "<group>"; };
+		AB4D12C827C6DB010045D427 /* SourceCodePro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceCodePro-Regular.otf"; sourceTree = "<group>"; };
+		AB4D12C927C6DB020045D427 /* SourceCodePro-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceCodePro-Medium.otf"; sourceTree = "<group>"; };
 		AB53BBCB27B4126400695EA5 /* DataStoragePowerUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoragePowerUserView.swift; sourceTree = "<group>"; };
 		AB67F4AB27BD9294002348BE /* SavingConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingConfirmationView.swift; sourceTree = "<group>"; };
+		AB6D55B727C7E39800F9C11F /* SavingsListHeaderBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsListHeaderBarView.swift; sourceTree = "<group>"; };
+		AB6D55B927C7EAAE00F9C11F /* SourceCodePro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceCodePro-Bold.otf"; sourceTree = "<group>"; };
 		AB8AC01627A6FAB200EDFD62 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		ABA2710A27C6D0810096C0B5 /* ModePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModePickerView.swift; sourceTree = "<group>"; };
+		ABA2710C27C6D5BC0096C0B5 /* SavingListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingListHeaderView.swift; sourceTree = "<group>"; };
 		ABA6D2B027A1A62000F62E42 /* Piggy Saving.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Piggy Saving.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA6D2B327A1A62000F62E42 /* PiggySavingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiggySavingApp.swift; sourceTree = "<group>"; };
 		ABA6D2B727A1A62100F62E42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -135,6 +147,7 @@
 				AB1530DC27A33149006FD2FF /* CardView.swift */,
 				AB8AC01627A6FAB200EDFD62 /* ErrorView.swift */,
 				AB1F410A27AD47970059D50F /* WarningConfirmationView.swift */,
+				ABA2710A27C6D0810096C0B5 /* ModePickerView.swift */,
 			);
 			path = UtilityView;
 			sourceTree = "<group>";
@@ -171,6 +184,16 @@
 			path = SettingsViewOperationView;
 			sourceTree = "<group>";
 		};
+		AB4D12C727C6DAF10045D427 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AB6D55B927C7EAAE00F9C11F /* SourceCodePro-Bold.otf */,
+				AB4D12C927C6DB020045D427 /* SourceCodePro-Medium.otf */,
+				AB4D12C827C6DB010045D427 /* SourceCodePro-Regular.otf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		ABA6D2A727A1A62000F62E42 = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +220,7 @@
 				AB1530E227A33A33006FD2FF /* MainView */,
 				AB43A30D27A1F1680046740D /* UtilityView */,
 				ABC6E9FE27A9591100E6D487 /* Shape */,
+				AB4D12C727C6DAF10045D427 /* fonts */,
 				ABA6D2B727A1A62100F62E42 /* Assets.xcassets */,
 				ABA6D2B927A1A62100F62E42 /* Preview Content */,
 			);
@@ -253,6 +277,8 @@
 			children = (
 				AB01CC2527A3FAC300C4E448 /* SavingsListView.swift */,
 				ABDBC09027B41C2200E49082 /* SavingListOverviewView.swift */,
+				ABA2710C27C6D5BC0096C0B5 /* SavingListHeaderView.swift */,
+				AB6D55B727C7E39800F9C11F /* SavingsListHeaderBarView.swift */,
 				ABCCCBFA27A8186D00ECAE6F /* SavingListItemView.swift */,
 				ABDBC09427B45CD500E49082 /* SavingListMonthView.swift */,
 				AB67F4AB27BD9294002348BE /* SavingConfirmationView.swift */,
@@ -345,6 +371,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB6D55BA27C7EAD700F9C11F /* SourceCodePro-Bold.otf in Resources */,
+				AB4D12CB27C7760A0045D427 /* SourceCodePro-Medium.otf in Resources */,
+				AB4D12CC27C7760A0045D427 /* SourceCodePro-Regular.otf in Resources */,
 				ABA6D2BB27A1A62100F62E42 /* Preview Assets.xcassets in Resources */,
 				ABD3337527ADD84D00A72D23 /* Localizable.strings in Resources */,
 				ABA6D2B827A1A62100F62E42 /* Assets.xcassets in Resources */,
@@ -383,6 +412,7 @@
 				AB1530E827A3E5F1006FD2FF /* Data.swift in Sources */,
 				AB1530E427A33A54006FD2FF /* MainView.swift in Sources */,
 				ABE8886B27B01693006B3246 /* NotificationView.swift in Sources */,
+				ABA2710B27C6D0810096C0B5 /* ModePickerView.swift in Sources */,
 				ABE25B4827C19B8B00EC1BAC /* SettingsViewSystemView.swift in Sources */,
 				ABCCCBFB27A8186D00ECAE6F /* SavingListItemView.swift in Sources */,
 				AB49C45227B84EEB001558C3 /* SettingsViewFooterInfoView.swift in Sources */,
@@ -396,6 +426,7 @@
 				ABE25B4527C15C7E00EC1BAC /* ModeChangeConfirmationView.swift in Sources */,
 				ABDBC09527B45CD500E49082 /* SavingListMonthView.swift in Sources */,
 				ABC6EA0227A9BD4400E6D487 /* Helper.swift in Sources */,
+				AB6D55B827C7E39800F9C11F /* SavingsListHeaderBarView.swift in Sources */,
 				ABD0DF2127AAE7C000B9AAC9 /* PiggySavingData.xcdatamodeld in Sources */,
 				ABF1710E27BC163500CEA215 /* PopupHandler.swift in Sources */,
 				ABA6D2D327A1BC8700F62E42 /* ConfigStore.swift in Sources */,
@@ -419,6 +450,7 @@
 				AB67F4AC27BD9294002348BE /* SavingConfirmationView.swift in Sources */,
 				ABDBC09927B463E300E49082 /* SavingListYearView.swift in Sources */,
 				AB01CC2627A3FAC300C4E448 /* SavingsListView.swift in Sources */,
+				ABA2710D27C6D5BC0096C0B5 /* SavingListHeaderView.swift in Sources */,
 				AB1530DD27A33149006FD2FF /* CardView.swift in Sources */,
 				ABE4E83C27BAC029007ECBD3 /* CostListMonthView.swift in Sources */,
 				ABD0DF1E27AA915700B9AAC9 /* PiggySavingConfig.xcdatamodeld in Sources */,

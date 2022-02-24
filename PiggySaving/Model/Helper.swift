@@ -43,16 +43,27 @@ extension Calendar {
 }
 
 struct Fonts {
-    static var TITLE_SEMIBOLD: Font {
-        return Font.custom("PingFangSC-Semibold", size: 34)
+    static var HEADING_15_REG = Font.custom("SourceCodePro-Regular", size: 15)
+    static var HEADING_20_BOLD = Font.custom("SourceCodePro-Bold", size: 20)
+    static var TITLE_SEMIBOLD = Font.custom("PingFangSC-Semibold", size: 34)
+    static var BODY_CHINESE_NORMAL = Font.custom("PingFangSC-Regular", size: 16)
+    static var CAPTION = Font.custom("PingFangSC-Regular", size: 11)
+}
+
+extension View {
+    func heading15Reg() -> some View {
+        return self.font(Fonts.HEADING_15_REG)
+            .frame(height: 25)
     }
     
-    static var BODY_CHINESE_NORMAL: Font {
-        return Font.custom("PingFangSC-Regular", size: 16)
+    func heading20Bold() -> some View {
+        return self.font(Fonts.HEADING_20_BOLD)
+            .frame(height: 30)
     }
     
-    static var CAPTION: Font {
-        return Font.custom("PingFangSC-Regular", size: 11)
+    func shadowA() -> some View {
+        return self.shadow(color: .black.opacity(0.03), radius: 4, x: -1, y: -1)
+            .shadow(color: .black.opacity(0.1), radius: 7, x: 3, y: 3)
     }
 }
 

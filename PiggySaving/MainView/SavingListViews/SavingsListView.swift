@@ -45,7 +45,8 @@ struct SavingsListView: View {
             ScrollView {
                 ZStack {
                     LazyVStack {
-                        SavingListOverviewView(sumSaving: savingDataStore.totalSavingActual, totalSaving: savingDataStore.totalSaving, totalCost: savingDataStore.totalCost)
+//                        SavingListOverviewView(sumSaving: savingDataStore.totalSavingActual, totalSaving: savingDataStore.totalSaving, totalCost: savingDataStore.totalCost)
+                        SavingListHeaderView(currentBalance: savingDataStore.totalSavingActual, totalSavings: savingDataStore.totalSaving, totalExpenses: savingDataStore.totalCost)
                         if configs.configs.ableToWithdraw {
                             HStack {
                                 Picker("", selection: $displayOption) {
