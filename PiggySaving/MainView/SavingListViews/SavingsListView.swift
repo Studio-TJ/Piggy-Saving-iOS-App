@@ -38,14 +38,22 @@ struct SavingsListView: View {
     var body: some View {
         ZStack {
             VStack {
-                Image(systemName: "arrow.clockwise.circle")
-                Text("Refresh")
+                VStack {
+                    Image(systemName: "arrow.clockwise.circle")
+                    Text("Refresh")
+                }
+                .opacity(min(offset / (SCREEN_SIZE.height * 0.1), 1))
+                .background(
+                    Rectangle()
+                        .fill(Color("MainPink"))
+                        .edgesIgnoringSafeArea(.top)
+                        .frame(width: SCREEN_SIZE.width, height: (offset >= 0) ? 150 + offset : 0)
+                )
                 Spacer()
-            }.opacity(min(offset / (SCREEN_SIZE.height * 0.1), 1))
+            }
             ScrollView {
                 ZStack {
                     LazyVStack {
-//                        SavingListOverviewView(sumSaving: savingDataStore.totalSavingActual, totalSaving: savingDataStore.totalSaving, totalCost: savingDataStore.totalCost)
                         SavingListHeaderView(currentBalance: savingDataStore.totalSavingActual, totalSavings: savingDataStore.totalSaving, totalExpenses: savingDataStore.totalCost)
                         if configs.configs.ableToWithdraw {
                             HStack {
@@ -136,6 +144,7 @@ struct SavingsListView: View {
                     }
                 }
             }
+            .edgesIgnoringSafeArea(.top)
             .coordinateSpace(name: "scroll")
             .onPreferenceChange(PositionPreferenceKey.self) { value in
                 let generator = UINotificationFeedbackGenerator()
@@ -153,7 +162,11 @@ struct SavingsListView: View {
                         }
                     }
                 } else  {
-                    offset = 0
+                    if value < -50 {
+                        offset = -1
+                    } else {
+                        offset = 0
+                    }
                     if refreshed == true {
                         refreshed = false
                     }
@@ -167,7 +180,7 @@ struct SavingsListView: View {
             }
             .blur(radius: popupHandler.popuped ? 5 : 0)
             .disabled(popupHandler.popuped)
-            
+
             if popupHandler.popuped {
                 popupHandler.view.transition(.opacity)
             }

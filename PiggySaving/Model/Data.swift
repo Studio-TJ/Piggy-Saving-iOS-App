@@ -375,7 +375,9 @@ class SavingDataStore: ObservableObject {
                 yearArray = []
                 lastYear = saving.dateLocalizedYear
             }
-            yearArray.append(saving)
+            if saving.dateFormatted < Date() {
+                yearArray.append(saving)
+            }
         }
         groupedByYear.append(yearArray)
         

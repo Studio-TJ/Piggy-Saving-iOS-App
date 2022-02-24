@@ -17,7 +17,9 @@ struct SavingListHeaderView: View {
             VStack(spacing: 5) {
                 SavingsListHeaderBarView(leftRatio: 0.61, leftText: "Current Balance", rightText: CURRENCY_SYMBOL + " " + String(format: "%.2f", currentBalance))
                 SavingsListHeaderBarView(leftRatio: 0, leftText: "Total Savings", rightText: CURRENCY_SYMBOL + " " + String(format: "%.2f", totalSavings))
-                SavingsListHeaderBarView(leftRatio: 0.5, leftText: "Total Expenses", rightText: CURRENCY_SYMBOL + " " + String(format: "%.2f", totalExpenses))
+                if totalExpenses != 0 {
+                    SavingsListHeaderBarView(leftRatio: 0.5, leftText: "Total Expenses", rightText: CURRENCY_SYMBOL + " " + String(format: "%.2f", totalExpenses))
+                }
             }
         }
         .padding(.top, 35)
