@@ -365,17 +365,17 @@ class SavingDataStore: ObservableObject {
         }
         var groupedByYear: [[Saving]] = []
         var groupedByYearMonth: [[[Saving]]] = []
-        var lastYear = savings[0].dateLocalizedYear
+        var lastYear = String(Calendar.current.component(.year, from: Date()))
         var yearArray: [Saving] = []
         
         // Group year, source should already be sorted
         for saving in savings {
-            if saving.dateLocalizedYear != lastYear {
-                groupedByYear.append(yearArray)
-                yearArray = []
-                lastYear = saving.dateLocalizedYear
-            }
             if saving.dateFormatted < Date() {
+                if saving.dateLocalizedYear != lastYear {
+                    groupedByYear.append(yearArray)
+                    yearArray = []
+                    lastYear = saving.dateLocalizedYear
+                }
                 yearArray.append(saving)
             }
         }

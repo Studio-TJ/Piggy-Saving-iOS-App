@@ -115,16 +115,43 @@ struct SavingConfirmationView: View {
     
     private func localReRoll() {
         let numberOfDays = configs.configs.numberOfDays
-        print(numberOfDays)
+        let today = Calendar.current.startOfDay(for: Date())
         let fetchRequest = SavingData.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "type == 'saving'")
         let savings = try? context.fetch(fetchRequest)
-//        var 
-        if let savings = savings {
+        var todayIndex = 0
+        var replacedSavingDate: Date = today
+        let thisAmount = self.saving.amount
+        if var savings = savings {
+            savings.sort {
+                $0.date! < $1.date!
+            }
             savings.forEach { saving in
-//                if
+                if saving.date! <= today {
+                    todayIndex += 1
+                }
+            }
+            let replacedIndex = Int.random(in: todayIndex..<Int(numberOfDays))
+            replacedSavingDate = savings[replacedIndex].date!
+        }
+        fetchRequest.predicate = NSPredicate(format: "date == %@ AND type == 'saving'", replacedSavingDate as CVarArg)
+        var replacedSaving = try? context.fetch(fetchRequest).first
+        fetchRequest.predicate = NSPredicate(format: "date == %@ AND type == 'saving'", self.saving.dateFormatted as CVarArg)
+        let thisSaving = try? context.fetch(fetchRequest).first
+        if let thisSaving = thisSaving {
+            if let replacedSaving = replacedSaving {
+                thisSaving.amount = replacedSaving.amount
             }
         }
+        try? context.save()
+        fetchRequest.predicate = NSPredicate(format: "date == %@ AND type == 'saving'", replacedSavingDate as CVarArg)
+        replacedSaving = try? context.fetch(fetchRequest).first
+        if let replacedSaving = replacedSaving {
+            self.saving.amount = replacedSaving.amount
+            replacedSaving.amount = thisAmount
+        }
+        try? context.save()
+        states.savingDataChanged = true
     }
 }
 
