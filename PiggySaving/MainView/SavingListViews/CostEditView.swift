@@ -34,7 +34,6 @@ struct CostEditView: View {
                 "Date",
                 selection: $date,
                 displayedComponents: .date)
-                .frame(width: SCREEN_SIZE.width * 0.7)
                 .padding(.top, 20)
                 .padding(.leading, 20)
                 .padding(.trailing, 60)
@@ -99,7 +98,7 @@ struct CostEditView: View {
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color("BackgroundColor"))
-                .frame(minWidth: min(SCREEN_SIZE.width * 0.9, 400))
+                .frame(width: min(SCREEN_SIZE.width * 0.9, 400))
                 .shadow(color: Color("AccentColor").opacity(0.2), radius: 16)
         )
         .onTapGesture {
