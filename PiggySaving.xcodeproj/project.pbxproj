@@ -597,7 +597,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 885;
+				CURRENT_PROJECT_VERSION = 903;
 				DEVELOPMENT_ASSET_PATHS = "\"PiggySaving/Preview Content\"";
 				DEVELOPMENT_TEAM = F68MNZRCPQ;
 				ENABLE_PREVIEWS = YES;
@@ -614,7 +614,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.12;
+				MARKETING_VERSION = 0.13;
 				PRODUCT_BUNDLE_IDENTIFIER = cc.studiotj.piggysave;
 				PRODUCT_NAME = "Piggy Saving";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -629,7 +629,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 885;
+				CURRENT_PROJECT_VERSION = 903;
 				DEVELOPMENT_ASSET_PATHS = "\"PiggySaving/Preview Content\"";
 				DEVELOPMENT_TEAM = F68MNZRCPQ;
 				ENABLE_PREVIEWS = YES;
@@ -646,7 +646,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.12;
+				MARKETING_VERSION = 0.13;
 				PRODUCT_BUNDLE_IDENTIFIER = cc.studiotj.piggysave;
 				PRODUCT_NAME = "Piggy Saving";
 				SWIFT_EMIT_LOC_STRINGS = YES;
