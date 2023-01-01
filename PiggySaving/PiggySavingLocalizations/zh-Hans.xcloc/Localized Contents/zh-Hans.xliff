@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="en.lproj/Localizable.strings" source-language="en" target-language="zh-Hans" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.2.1" build-num="13C100"/>
+    </header>
+    <body>
+      <trans-unit id="Cancel" xml:space="preserve">
+        <source>Cancel</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cannot retrieve all savings from server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now." xml:space="preserve">
+        <source>Cannot retrieve all savings from server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.</source>
+        <note>Get all saving from server error guidance.</note>
+      </trans-unit>
+      <trans-unit id="Cannot send save request to server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now." xml:space="preserve">
+        <source>Cannot send save request to server. Please check your network connection and try again later. If you are sure that your network connection is working properly, please contact the developer. You can safely dismiss this page for now.</source>
+        <target>无法将存钱记录请求发送至服务器。请检查您的网络连接并稍后再试。如果您确信你的网络连接正常而此问题仍然存在，请联系开发者。现在您可以安全地关闭这个对话框。</target>
+        <note>Saving action to server error guidance.</note>
+      </trans-unit>
+      <trans-unit id="Chinese Yuan" xml:space="preserve">
+        <source>Chinese Yuan</source>
+        <note>Chinese Yuan</note>
+      </trans-unit>
+      <trans-unit id="Choose Currency" xml:space="preserve">
+        <source>Choose Currency</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Confirm" xml:space="preserve">
+        <source>Confirm</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Currency" xml:space="preserve">
+        <source>Currency</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Dismiss" xml:space="preserve">
+        <source>Dismiss</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Enter server URL:" xml:space="preserve">
+        <source>Enter server URL:</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Error(s) have occurred!" xml:space="preserve">
+        <source>Error(s) have occurred!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Euro" xml:space="preserve">
+        <source>Euro</source>
+        <note>Euro</note>
+      </trans-unit>
+      <trans-unit id="Hello, World!" xml:space="preserve">
+        <source>Hello, World!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hi你好欢迎使用🐷🐷存钱blah👋" xml:space="preserve">
+        <source>Hi你好欢迎使用🐷🐷存钱blah👋</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Overview View" xml:space="preserve">
+        <source>Overview View</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Provided URL is invalid." xml:space="preserve">
+        <source>Provided URL is invalid.</source>
+        <note>Invalid URL</note>
+      </trans-unit>
+      <trans-unit id="Reset App!" xml:space="preserve">
+        <source>Reset App!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Running Mode" xml:space="preserve">
+        <source>Running Mode</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Save" xml:space="preserve">
+        <source>Save</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Save Now!" xml:space="preserve">
+        <source>Save Now!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Savings List" xml:space="preserve">
+        <source>Savings List</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Savings view" xml:space="preserve">
+        <source>Savings view</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Select Source" xml:space="preserve">
+        <source>Select Source</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Server address:" xml:space="preserve">
+        <source>Server address:</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Server data from URL:  cannot be retrived." xml:space="preserve">
+        <source>Server data from URL:  cannot be retrived.</source>
+        <note>Server data not retrived.</note>
+      </trans-unit>
+      <trans-unit id="Settings" xml:space="preserve">
+        <source>Settings</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This mode is not available yet." xml:space="preserve">
+        <source>This mode is not available yet.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="US Dollar" xml:space="preserve">
+        <source>US Dollar</source>
+        <note>US Dollar</note>
+      </trans-unit>
+      <trans-unit id="Undefined" xml:space="preserve">
+        <source>Undefined</source>
+        <note>Undefined</note>
+      </trans-unit>
+      <trans-unit id="Use Locally" xml:space="preserve">
+        <source>Use Locally</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Use with self-hosted server" xml:space="preserve">
+        <source>Use with self-hosted server</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Warning! You are Performing Dangerous Operations!" xml:space="preserve">
+        <source>Warning!! You are Performing Dangerous Operations!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Withdraw" xml:space="preserve">
+        <source>Withdraw</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="https://" xml:space="preserve">
+        <source>https://</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="🐷🐷存钱就是blahblah" xml:space="preserve">
+        <source>🐷🐷存钱就是blahblah</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="en.lproj/PiggySaving-InfoPlist.strings" datatype="plaintext" source-language="en" target-language="zh-Hans">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.2.1" build-num="13C100"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>Piggy Saving</source>
+        <note>Bundle name</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
